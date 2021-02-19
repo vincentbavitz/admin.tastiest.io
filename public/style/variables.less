@@ -1,0 +1,54 @@
+@import './colors.less';
+
+@theme: light;
+
+@white: #fff;
+@black: #000;
+
+@vurox-base-color: @black;
+@vurox-base-color-reverse: @white;
+
+
+@header-padding: 15px 0;
+@vertical-nav-width: 215px;
+
+// fonts
+@base-font-size: 14px;
+@font-family: 'Jost', sans-serif;
+
+
+// Main colors used in the backgrounds and others without texts
+@vurox-primary-background-color: #fff;
+@vurox-secondary-background-color: darken(@vurox-primary-background-color, 2%);
+@vurox-body-bg: darken(@vurox-primary-background-color, 5%); 
+
+
+// Link active/hover colors
+@vurox-link-hover-color: #00C1D8 !important;
+@vurox-link-active-color: @vurox-link-hover-color;
+@vurox-active-link-border-color: fade(@vurox-link-hover-color, 10%);
+@vurox-active-link-background-color: fade(@vurox-link-hover-color, 20%);
+
+
+// Items hover BG color - applied for options, dropdowns
+@vurox-list-hover-bg: fade(@vurox-base-color, 5%);
+
+
+// Box Shadow Color
+@box-shadow-color: if( ( @theme = dark ), 0 20px 35px 0px fade(@vurox-base-color-reverse, 50%), 0 14px 8px 0px fade(@vurox-base-color, 20%) );
+
+// Texts color
+@vurox-text-primary-color: fade(@vurox-base-color, 85% );
+@vurox-text-primary-color-fade: fade(@vurox-base-color, 65% );
+@vurox-text-secondary-color: fade(@vurox-base-color, 80% );
+@vurox-text-inactive-color: fade(@vurox-base-color, 40% );
+
+
+// Box Shadow
+@vurox-base-box-shadow: @box-shadow-color;
+
+
+
+//Borders
+@vurox-border-color-primary: fade(@vurox-base-color, 10%); 
+@font-size-base: @base-font-size;

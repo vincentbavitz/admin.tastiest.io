@@ -1,0 +1,1678 @@
+
+/*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 2px;
+	background-color: #000;
+}
+
+::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #000;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}*/
+/*.vw-1{width:1%;}.vw-2{width:2%;}.vw-3{width:3%;}.vw-4{width:4%;}.vw-5{width:5%;}.vw-6{width:6%;}.vw-7{width:7%;}.vw-8{width:8%;}.vw-9{width:9%;}.vw-10{width:10%;}.vw-11{width:11%;}.vw-12{width:12%;}.vw-13{width:13%;}.vw-14{width:14%;}.vw-15{width:15%;}.vw-16{width:16%;}.vw-17{width:17%;}.vw-18{width:18%;}.vw-19{width:19%;}.vw-20{width:20%;}.vw-21{width:21%;}.vw-22{width:22%;}.vw-23{width:23%;}.vw-24{width:24%;}.vw-25{width:25%;}.vw-26{width:26%;}.vw-27{width:27%;}.vw-28{width:28%;}.vw-29{width:29%;}.vw-30{width:30%;}.vw-31{width:31%;}.vw-32{width:32%;}.vw-33{width:33%;}.vw-34{width:34%;}.vw-35{width:35%;}.vw-36{width:36%;}.vw-37{width:37%;}.vw-38{width:38%;}.vw-39{width:39%;}.vw-40{width:40%;}.vw-41{width:41%;}.vw-42{width:42%;}.vw-43{width:43%;}.vw-44{width:44%;}.vw-45{width:45%;}.vw-46{width:46%;}.vw-47{width:47%;}.vw-48{width:48%;}.vw-49{width:49%;}.vw-50{width:50%;}.vw-51{width:51%;}.vw-52{width:52%;}.vw-53{width:53%;}.vw-54{width:54%;}.vw-55{width:55%;}.vw-56{width:56%;}.vw-57{width:57%;}.vw-58{width:58%;}.vw-59{width:59%;}.vw-60{width:60%;}.vw-61{width:61%;}.vw-62{width:62%;}.vw-63{width:63%;}.vw-64{width:64%;}.vw-65{width:65%;}.vw-66{width:66%;}.vw-67{width:67%;}.vw-68{width:68%;}.vw-69{width:69%;}.vw-70{width:70%;}.vw-71{width:71%;}.vw-72{width:72%;}.vw-73{width:73%;}.vw-74{width:74%;}.vw-75{width:75%;}.vw-76{width:76%;}.vw-77{width:77%;}.vw-78{width:78%;}.vw-79{width:79%;}.vw-80{width:80%;}.vw-81{width:81%;}.vw-82{width:82%;}.vw-83{width:83%;}.vw-84{width:84%;}.vw-85{width:85%;}.vw-86{width:86%;}.vw-87{width:87%;}.vw-88{width:88%;}.vw-89{width:89%;}.vw-90{width:90%;}.vw-91{width:91%;}.vw-92{width:92%;}.vw-93{width:93%;}.vw-94{width:94%;}.vw-95{width:95%;}.vw-96{width:96%;}.vw-97{width:97%;}.vw-98{width:98%;}.vw-99{width:99%;}.vw-100{width:100%;}
+.vop-1{opacity:.1}.vop-2{opacity:.2}.vop-3{opacity:.3}.vop-4{opacity:.4}.vop-5{opacity:.5}.vop-6{opacity:.6}.vop-7{opacity:.7}.vop-8{opacity:.8}.vop-9{opacity:.9}.vop-10{opacity:1.0}
+.mt--1{margin-top: -1px}.mt--2{margin-top: -2px}.mt--3{margin-top: -3px}.mt--4{margin-top: -4px}.mt--5{margin-top: -5px}.mt--6{margin-top: -6px}.mt--7{margin-top: -7px}.mt--8{margin-top: -8px}.mt--9{margin-top: -9px}.mt--10{margin-top: -10px}.mt--11{margin-top: -11px}.mt--12{margin-top: -12px}.mt--13{margin-top: -13px}.mt--14{margin-top: -14px}.mt--15{margin-top: -15px}.mt--16{margin-top: -16px}.mt--17{margin-top: -17px}.mt--18{margin-top: -18px}.mt--19{margin-top: -19px}.mt--20{margin-top: -20px}.mt--21{margin-top: -21px}.mt--22{margin-top: -22px}.mt--23{margin-top: -23px}.mt--24{margin-top: -24px}.mt--25{margin-top: -25px}.mt--26{margin-top: -26px}.mt--27{margin-top: -27px}.mt--28{margin-top: -28px}.mt--29{margin-top: -29px}.mt--30{margin-top: -30px}.mt--31{margin-top: -31px}.mt--32{margin-top: -32px}.mt--33{margin-top: -33px}.mt--34{margin-top: -34px}.mt--35{margin-top: -35px}.mt--36{margin-top: -36px}.mt--37{margin-top: -37px}.mt--38{margin-top: -38px}.mt--39{margin-top: -39px}.mt--40{margin-top: -40px}.mt--41{margin-top: -41px}.mt--42{margin-top: -42px}.mt--43{margin-top: -43px}.mt--44{margin-top: -44px}.mt--45{margin-top: -45px}.mt--46{margin-top: -46px}.mt--47{margin-top: -47px}.mt--48{margin-top: -48px}.mt--49{margin-top: -49px}.mt--50{margin-top: -50px}
+.mb--1{margin-bottom: -1px}.mb--2{margin-bottom: -2px}.mb--3{margin-bottom: -3px}.mb--4{margin-bottom: -4px}.mb--5{margin-bottom: -5px}.mb--6{margin-bottom: -6px}.mb--7{margin-bottom: -7px}.mb--8{margin-bottom: -8px}.mb--9{margin-bottom: -9px}.mb--10{margin-bottom: -10px}.mb--11{margin-bottom: -11px}.mb--12{margin-bottom: -12px}.mb--13{margin-bottom: -13px}.mb--14{margin-bottom: -14px}.mb--15{margin-bottom: -15px}.mb--16{margin-bottom: -16px}.mb--17{margin-bottom: -17px}.mb--18{margin-bottom: -18px}.mb--19{margin-bottom: -19px}.mb--20{margin-bottom: -20px}.mb--21{margin-bottom: -21px}.mb--22{margin-bottom: -22px}.mb--23{margin-bottom: -23px}.mb--24{margin-bottom: -24px}.mb--25{margin-bottom: -25px}.mb--26{margin-bottom: -26px}.mb--27{margin-bottom: -27px}.mb--28{margin-bottom: -28px}.mb--29{margin-bottom: -29px}.mb--30{margin-bottom: -30px}.mb--31{margin-bottom: -31px}.mb--32{margin-bottom: -32px}.mb--33{margin-bottom: -33px}.mb--34{margin-bottom: -34px}.mb--35{margin-bottom: -35px}.mb--36{margin-bottom: -36px}.mb--37{margin-bottom: -37px}.mb--38{margin-bottom: -38px}.mb--39{margin-bottom: -39px}.mb--40{margin-bottom: -40px}.mb--41{margin-bottom: -41px}.mb--42{margin-bottom: -42px}.mb--43{margin-bottom: -43px}.mb--44{margin-bottom: -44px}.mb--45{margin-bottom: -45px}.mb--46{margin-bottom: -46px}.mb--47{margin-bottom: -47px}.mb--48{margin-bottom: -48px}.mb--49{margin-bottom: -49px}.mb--50{margin-bottom: -50px}
+.mr--1{margin-right: -1px}.mr--2{margin-right: -2px}.mr--3{margin-right: -3px}.mr--4{margin-right: -4px}.mr--5{margin-right: -5px}.mr--6{margin-right: -6px}.mr--7{margin-right: -7px}.mr--8{margin-right: -8px}.mr--9{margin-right: -9px}.mr--10{margin-right: -10px}.mr--11{margin-right: -11px}.mr--12{margin-right: -12px}.mr--13{margin-right: -13px}.mr--14{margin-right: -14px}.mr--15{margin-right: -15px}.mr--16{margin-right: -16px}.mr--17{margin-right: -17px}.mr--18{margin-right: -18px}.mr--19{margin-right: -19px}.mr--20{margin-right: -20px}.mr--21{margin-right: -21px}.mr--22{margin-right: -22px}.mr--23{margin-right: -23px}.mr--24{margin-right: -24px}.mr--25{margin-right: -25px}.mr--26{margin-right: -26px}.mr--27{margin-right: -27px}.mr--28{margin-right: -28px}.mr--29{margin-right: -29px}.mr--30{margin-right: -30px}.mr--31{margin-right: -31px}.mr--32{margin-right: -32px}.mr--33{margin-right: -33px}.mr--34{margin-right: -34px}.mr--35{margin-right: -35px}.mr--36{margin-right: -36px}.mr--37{margin-right: -37px}.mr--38{margin-right: -38px}.mr--39{margin-right: -39px}.mr--40{margin-right: -40px}.mr--41{margin-right: -41px}.mr--42{margin-right: -42px}.mr--43{margin-right: -43px}.mr--44{margin-right: -44px}.mr--45{margin-right: -45px}.mr--46{margin-right: -46px}.mr--47{margin-right: -47px}.mr--48{margin-right: -48px}.mr--49{margin-right: -49px}.mr--50{margin-right: -50px}
+.ml--1{margin-left: -1px}.ml--2{margin-left: -2px}.ml--3{margin-left: -3px}.ml--4{margin-left: -4px}.ml--5{margin-left: -5px}.ml--6{margin-left: -6px}.ml--7{margin-left: -7px}.ml--8{margin-left: -8px}.ml--9{margin-left: -9px}.ml--10{margin-left: -10px}.ml--11{margin-left: -11px}.ml--12{margin-left: -12px}.ml--13{margin-left: -13px}.ml--14{margin-left: -14px}.ml--15{margin-left: -15px}.ml--16{margin-left: -16px}.ml--17{margin-left: -17px}.ml--18{margin-left: -18px}.ml--19{margin-left: -19px}.ml--20{margin-left: -20px}.ml--21{margin-left: -21px}.ml--22{margin-left: -22px}.ml--23{margin-left: -23px}.ml--24{margin-left: -24px}.ml--25{margin-left: -25px}.ml--26{margin-left: -26px}.ml--27{margin-left: -27px}.ml--28{margin-left: -28px}.ml--29{margin-left: -29px}.ml--30{margin-left: -30px}.ml--31{margin-left: -31px}.ml--32{margin-left: -32px}.ml--33{margin-left: -33px}.ml--34{margin-left: -34px}.ml--35{margin-left: -35px}.ml--36{margin-left: -36px}.ml--37{margin-left: -37px}.ml--38{margin-left: -38px}.ml--39{margin-left: -39px}.ml--40{margin-left: -40px}.ml--41{margin-left: -41px}.ml--42{margin-left: -42px}.ml--43{margin-left: -43px}.ml--44{margin-left: -44px}.ml--45{margin-left: -45px}.ml--46{margin-left: -46px}.ml--47{margin-left: -47px}.ml--48{margin-left: -48px}.ml--49{margin-left: -49px}.ml--50{margin-left: -50px}
+*/
+/*.vurox-ml-1{margin-left: 1px !important}.vurox-ml-2{margin-left: 2px !important}.vurox-ml-3{margin-left: 3px !important}.vurox-ml-4{margin-left: 4px !important}.vurox-ml-5{margin-left: 5px !important}.vurox-ml-6{margin-left: 6px !important}.vurox-ml-7{margin-left: 7px !important}.vurox-ml-8{margin-left: 8px !important}.vurox-ml-9{margin-left: 9px !important}.vurox-ml-10{margin-left: 10px !important}.vurox-ml-11{margin-left: 11px !important}.vurox-ml-12{margin-left: 12px !important}.vurox-ml-13{margin-left: 13px !important}.vurox-ml-14{margin-left: 14px !important}.vurox-ml-15{margin-left: 15px !important}.vurox-ml-16{margin-left: 16px !important}.vurox-ml-17{margin-left: 17px !important}.vurox-ml-18{margin-left: 18px !important}.vurox-ml-19{margin-left: 19px !important}.vurox-ml-20{margin-left: 20px !important}.vurox-ml-21{margin-left: 21px !important}.vurox-ml-22{margin-left: 22px !important}.vurox-ml-23{margin-left: 23px !important}.vurox-ml-24{margin-left: 24px !important}.vurox-ml-25{margin-left: 25px !important}.vurox-ml-26{margin-left: 26px !important}.vurox-ml-27{margin-left: 27px !important}.vurox-ml-28{margin-left: 28px !important}.vurox-ml-29{margin-left: 29px !important}.vurox-ml-30{margin-left: 30px !important}.vurox-ml-31{margin-left: 31px !important}.vurox-ml-32{margin-left: 32px !important}.vurox-ml-33{margin-left: 33px !important}.vurox-ml-34{margin-left: 34px !important}.vurox-ml-35{margin-left: 35px !important}.vurox-ml-36{margin-left: 36px !important}.vurox-ml-37{margin-left: 37px !important}.vurox-ml-38{margin-left: 38px !important}.vurox-ml-39{margin-left: 39px !important}.vurox-ml-40{margin-left: 40px !important}.vurox-ml-41{margin-left: 41px !important}.vurox-ml-42{margin-left: 42px !important}.vurox-ml-43{margin-left: 43px !important}.vurox-ml-44{margin-left: 44px !important}.vurox-ml-45{margin-left: 45px !important}.vurox-ml-46{margin-left: 46px !important}.vurox-ml-47{margin-left: 47px !important}.vurox-ml-48{margin-left: 48px !important}.vurox-ml-49{margin-left: 49px !important}.vurox-ml-50{margin-left: 50px !important}
+
+.vurox-mr-1{margin-right: 1px !important}.vurox-mr-2{margin-right: 2px !important}.vurox-mr-3{margin-right: 3px !important}.vurox-mr-4{margin-right: 4px !important}.vurox-mr-5{margin-right: 5px !important}.vurox-mr-6{margin-right: 6px !important}.vurox-mr-7{margin-right: 7px !important}.vurox-mr-8{margin-right: 8px !important}.vurox-mr-9{margin-right: 9px !important}.vurox-mr-10{margin-right: 10px !important}.vurox-mr-11{margin-right: 11px !important}.vurox-mr-12{margin-right: 12px !important}.vurox-mr-13{margin-right: 13px !important}.vurox-mr-14{margin-right: 14px !important}.vurox-mr-15{margin-right: 15px !important}.vurox-mr-16{margin-right: 16px !important}.vurox-mr-17{margin-right: 17px !important}.vurox-mr-18{margin-right: 18px !important}.vurox-mr-19{margin-right: 19px !important}.vurox-mr-20{margin-right: 20px !important}.vurox-mr-21{margin-right: 21px !important}.vurox-mr-22{margin-right: 22px !important}.vurox-mr-23{margin-right: 23px !important}.vurox-mr-24{margin-right: 24px !important}.vurox-mr-25{margin-right: 25px !important}.vurox-mr-26{margin-right: 26px !important}.vurox-mr-27{margin-right: 27px !important}.vurox-mr-28{margin-right: 28px !important}.vurox-mr-29{margin-right: 29px !important}.vurox-mr-30{margin-right: 30px !important}.vurox-mr-31{margin-right: 31px !important}.vurox-mr-32{margin-right: 32px !important}.vurox-mr-33{margin-right: 33px !important}.vurox-mr-34{margin-right: 34px !important}.vurox-mr-35{margin-right: 35px !important}.vurox-mr-36{margin-right: 36px !important}.vurox-mr-37{margin-right: 37px !important}.vurox-mr-38{margin-right: 38px !important}.vurox-mr-39{margin-right: 39px !important}.vurox-mr-40{margin-right: 40px !important}.vurox-mr-41{margin-right: 41px !important}.vurox-mr-42{margin-right: 42px !important}.vurox-mr-43{margin-right: 43px !important}.vurox-mr-44{margin-right: 44px !important}.vurox-mr-45{margin-right: 45px !important}.vurox-mr-46{margin-right: 46px !important}.vurox-mr-47{margin-right: 47px !important}.vurox-mr-48{margin-right: 48px !important}.vurox-mr-49{margin-right: 49px !important}.vurox-mr-50{margin-right: 50px !important}
+
+.h-0{height:0px}.h-1{height:1px}.h-2{height:2px}.h-3{height:3px}.h-4{height:4px}.h-5{height:5px}.h-6{height:6px}.h-7{height:7px}.h-8{height:8px}.h-9{height:9px}.h-10{height:10px}.h-11{height:11px}.h-12{height:12px}.h-13{height:13px}.h-14{height:14px}.h-15{height:15px}.h-16{height:16px}.h-17{height:17px}.h-18{height:18px}.h-19{height:19px}.h-20{height:20px}.h-21{height:21px}.h-22{height:22px}.h-23{height:23px}.h-24{height:24px}.h-25{height:25px}.h-26{height:26px}.h-27{height:27px}.h-28{height:28px}.h-29{height:29px}.h-30{height:30px}.h-31{height:31px}.h-32{height:32px}.h-33{height:33px}.h-34{height:34px}.h-35{height:35px}.h-36{height:36px}.h-37{height:37px}.h-38{height:38px}.h-39{height:39px}.h-40{height:40px}.h-41{height:41px}.h-42{height:42px}.h-43{height:43px}.h-44{height:44px}.h-45{height:45px}.h-46{height:46px}.h-47{height:47px}.h-48{height:48px}.h-49{height:49px}.h-50{height:50px}.h-51{height:51px}.h-52{height:52px}.h-53{height:53px}.h-54{height:54px}.h-55{height:55px}.h-56{height:56px}.h-57{height:57px}.h-58{height:58px}.h-59{height:59px}.h-60{height:60px}.h-61{height:61px}.h-62{height:62px}.h-63{height:63px}.h-64{height:64px}.h-65{height:65px}.h-66{height:66px}.h-67{height:67px}.h-68{height:68px}.h-69{height:69px}.h-70{height:70px}.h-71{height:71px}.h-72{height:72px}.h-73{height:73px}.h-74{height:74px}.h-75{height:75px}.h-76{height:76px}.h-77{height:77px}.h-78{height:78px}.h-79{height:79px}.h-80{height:80px}.h-81{height:81px}.h-82{height:82px}.h-83{height:83px}.h-84{height:84px}.h-85{height:85px}.h-86{height:86px}.h-87{height:87px}.h-88{height:88px}.h-89{height:89px}.h-90{height:90px}.h-91{height:91px}.h-92{height:92px}.h-93{height:93px}.h-94{height:94px}.h-95{height:95px}.h-96{height:96px}.h-97{height:97px}.h-98{height:98px}.h-99{height:99px}.h-100{height:100px}.h-101{height:101px}.h-102{height:102px}.h-103{height:103px}.h-104{height:104px}.h-105{height:105px}.h-106{height:106px}.h-107{height:107px}.h-108{height:108px}.h-109{height:109px}.h-110{height:110px}.h-111{height:111px}.h-112{height:112px}.h-113{height:113px}.h-114{height:114px}.h-115{height:115px}.h-116{height:116px}.h-117{height:117px}.h-118{height:118px}.h-119{height:119px}.h-120{height:120px}.h-121{height:121px}.h-122{height:122px}.h-123{height:123px}.h-124{height:124px}.h-125{height:125px}.h-126{height:126px}.h-127{height:127px}.h-128{height:128px}.h-129{height:129px}.h-130{height:130px}.h-131{height:131px}.h-132{height:132px}.h-133{height:133px}.h-134{height:134px}.h-135{height:135px}.h-136{height:136px}.h-137{height:137px}.h-138{height:138px}.h-139{height:139px}.h-140{height:140px}.h-141{height:141px}.h-142{height:142px}.h-143{height:143px}.h-144{height:144px}.h-145{height:145px}.h-146{height:146px}.h-147{height:147px}.h-148{height:148px}.h-149{height:149px}.h-150{height:150px}.h-151{height:151px}.h-152{height:152px}.h-153{height:153px}.h-154{height:154px}.h-155{height:155px}.h-156{height:156px}.h-157{height:157px}.h-158{height:158px}.h-159{height:159px}.h-160{height:160px}.h-161{height:161px}.h-162{height:162px}.h-163{height:163px}.h-164{height:164px}.h-165{height:165px}.h-166{height:166px}.h-167{height:167px}.h-168{height:168px}.h-169{height:169px}.h-170{height:170px}.h-171{height:171px}.h-172{height:172px}.h-173{height:173px}.h-174{height:174px}.h-175{height:175px}.h-176{height:176px}.h-177{height:177px}.h-178{height:178px}.h-179{height:179px}.h-180{height:180px}.h-181{height:181px}.h-182{height:182px}.h-183{height:183px}.h-184{height:184px}.h-185{height:185px}.h-186{height:186px}.h-187{height:187px}.h-188{height:188px}.h-189{height:189px}.h-190{height:190px}.h-191{height:191px}.h-192{height:192px}.h-193{height:193px}.h-194{height:194px}.h-195{height:195px}.h-196{height:196px}.h-197{height:197px}.h-198{height:198px}.h-199{height:199px}.h-200{height:200px}.h-201{height:201px}.h-202{height:202px}.h-203{height:203px}.h-204{height:204px}.h-205{height:205px}.h-206{height:206px}.h-207{height:207px}.h-208{height:208px}.h-209{height:209px}.h-210{height:210px}.h-211{height:211px}.h-212{height:212px}.h-213{height:213px}.h-214{height:214px}.h-215{height:215px}.h-216{height:216px}.h-217{height:217px}.h-218{height:218px}.h-219{height:219px}.h-220{height:220px}.h-221{height:221px}.h-222{height:222px}.h-223{height:223px}.h-224{height:224px}.h-225{height:225px}.h-226{height:226px}.h-227{height:227px}.h-228{height:228px}.h-229{height:229px}.h-230{height:230px}.h-231{height:231px}.h-232{height:232px}.h-233{height:233px}.h-234{height:234px}.h-235{height:235px}.h-236{height:236px}.h-237{height:237px}.h-238{height:238px}.h-239{height:239px}.h-240{height:240px}.h-241{height:241px}.h-242{height:242px}.h-243{height:243px}.h-244{height:244px}.h-245{height:245px}.h-246{height:246px}.h-247{height:247px}.h-248{height:248px}.h-249{height:249px}.h-250{height:250px}.h-251{height:251px}.h-252{height:252px}.h-253{height:253px}.h-254{height:254px}.h-255{height:255px}.h-256{height:256px}.h-257{height:257px}.h-258{height:258px}.h-259{height:259px}.h-260{height:260px}.h-261{height:261px}.h-262{height:262px}.h-263{height:263px}.h-264{height:264px}.h-265{height:265px}.h-266{height:266px}.h-267{height:267px}.h-268{height:268px}.h-269{height:269px}.h-270{height:270px}.h-271{height:271px}.h-272{height:272px}.h-273{height:273px}.h-274{height:274px}.h-275{height:275px}.h-276{height:276px}.h-277{height:277px}.h-278{height:278px}.h-279{height:279px}.h-280{height:280px}.h-281{height:281px}.h-282{height:282px}.h-283{height:283px}.h-284{height:284px}.h-285{height:285px}.h-286{height:286px}.h-287{height:287px}.h-288{height:288px}.h-289{height:289px}.h-290{height:290px}.h-291{height:291px}.h-292{height:292px}.h-293{height:293px}.h-294{height:294px}.h-295{height:295px}.h-296{height:296px}.h-297{height:297px}.h-298{height:298px}.h-299{height:299px}.h-300{height:300px}.h-301{height:301px}*/
+
+/*.row.no-gutters{
+	margin-left: -15px;
+	margin-right: -15px;
+}*/
+/*.absolute{
+
+}
+.position-static{
+	position: static !important;
+}
+.absolute-right{
+	position: absolute;
+    right: 25px;
+}
+.position-relative{
+	position: relative;
+}
+.absolute-full{
+	position: absolute;
+	width: 100%;
+	top: 50%;
+}
+.has-bg-img-right{
+  background-repeat: no-repeat;
+  background-position: center right;
+}*/
+/*.vurox-online{
+	color: #00d300 !important;
+	margin-left: 25px;
+}*/
+/*.rotate-45{
+	transform: rotate(45deg);
+}
+.rotate-90{
+	transform: rotate(90deg);
+}
+.rotate-180{
+	transform: rotate(180deg);
+}*/
+/*.vurox-online:after{
+	position: absolute;
+	content: '';
+	background: #00d300 !important;
+	width: 10px;
+	height: 10px;
+	border-radius: 30px;
+}*/
+/*.vurox-dual-box{
+	padding: 0 20px;
+}
+.vurox-dual-box .vurox-box-1-2,
+.vurox-dual-box .vurox-box-2-2{
+	display: inline-block;
+	width: 49%;
+}*/
+/* -------------------- Vurox custom check and radio -------------------- */
+
+/*--------------- canvas js tooltip settings -----------------*/
+/*.vurox-dark-version .canvasjs-chart-tooltip div{
+	background: #152937 !important;
+	font-size: 13px !important;
+	border: none !important;
+	padding: 3px 5px !important;
+	color: #ccc !important;
+	border-radius: 3px !important; 
+}*/
+/*------------------------------------------------
+------------------ Vurox Header ---------------*/
+/*.vurox-admin-header{
+	padding: 20px 0;
+}
+
+.vurox-dark-version .vurox-admin-header{
+	background: #152937;
+	position: fixed;
+	z-index: 99;
+	width: 100%;
+	/* margin-bottom: 200px; */
+}*
+
+/*------------- Header Search ------------*/
+/*.vurox-header-search input{
+	border: none;
+    height: 38px;
+    background: #193345;
+    padding: 0 18px;
+    border-radius: 30px;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    width:80%;
+}*/
+
+/*------------- Header menu --------------------*/
+
+/* .vurox-header-menu{
+    position: relative;
+    height: 100%;
+}
+ul.vurox-main-menu{
+    padding: 8px 0;
+    margin: 0;
+}
+ul.vurox-main-menu li{
+    display: inline-block;
+    padding: 0 10px;
+}
+ul.vurox-main-menu li:hover{}
+ul.vurox-main-menu li a{
+    color: #ddd;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+}
+ul.vurox-main-menu li a:after{
+	position: absolute;
+	content: '';
+	height: 1px;
+	width: 0px;
+	background: #F7614E;
+	top: 107%;
+	left: 0;
+	transition: all 0.4s ease;
+}
+ul.vurox-main-menu li a:hover{
+    color: #F7614E;
+}
+ul.vurox-main-menu li a:hover:after{
+    width: 80%;
+}
+.vurox-menu-toggler{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+---------- Sub menu -------------
+ul.vurox-main-menu .vurox-sub-menu{
+    position: absolute;
+    padding: 20px 10px;
+    margin-left: -30px;
+    background: #10212c;
+    top: 160%;
+    box-shadow: 0 21px 37px 0px rgba(0, 0, 0, 0.49);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+ul.vurox-main-menu li:hover .vurox-sub-menu{
+    top: 148%;
+    visibility: visible;
+    opacity: 1;
+}
+ul.vurox-main-menu .vurox-sub-menu li{
+    display: block;
+    padding: 4px 18px;
+}
+ */
+/*-------------- Header Notification center ----------------*/
+/*.vurox-admin-settings{
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+}
+.vurox-header-sidebar{
+	padding: 0.4em 0;
+	float: right;
+}
+.vurox-header-sidebar i{
+	font-size: 19px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.vurox-header-sidebar img{
+	width: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+}*/
+/* .vurox-bubble-dropdown.vurox-bubble-dropdown-arrow-right{}
+.vurox-bubble-dropdown{
+    position: relative;
+}
+.vurox-bubble-dropdown-arrow-right{}
+.vurox-bubble-dropdown-arrow-right ul{
+    margin-left: -68px !important;
+}
+.vurox-bubble-dropdown-arrow-right ul:after{
+	position: absolute;
+	content: '';
+	background: #fff;
+	width: 20px;
+	height: 20px;
+	top: -5px;
+	right: 15px;
+	transform: rotate(45deg);
+}
+.vurox-bubble-dropdown ul{
+    position: absolute;
+    list-style: none;
+    padding-left: 0;
+    background: #fff;
+    padding: 20px;
+    margin-top: 15px;
+    box-shadow: 0 0 10px #ddd;
+    margin-left: -10px;
+    border-radius: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5);
+    transform-origin: top right;
+    -webkit-transition: all 600ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+   	-moz-transition: all 600ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     	-o-transition: all 600ms cubic-bezier(1.000, 0.000, 0.000, 1.000);
+        transition: all 600ms cubic-bezier(1.000, 0.000, 0.000, 1.000); easeInOutExpo
+
+	-webkit-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+   		-moz-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+     	-o-transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+        transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000); easeInOutExpo
+    z-index: 99;
+}
+.vurox-bubble-dropdown ul.vurox-bubble-dropdown-show{
+	opacity: 1;
+    visibility: visible;
+    transform: scale(1);	
+}
+.vurox-bubble-dropdown ul li{
+    padding: 5px 8px;
+    position: relative;
+}
+.vurox-bubble-dropdown ul li a{
+    font-size: 11.6px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+}
+
+.vurox-bubble-dropdown ul li a:hover{
+	color: #F7614E;
+}
+.vurox-bubble-dropdown-seperator:after{
+	position: absolute;
+	content: '';
+	background: #4f4f4f;
+	width: 100%;
+	height: 1px;
+	left: 0;
+}
+.vurox-notif-number{
+	background: #F7614E;
+	position: absolute;
+	top: 0px;
+	height: 15px;
+	line-height: 14px;
+	padding: 0px 4px;
+	font-size: 11px;
+	color: #fff;
+	border-radius: 30px;
+	font-weight: 500;
+	left: 10px;
+}
+-------- for darks -------
+.vurox-dark-version .vurox-bubble-dropdown ul{
+	background: #10212c;
+	box-shadow: none;
+}
+
+.vurox-dark-version .vurox-bubble-dropdown ul li a{
+	color: #ddd;
+}
+.vurox-dark-version .vurox-bubble-dropdown ul li a:hover{
+	color: #F7614E;
+}
+.vurox-dark-version .vurox-bubble-dropdown-arrow-right ul:after{
+	background: #10212c;
+}
+.vurox-dark-version .vurox-bubble-dropdown-notification-style ul li a span{
+	color: #666;
+} */
+/*--------- For notification -------------*/
+/*.vurox-bubble-dropdown-notification-style ul{
+	padding: 0;
+	width: 250px;
+	border-radius: 4px;
+}
+.vurox-bubble-dropdown-notification-style ul li{
+	padding: 17px 28px 32px 28px;
+	border-bottom: 1px solid #414141;
+}
+.vurox-bubble-dropdown-notification-style ul li:last-child{
+	border-bottom: none;
+}
+.vurox-bubble-dropdown-arrow-right.vurox-bubble-dropdown-notification-style ul{
+    margin-left: -215px !important;
+}
+.vurox-bubble-dropdown-notification-style ul li a{
+    text-transform: none;
+    font-size: 14px;
+    letter-spacing: 0;
+}
+.vurox-bubble-dropdown-notification-style ul li a span{
+	position: absolute;
+	bottom: -19px;
+	left: 0;
+	font-size: 9px;
+	width: 120px;
+	color: #ddd;
+}
+.vurox-bubble-dropdown-notification-style ul li a:after{
+	display: none;
+}
+.vurox-bubble-dropdown-notification-style ul li a:hover{}*/
+
+/* ------------------------------ Admin Sidebar ------------------------- */
+/*.vurox-header-sidebar-minimal .vurox-admin-sidebar{
+	width: 230px !important;
+}
+.vurox-admin-sidebar ul li a span i,
+.vurox-admin-sidebar ul li a span span{
+
+}
+.vurox-admin-sidebar ul li a{
+	white-space: nowrap;
+}
+.vurox-admin-sidebar ul li a span{
+	transition: all 0.4s ease;
+}
+.vurox-header-sidebar-minimal .vurox-admin-sidebar .vurox-admin-sidebar-heading{
+	opacity: 0;
+}
+.vurox-header-sidebar-minimal .vurox-admin-sidebar ul li a span, 
+.vurox-header-sidebar-minimal .vurox-admin-sidebar ul li a span i, 
+.vurox-header-sidebar-minimal .vurox-admin-sidebar ul li a span span{
+	opacity: 0;
+}
+.vurox-header-sidebar-minimal nav.vurox-admin-sidebar:hover{
+	width: 230px !important;
+	z-index: 9;
+	background-color: rgba(17, 34, 47, 0.95);
+}
+.vurox-header-sidebar-minimal nav.vurox-admin-sidebar:hover ul li a span,
+.vurox-header-sidebar-minimal nav.vurox-admin-sidebar:hover .vurox-admin-sidebar-heading,
+.vurox-header-sidebar-minimal nav.vurox-admin-sidebar:hover ul li a i,
+.vurox-header-sidebar-minimal nav.vurox-admin-sidebar:hover ul li a span span{
+	opacity: 1 !important;
+}
+.vurox-admin-sidebar{
+    width: 230px;
+    background: #fcfcfc;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    padding-top: 100px;
+    transition: width 0.4s ease;
+}
+.vurox-admin-sidebar ul{
+    list-style: none;
+    padding-left: 0;
+    padding: 20px;
+}
+.vurox-admin-sidebar ul li.vurox-admin-sidebar-heading{
+	white-space: nowrap;
+    padding: 15px 25px;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.4s ease;
+}
+.vurox-admin-sidebar ul li a{
+    padding: 10px 25px;
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+    color: #555;
+    transition: all 0.4s ease;
+    font-size: 13px;
+}
+.vurox-admin-sidebar ul li a.has-submenu i.ti-angle-right{
+	float: right;
+	margin-top: 6px;
+	font-size: 11px;
+	font-weight: 800;
+	transition: all 0.4s ease;
+}
+.vurox-admin-sidebar ul li a.has-submenu i.ti-angle-right.menu-open{
+	transform: rotate(90deg);
+}
+.vurox-admin-sidebar ul li a i{
+    margin-right: 10px;
+}
+.vurox-admin-sidebar ul li a:hover{
+    background: #f8f8f8;
+}
+.vurox-nav-label{
+    float: right;
+    background: #F7614E;
+    padding: 1px 7px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 40px;
+}
+
+/*------------- Sidemenu submenu -------------*/
+
+/*.vurox-admin-sidebar-submenu{
+    background: #17283a;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.vurox-admin-sidebar-submenu.submenu-open{
+    visibility: visible;
+    height: auto;
+    opacity: 1;
+}
+.vurox-admin-sidebar-submenu li{}
+.vurox-admin-sidebar-submenu li a{
+	padding-left: 40px !important;
+	font-size: 12px !important;
+}
+.vurox-admin-sidebar-submenu li a:hover{}
+.sidebar-dark.vurox-admin-sidebar{
+    background: transparent;
+}
+.sidebar-dark.vurox-admin-sidebar ul li.vurox-admin-sidebar-heading{
+	color: #999;
+}
+.sidebar-dark.vurox-admin-sidebar ul li a{
+    color: #ddd;
+}
+.sidebar-dark.vurox-admin-sidebar ul li a:hover{
+    background: #0c1c28;
+    color: #F7614E;
+}
+.vurox-ltr-first-section{
+	padding-left: 251px !important;
+	transition: padding 0.4s ease;
+}
+
+.vurox-header-sidebar-minimal .vurox-ltr-first-section{
+	padding-left: 84px !important;
+}*/
+/*.vurox-dark-version{
+	background: #121c26;
+}*/
+/* .vurox-admin-content-section{
+	padding: 20px;
+ }
+.vurox-dark-version .vurox-admin-content-section h1,
+.vurox-dark-version .vurox-admin-content-section h2,
+.vurox-dark-version .vurox-admin-content-section h3,
+.vurox-dark-version .vurox-admin-content-section h4,
+.vurox-dark-version .vurox-admin-content-section h5,
+.vurox-dark-version .vurox-admin-content-section h6,
+.vurox-dark-version .vurox-admin-content-section p,
+.vurox-dark-version .vurox-admin-content-section span{
+	color: #ddd;
+}*/
+/* ---------------- VuRoX Ratings ----------- */
+/*p.vurox-rating-block{
+	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: text-bottom;
+	font-size: 23px;
+}
+p.vurox-rating-block img{
+    width: 19px;
+}
+.rating-number{
+	display: inline;
+	vertical-align: bottom;
+}*/
+/* ------------------------- VuROoX Button ------------------------ */
+/*.vurox-button{
+    outline: none;
+    border: none;
+    padding: 12px 35px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    margin:4px 0;
+}
+.vurox-button-md{
+    padding: 7px 25px;
+}
+.vurox-icon-button i{
+	color: #fff;
+}*/
+/* --------------- Vurox Charts BLock --------------------- */
+/*.vurox-admin-components-block{
+    margin: 7.5px 0;
+    transition: all 0.4s ease;
+}
+.vurox-admin-components-block-content{
+    padding: 25px 25px 0 25px;
+}
+.vurox-admin-components-block h3{
+    font-weight: 300;
+}
+.vurox-admin-components-block h3 small,
+.vurox-admin-components-block h4 small{
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+.vurox-admin-components-block h4 small.vurox-text-sizes{
+    font-size: 11px;
+    letter-spacing: 0px;
+
+}
+.vurox-admin-components-block h6,
+.vurox-admin-components-block h3,
+.vurox-admin-components-block i{
+	color: #fff;
+}
+.vurox-admin-components-block h5{
+	font-size: 1.10rem;
+}
+#chartContainer body{
+	margin:0;
+}*/
+/*.vurox-static-spline-chart-1,
+.vurox-static-spline-chart-2{
+	width: auto; 
+	margin-right:-20.5px
+}*/
+/* .vurox-admin-tab-content .tab-pane,
+.vurox-admin-double-axis-column-charts,
+.vurox-admin-double-axis-column-charts-thin{
+	height: auto;
+	width: 100%;
+}
+.vurox-charts-icon{}
+.vurox-charts-icon i{
+    padding: 16px;
+    color: #fff;
+    border-radius: 40px;
+    font-size: 20px;
+    opacity: 0.8;
+    background-color: rgba(255,255,255,0.2);
+} */
+/* ----------------------- Vurox Tabs --------------------------- */
+/* .vurox-chart-box-standard-padding{
+    padding: 25px 30px 20px 30px;
+} */
+/* .vurox-tabs-boxed.vurox-dark{}
+.vurox-tabs-boxed.vurox-charts-tab-right{
+    padding:0px 10px;
+}
+.vurox-charts-tab-right.vurox-tabs-boxed ul,
+.vurox-charts-tab-right.vurox-tabs-boxed .nav{
+	float: right;
+}
+.vurox-tabs-boxed ul li{}
+.vurox-tabs-boxed .nav-item{
+	display:inline-block;
+}
+.vurox-tabs-boxed ul li a,
+.vurox-tabs-boxed .nav .nav-item a{
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0px 2px;
+    border-radius: 0px !important;
+    color: #ccc;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.vurox-tabs-boxed.vurox-tabs-boxed-blue ul li a,
+.vurox-tabs-boxed.vurox-tabs-boxed-blue .nav .nav-item a{
+    border: 1px solid rgba(96,202,223,0.1);
+}
+.vurox-tabs-boxed ul li a.active,
+.vurox-tabs-boxed .nav .nav-item a.active{
+	color:#60cadf !important;
+	background: rgba(96,202,223, 0.28) !important;
+    border: 1px solid rgba(96,202,223,0.1);
+}
+.tab-content{
+	width: 100%;
+} */
+/* ----------------------- Vurox Tabs underlined --------------------------- */
+/*.vurox-tabs-underlined.vurox-dark{}
+.vurox-tabs-underlined.vurox-charts-tab-right{
+    padding:0px 10px;
+}
+.vurox-tabs-underlined-spacing-in-tabs{
+	padding: 30px 33px 25px 37px!important;
+}
+.vurox-charts-tab-right.vurox-tabs-underlined ul,
+.vurox-charts-tab-right.vurox-tabs-underlined .nav{
+	float: right;
+}
+.vurox-tabs-underlined ul li,
+.vurox-tabs-underlined .nav > .nav-item{
+    position: relative;
+}
+.vurox-tabs-underlined ul li a,
+.vurox-tabs-underlined .nav > .nav-item > a{
+    padding: 3px 0px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0 15px;
+    border-radius: 0px !important;
+    color: #ccc;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.vurox-tabs-underlined .nav > .nav-item > a:focus{
+	outline: none
+}
+.vurox-tabs-underlined.vurox-tabs-underlined-left ul li:first-child a,
+.vurox-tabs-underlined.vurox-tabs-underlined-left .nav > .nav-item:first-child a{
+	margin-left: 0;
+}
+.vurox-tabs-underlined.vurox-tabs-underlined-right ul,
+.vurox-tabs-underlined.vurox-tabs-underlined-right .nav{
+	float: right;
+}
+.vurox-tabs-underlined.vurox-tabs-underlined-right ul li:last-child a,
+.vurox-tabs-underlined.vurox-tabs-underlined-right .nav > .nav-item:last-child a{
+	margin-right: 0;
+}
+.vurox-tabs-underlined.vurox-charts-tab-left ul li a{
+}
+.vurox-tabs-underlined ul li a.active,
+.vurox-tabs-underlined .nav > .nav-item > a.active{
+	color:#00C1D8 !important;
+	background: transparent !important;
+	border-color:#00C1D8;
+}
+.vurox-tabs-underlined ul li a.nav-link-round-bordered,
+.vurox-tabs-underlined .nav > .nav-item > a.nav-link-round-bordered{
+    border: 1px solid #00c1d8;
+    padding: 5px 20px;
+    color: #00c1d8;
+    border-radius: 40px !important;
+}
+.vurox-tabs-underlined ul li a.nav-link-round-bordered i{
+    color: #00c1d8;
+}*/
+
+/* ------------------------ Vurox Tables -------------------- */
+/* .vurox-admin-table{}
+.vurox-table-dark{}
+.vurox-admin-table p,
+.vurox-admin-table *{
+	color: #ccc;
+}
+.vurox-admin-table thead{
+}
+.vurox-admin-table thead tr{
+    padding:20px;
+}
+
+.vurox-admin-table thead tr th{
+    font-size: 12px;
+    font-weight: 500;
+    padding: 16px 20px 10px;
+}
+.vurox-admin-table tbody{}
+.vurox-admin-table tbody tr{
+	font-size: 12px;
+	border-top: 1px solid #21334173;
+	transition: all 0.4s ease;
+}
+.vurox-admin-table-borderless tbody tr{
+	border-top: none;
+}
+.vurox-admin-table.vurox-admin-table-borderless tbody tr td{
+	padding: 10px 14px;
+}
+.vurox-admin-table tbody tr th{
+    padding: 15px 22px;
+}
+.vurox-admin-table tbody tr th .vurox-sq-img{
+	width: 30px;
+	height: 30px;
+	overflow: hidden;
+}
+.vurox-admin-table tbody tr th img{
+	border-radius: 50px;
+    margin-right: 5px;
+    width: 25px;
+}
+.vurox-admin-table tbody tr td{
+    padding: 17px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0px;
+}
+.vurox-admin-table tbody tr:hover{
+	background: rgba(46, 70, 89, 0.4);;
+	cursor:pointer;
+}
+---------------------
+.vurox-stats-down{
+	display: inline-block;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+.vurox-stats-down i{
+
+	color: #f7614d;
+
+	font-size: 19px;
+}
+.vurox-stats-down span{
+
+	font-size: 12px;
+
+	margin-left: 10px;
+
+	font-weight: 600;
+
+	color: #f7614d !important;
+}
+.vurox-stats-up{
+	display: inline-block;
+	margin-bottom: 10px;
+	vertical-align: middle;
+}
+.vurox-stats-up i{
+
+	color: #00C250;
+
+	font-size: 19px;
+}
+.vurox-stats-up span{
+
+	font-size: 12px;
+
+	margin-left: 10px;
+
+	font-weight: 600;
+
+	color: #00C250 !important;
+}
+.vurox-pie-chart-with-progressbar .vurox-pie-chart-section{
+	display: inline-block;
+	width: 49%;
+}
+.vurox-pie-chart-with-progressbar .vurox-progressbar-section{
+	display: inline-block;
+	width: 49%;
+	padding: 0 20px 0 0;
+} */
+/* ------------------- Progressbar --------------------------- */
+/*.vurox-progressbar-section{
+    vertical-align: top;
+    position: relative;
+}
+.vurox-progressbar-section .vurox-progressbar-container .vurox-progress{
+    position: relative;
+    margin-bottom: 13px;
+    position: relative;
+    height: 7px;
+    width: 100%;
+    overflow: hidden;
+}
+.vurox-progressbar-section .vurox-progressbar-container.vurox-dark .vurox-progress{
+    background: #2f424d;
+}
+.vurox-progressbar-container .vurox-progress > div{
+	position: absolute;
+	content: '';
+    height: 7px;
+	height: inherit;	
+	border-radius: 2px;
+}
+.vurox-progressbar-container .vurox-progress.vurox-bg-ocean-blue:after{
+	background: #00C0D7;
+}
+.vurox-progressbar-container .vurox-progress.vurox-bg-light-violet:after{
+	background: #7B4DFF;
+}
+.vurox-progressbar-container .vurox-progress.vurox-bg-red:after{
+	background: #F7614E;
+}
+.vurox-progressbar-container .vurox-progress.vurox-bg-green:after{
+	background: #00C150;
+}
+.vurox-progressbar-container .vurox-progress.vurox-bg-yellow:after{
+	background: #f9be49;
+}	
+.vurox-progress.vw-1:after{width:1%;}.vurox-progress.vw-2:after{width:2%;}.vurox-progress.vw-3:after{width:3%;}.vurox-progress.vw-4:after{width:4%;}.vurox-progress.vw-5:after{width:5%;}.vurox-progress.vw-6:after{width:6%;}.vurox-progress.vw-7:after{width:7%;}.vurox-progress.vw-8:after{width:8%;}.vurox-progress.vw-9:after{width:9%;}.vurox-progress.vw-10:after{width:10%;}.vurox-progress.vw-11:after{width:11%;}.vurox-progress.vw-12:after{width:12%;}.vurox-progress.vw-13:after{width:13%;}.vurox-progress.vw-14:after{width:14%;}.vurox-progress.vw-15:after{width:15%;}.vurox-progress.vw-16:after{width:16%;}.vurox-progress.vw-17:after{width:17%;}.vurox-progress.vw-18:after{width:18%;}.vurox-progress.vw-19:after{width:19%;}.vurox-progress.vw-20:after{width:20%;}.vurox-progress.vw-21:after{width:21%;}.vurox-progress.vw-22:after{width:22%;}.vurox-progress.vw-23:after{width:23%;}.vurox-progress.vw-24:after{width:24%;}.vurox-progress.vw-25:after{width:25%;}.vurox-progress.vw-26:after{width:26%;}.vurox-progress.vw-27:after{width:27%;}.vurox-progress.vw-28:after{width:28%;}.vurox-progress.vw-29:after{width:29%;}.vurox-progress.vw-30:after{width:30%;}.vurox-progress.vw-31:after{width:31%;}.vurox-progress.vw-32:after{width:32%;}.vurox-progress.vw-33:after{width:33%;}.vurox-progress.vw-34:after{width:34%;}.vurox-progress.vw-35:after{width:35%;}.vurox-progress.vw-36:after{width:36%;}.vurox-progress.vw-37:after{width:37%;}.vurox-progress.vw-38:after{width:38%;}.vurox-progress.vw-39:after{width:39%;}.vurox-progress.vw-40:after{width:40%;}.vurox-progress.vw-41:after{width:41%;}.vurox-progress.vw-42:after{width:42%;}.vurox-progress.vw-43:after{width:43%;}.vurox-progress.vw-44:after{width:44%;}.vurox-progress.vw-45:after{width:45%;}.vurox-progress.vw-46:after{width:46%;}.vurox-progress.vw-47:after{width:47%;}.vurox-progress.vw-48:after{width:48%;}.vurox-progress.vw-49:after{width:49%;}.vurox-progress.vw-50:after{width:50%;}.vurox-progress.vw-51:after{width:51%;}.vurox-progress.vw-52:after{width:52%;}.vurox-progress.vw-53:after{width:53%;}.vurox-progress.vw-54:after{width:54%;}.vurox-progress.vw-55:after{width:55%;}.vurox-progress.vw-56:after{width:56%;}.vurox-progress.vw-57:after{width:57%;}.vurox-progress.vw-58:after{width:58%;}.vurox-progress.vw-59:after{width:59%;}.vurox-progress.vw-60:after{width:60%;}.vurox-progress.vw-61:after{width:61%;}.vurox-progress.vw-62:after{width:62%;}.vurox-progress.vw-63:after{width:63%;}.vurox-progress.vw-64:after{width:64%;}.vurox-progress.vw-65:after{width:65%;}.vurox-progress.vw-66:after{width:66%;}.vurox-progress.vw-67:after{width:67%;}.vurox-progress.vw-68:after{width:68%;}.vurox-progress.vw-69:after{width:69%;}.vurox-progress.vw-70:after{width:70%;}.vurox-progress.vw-71:after{width:71%;}.vurox-progress.vw-72:after{width:72%;}.vurox-progress.vw-73:after{width:73%;}.vurox-progress.vw-74:after{width:74%;}.vurox-progress.vw-75:after{width:75%;}.vurox-progress.vw-76:after{width:76%;}.vurox-progress.vw-77:after{width:77%;}.vurox-progress.vw-78:after{width:78%;}.vurox-progress.vw-79:after{width:79%;}.vurox-progress.vw-80:after{width:80%;}.vurox-progress.vw-81:after{width:81%;}.vurox-progress.vw-82:after{width:82%;}.vurox-progress.vw-83:after{width:83%;}.vurox-progress.vw-84:after{width:84%;}.vurox-progress.vw-85:after{width:85%;}.vurox-progress.vw-86:after{width:86%;}.vurox-progress.vw-87:after{width:87%;}.vurox-progress.vw-88:after{width:88%;}.vurox-progress.vw-89:after{width:89%;}.vurox-progress.vw-90:after{width:90%;}.vurox-progress.vw-91:after{width:91%;}.vurox-progress.vw-92:after{width:92%;}.vurox-progress.vw-93:after{width:93%;}.vurox-progress.vw-94:after{width:94%;}.vurox-progress.vw-95:after{width:95%;}.vurox-progress.vw-96:after{width:96%;}.vurox-progress.vw-97:after{width:97%;}.vurox-progress.vw-98:after{width:98%;}.vurox-progress.vw-99:after{width:99%;}.vurox-progress.vw-100:after{width:100%;}
+*//* -------------- Vurox list items ----------- */
+/*.vurox-list-items-stacked{
+	position: relative;
+}
+.vurox-list-items-stacked .heading{
+	padding: 25px 25px 15px 25px;
+}
+.vurox-list-items-stacked ul{
+    list-style: none;
+    padding-left: 0;
+}
+.vurox-list-items-stacked ul li{
+	cursor: pointer;
+	padding: 15px 20px 15px 20px;
+	transition: all 0.4s ease;
+	position: relative;
+}
+.vurox-list-items-stacked ul li:hover{
+	background-color: rgba(255,255,255,0.1);
+}
+.vurox-list-items-stacked ul li i{color: #fff;padding: 12px;display: inline-block;width: 40px;vertical-align: top;border-radius: 50%;}
+.vurox-list-items-stacked ul li span{
+	font-size: 10px;
+	font-weight: 700;
+}
+.vurox-list-items-stacked ul li .vurox-list-desc{
+    display: inline-block;
+    padding: 0 9px;
+    width: 77%;
+}
+.vurox-list-items-stacked ul li img{
+	border-radius: 50px;
+	width: 40px;
+	vertical-align: top;
+	margin-right: 5px;
+}
+.vurox-list-items-stacked ul li .vurox-rating-block img{
+	height: 20px;
+	width: 16px;
+}*/
+
+/*-------------- Vurox legends --------------*/
+/* .vurox-vertical-legends{
+	position: absolute;
+	top: 30px;
+	right: 30px;
+}
+.vurox-legend-block{
+	position: relative;
+	padding: 2px;
+}
+.vurox-legend-block span{
+	position: absolute;
+	content: '';
+	width: 16px;
+	height: 16px;
+	border-radius: 50px;
+}
+.vurox-legend-block p{
+    margin-left: 20px !important;
+    margin-top: -2px;
+}
+
+.vurox-charts-legend{
+	position: relative;
+}
+.vurox-charts-legend.horizontal{
+	display: inline-block;
+	margin-right: 15px;
+}
+.vurox-charts-legend.horizontal span{
+	position: absolute;
+    content: '';
+    top: 50%;
+    transform: translateY(-50%);
+}
+.vurox-charts-legend.horizontal span.rectangle{
+	width: 20px;
+	height: 7px;
+}
+.vurox-charts-legend.horizontal span.rectangle+p{
+	margin-left: 25px;
+}
+.vurox-charts-legend.horizontal span.circle{
+	width: 20px;
+	height: 20px;
+	border-radius: 50px;
+	top: 50%;
+}
+.vurox-charts-legend.horizontal span.circle+p{
+	margin-left: 25px;
+} */
+/*--------------- Vurox mail template ---------------*/
+/* .vurox-mail-section{}
+.vurox-mail-links{}
+.vurox-mail-links ul{
+    list-style: none;
+    padding: 15px 0px;
+}
+.vurox-mail-toolbar-icon{}
+.vurox-mail-toolbar-icon ul{
+	padding: 0 0 10px 0;
+}
+.vurox-mail-toolbar-icon ul li{
+	list-style: none;
+	display: inline-block;
+	position: relative;
+}
+.vurox-mail-toolbar-icon ul li a{
+    padding: 6px 13px;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+}
+.vurox-mail-toolbar-icon ul li a:hover{
+    background: var(--gray-dark);
+    text-decoration: none;
+}
+.vurox-mail-toolbar-icon ul li a:focus{}
+.vurox-mail-links ul li.vurox-mail-main-link{padding: 6px 18px;}
+.vurox-mail-links ul li.vurox-mail-main-link a{
+    padding: 10px;
+    background: #f7614d;
+    border-radius: 30px;
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+}
+.vurox-mail-links ul li{
+    padding: 8px 20px;
+}
+.vurox-mail-links ul li a{
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+.vurox-mail-links ul li a i{
+    vertical-align: middle;
+    margin-right: 8px;
+    transition: all 0.4s ease;
+}
+.vurox-dark-version .vurox-mail-links ul li.vurox-mail-main-link a{
+	color: #fff;
+	display: block;
+}
+.vurox-dark-version .vurox-mail-links ul li a{
+    color: #A5BCD3;
+    display: block;
+    padding: 8px 21px;
+}
+.vurox-dark-version .vurox-mail-links ul li a i{
+    color: #678999;
+}
+.vurox-dark-version .vurox-mail-links ul li a:hover,
+.vurox-dark-version .vurox-mail-links ul li a:hover i{
+	color: #f7614d;
+}
+.vurox-dark-version .vurox-mail-links ul li a:hover{
+	background-color: #213341;
+}
+.vurox-partial-heading{
+	white-space: nowrap;
+    padding: 15px 25px;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.4s ease;
+}
+.vurox-dark-version .vurox-partial-heading{
+	color: #A5BCD3;
+}
+.vurox-mail-main-contents{
+    padding: 25px;
+}
+.vurox-mail-main-contents .vurox-mail-toolbar-top{}
+.vurox-mail-main-contents .vurox-mail-email-list{}
+.vurox-mail-main-contents .vurox-mail-email-list ul{
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li{
+    border-bottom: 1px solid #44444426;
+    padding-bottom: 0px;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a{
+	text-decoration: none;
+	font-size: 13px;
+	padding: 10px 0;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a p{
+	margin-bottom: 0;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-checkbox{
+     width: 3%; 
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-star{
+    display: inline-block;
+    width: 20px;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-company{
+	color: #777;
+    display: inline-block;
+    width: 21%;
+    text-overflow: ellipsis;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-title{
+    font-weight: 700;
+    width: 18%;
+    display: inline-block;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-title-content-main{
+	white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a.email-unread .mail-company,
+.vurox-mail-main-contents .vurox-mail-email-list ul li a.email-unread .mail-title-content span:first-child{
+	color: #ddd;
+	font-weight: 700;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-title-content span{
+	color: #a3a3a3;
+}
+.vurox-mail-main-contents .vurox-mail-email-list ul li a .mail-content{
+    display: inline-block;
+    width: 356px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    color: #A5BCD3;
+    font-size: 12px;
+}
+
+.vurox-list-items{
+    position: relative;
+}
+span.vurox-options.vurox-options-right{
+    position: absolute;
+    font-size: 10px;
+    cursor: pointer;
+    z-index: 10;
+    top: 10px;
+    left: 15px;
+}
+span.vurox-options.vurox-options-left{
+    position: absolute;
+    font-size: 10px;
+    cursor: pointer;
+    z-index: 8;
+    top: 10px;
+    right: 15px;
+}
+.vurox-list-items .menu-open .vurox-options{
+	z-index: 99;
+}
+.vurox-options + ul.vurox-dropdown-list{
+    position: absolute;
+    background: #030e16;
+    z-index: 9;
+    border-radius: 3px;
+    transform-origin: top right;
+    padding: 12px 0 10px;
+    
+    top: 7px;
+    transform: scale(0.7);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    -webkit-transition: all 300ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -moz-transition: all 300ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -o-transition: all 300ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition: all 300ms cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -webkit-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -moz-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    -o-transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+    transition-timing-function: cubic-bezier(0.190, 1.000, 0.220, 1.000);
+} */
+/*.vurox-options + ul.vurox-dropdown-list.vurox-dropdown-list-left{
+    right: 7px;
+    transform-origin: top right;
+}
+.vurox-options + ul.vurox-dropdown-list.vurox-dropdown-list-right{
+    left: 7px;
+    transform-origin: top left;
+}
+.menu-open .vurox-options + ul.vurox-dropdown-list,
+.menu-open .vurox-options + ul.vurox-dropdown-list{
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+.vurox-options + ul.vurox-dropdown-list li{
+    padding: 0;
+    position: relative;
+    display: block;
+}
+.vurox-options + ul.vurox-dropdown-list > li > a{
+    padding: 5px 15px;
+    display: block;
+    font-size: 12px;
+    color: #ddd;
+    border: none;
+    margin: 0;
+}*/
+/*.vurox-list-items ul{
+    list-style: none;
+    padding: 0;
+}
+.vurox-list-items ul li{
+    position: relative;
+}
+.vurox-list-items ul li a{
+	padding: 12px 14px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    display: block;
+}
+.vurox-list-items ul li a:hover{
+	background: #081722;
+}
+.vurox-list-items ul li a img{
+    width: 37px;
+    border-radius: 50px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+.vurox-list-items > ul > li > a:after{
+	position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    background: #00bc00;
+    top: 39px;
+    left: 17px;
+    z-index: 9;
+}
+.vurox-list-items > ul > li:hover,
+.vurox-list-items > ul > li > a:hover{
+	background: #030e16;
+}
+.vurox-list-items ul li a .chatlist-content{
+    display: inline-block;
+    width: 68%;
+    padding-left: 7px;
+}
+.vurox-list-items ul li a .chatlist-content p:first-of-type{
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+}
+.vurox-list-items ul li a .chatlist-content p:last-child{
+    margin: 0;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}*/
+
+/*------------------ vurox calendar -----------------*/
+/* .vurox-daygrid-calendar .fc-timeGrid-view hr.fc-divider{
+    padding: 0 0 0px;
+    border-width: 0px 0;
+}
+.vurox-daygrid-calendar .fc-left h2{
+    float: left;
+    font-size: 13px;
+    width: 203px;
+    display: inline;
+}
+.vurox-daygrid-calendar .fc-left .fc-button-group button{
+	font-size: 9px;
+	background: transparent;
+	margin: 0 1px;
+}
+.vurox-daygrid-calendar .fc-left .fc-button-group button:hover{
+	color: #f7614e;
+	border: 1px solid rgba(247, 97, 78, 0);
+	background: rgba(247, 97, 78, 0.23);
+}
+.vurox-daygrid-calendar .fc-left .fc-button-group button:focus{
+	box-shadow: none;
+}
+.vurox-daygrid-calendar .fc-left .fc-today-button{
+	font-size: 9px;
+	padding: 4px 7px;
+	text-transform: capitalize;
+	background: transparent;
+	transition: all 0.4s ease;
+}
+.vurox-daygrid-calendar .fc-left .fc-today-button:hover{
+	color: #f7614e;
+	border: 1px solid rgba(247, 97, 78, 0);
+	background: rgba(247, 97, 78, 0.23);
+}
+.vurox-daygrid-calendar .fc-right .fc-button-group .fc-button-primary{
+	font-size: 9px;
+	text-transform: capitalize;
+	margin: 0 2px;
+	background: transparent;
+	padding: 4px 8px;
+	border-radius: 2px;
+	transition: all 0.4s ease;
+}
+.vurox-daygrid-calendar .fc-right .fc-button-group .fc-button-primary.fc-button-active,
+.vurox-daygrid-calendar .fc-right .fc-button-group .fc-button-primary:hover{
+	color: #f7614e;
+	border: 1px solid rgba(247, 97, 78, 0);
+	background: rgba(247, 97, 78, 0.23);
+}
+.vurox-daygrid-calendar .fc-button-primary:not(:disabled).fc-button-active:focus, 
+.vurox-daygrid-calendar .fc-button-primary:not(:disabled):active:focus{
+	box-shadow: none;
+}
+
+.vurox-dark-version .vurox-daygrid-calendar table tr th,
+.vurox-dark-version .vurox-daygrid-calendar table tr td{
+	border-color: #1c2a38;
+	text-align: right;
+	color: #ddd;
+}
+.vurox-dark-version .vurox-daygrid-calendar table thead tr th{
+	font-size: 10px;
+	height: 30px;
+}
+.vurox-dark-version .vurox-daygrid-calendar table thead tr th span,
+.vurox-dark-version .vurox-daygrid-calendar table thead tr th a,
+.vurox-dark-version .vurox-daygrid-calendar table tbody tr td > a.fc-day-number{
+	line-height: 30px;
+	padding: 10px;
+	text-decoration: none;
+}
+.vurox-dark-version .vurox-daygrid-calendar table tbody tr td{
+	font-size: 12px;
+	height: 30px;
+}
+.vurox-dark-version .vurox-daygrid-calendar table tbody tr td > a.fc-day-grid-event{
+	text-align: center;
+	font-size: 13px;
+	padding: 3px 0;
+	border-radius: 2px;
+}
+.vurox-dark-version .vurox-daygrid-calendar .fc-today{
+	background-color: #1f2c3a;
+}
+.vurox-dark-version .fc-more-popover{
+    border: none !important;
+    padding: 10px;
+    background: #142333 !important;
+}
+.vurox-dark-version .fc-more-popover .fc-header{
+    background: #142333 !important;
+    padding: 10px 12px;
+}
+.vurox-dark-version .fc-more-popover .fc-body{
+    background: #142333 !important;
+}
+.vurox-dark-version .fc-more-popover .fc-body .fc-day-grid-event{
+    padding: 5px 10px;
+    border-radius: 0px;
+    margin: 3px;
+}
+.vurox-daygrid-calendar th.fc-day-header{
+	text-align: center !important;
+} */
+
+/* --------------- Forms -------------------- */
+/*.vurox-form .form-control,
+.vurox-form .form-control:focus{
+	background-color: transparent;
+	outline: none;
+	box-shadow: none;
+}
+.vurox-dark-version .vurox-form .form-control{
+	border: 1px solid #283643;
+}
+.vurox-dark-version .vurox-form .form-group label{
+	color: #ddd;
+	font-size: 12px;
+	font-weight: 600;
+}
+.vurox-form .form-control{
+	height: 45px;
+	border-radius: 2px;
+	font-size: 13px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+.vurox-dark-version .vurox-form .custom-control-label{
+	color: #ddd;
+}
+.vurox-form .custom-control-label{
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+.vurox-dark-version .vurox-form .custom-control-label::before{
+	background-color: #36394b;
+	border: #1b3753 solid 1px;
+}
+.vurox-form .custom-control-label::before{
+	top: 0.05rem;
+	border-radius: 2px !important;
+}
+.vurox-form .custom-control-label::before{
+	box-shadow: none;
+}
+.vurox-form .custom-control-label::after{
+    top: 0.105rem;
+}
+.vurox-form .custom-control-input:checked ~ .custom-control-label::before{
+	background-color: #00bcd4;
+	box-shadow: none;
+}
+.vurox-form .custom-control-input:not(:disabled) ~ .custom-control-label::before{
+	border-color: #36394b !important;
+	box-shadow: none;
+}
+
+.vurox-form button.btn{
+    border-radius: 2px;
+    padding: 10px 19px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.vurox-form button.btn-primary{
+	background-color: #00bcd4;
+	border-color: #00bcd4;
+}
+.vurox-form button.btn-primary:hover{
+	box-shadow: 0 10px 10px rgba(0,0,0,0.4);
+}
+.vurox-dark-version .iti__country-list{
+	background-color: #111F2C;
+    border: none;
+}
+.vurox-dark-version .iti__divider {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1411764705882353);
+}
+.iti__selected-flag{
+	outline: none;
+}
+.vurox-dark-version select{
+	color: #6b757e;
+}
+.vurox-dark-version select:selected{
+	color: #6b757e;
+}
+.vurox-form-vertical label{
+	padding: 15px 15px 0;
+}
+.vurox-form-vertical label.custom-control-label{
+	padding: 0;
+}
+.vurox-form .custom-file-input{background: #666;}
+label.custom-file-label{
+	padding: 10px;
+	background: transparent;
+	border: 1px solid #283643;
+	height: 40px;
+	font-weight: 600;
+	border-radius: 2px;
+	color: #495057 !important;
+}
+label.custom-file-label:focus{
+	outline: none;
+}
+.vurox-form .custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: 100%;
+    padding: 11px 20px;
+    line-height: 1.5;
+    color: #ffffff;
+    content: "Browse";
+    background-color: #e66c56;
+    border-left: inherit;
+    border-radius: inherit;
+}*/
+
+/* ------------- Vurox pagination ---------------- */
+/*.pagination-arrow{}
+.pagination-arrow span{}
+.pagination-arrow span.pagination-has a,
+.pagination-arrow span.pagination-has i{
+
+}
+.pagination-arrow span a{
+    border-radius: 3px;
+    text-decoration: none;
+    padding: 0px 8px 2px;
+    border: 1px solid #ddd;
+}
+.pagination-arrow span i{
+    font-size: 10px;
+    color: #ddd;
+}
+
+.vurox-dark-version .pagination-arrow span{}
+.vurox-dark-version .pagination-arrow span.pagination-has a{
+	border-color: #397599;
+}
+.vurox-dark-version .pagination-arrow span.pagination-has i{
+	color: #397599;
+}
+.vurox-dark-version .pagination-arrow span a{
+    border: 1px solid #315469;
+}
+.vurox-dark-version .pagination-arrow span i{
+    color: #315469;
+}*/
+
+/*----------------------- Breadcrumbs ------------------------*/
+/*.vurox-breadcrumb-list{
+    padding: 0;
+    list-style: none;
+}
+.vurox-breadcrumb-list li{
+	display: inline-block;
+	padding-right: 13px;
+	position: relative;
+}
+.vurox-breadcrumb-list li a{
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ddd;
+}
+.vurox-breadcrumb-list li a:hover{}
+.vurox-breadcrumb-list li a.active{
+    color: #00bcd4;
+}
+.vurox-breadcrumb-list li:after{
+	position: absolute;
+	content: "";
+	right: 5px;
+	top: 8px;
+	background: transparent;
+	width: 5px;
+	height: 5px;
+	transform: rotate(45deg);
+	border-top: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.vurox-breadcrumb-list li:last-child:after{
+
+	border-top: 0px solid #ddd;
+	border-right: 0px solid #ddd;
+}*/
+
+
+/*------- Recharts Values --------------*/
+/* .recharts-text.recharts-cartesian-axis-tick-value{
+	font-size: 11px;
+	font-weight: 600;
+}
+.vurox-radar-charts-styles{
+	font-size: 11px;
+	font-weight: 600;
+	margin: 20px;
+	text-transform: uppercase;
+}
+.recharts-layer.recharts-radar-polygon polygon{
+	box-shadow: 10px 5px 0px #000;
+} */
+
+/*-------------- Stars ------------------*/
+/*.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  line-height: 21px;
+}
+
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: lightgray;
+  font-size:23px;
+}
+
+.stars-container:after {
+  position: absolute;
+  font-size:23px;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: rgb(0, 193, 80);
+  overflow: hidden;
+}
+
+.stars-0:after { width: 0%; }
+.stars-10:after { width: 10%; }
+.stars-20:after { width: 20%; }
+.stars-30:after { width: 30%; }
+.stars-40:after { width: 40%; }
+.stars-45:after { width: 45%; }
+.stars-50:after { width: 50%; }
+.stars-60:after { width: 60%; }
+.stars-70:after { width: 70%; }
+.stars-80:after { width: 80%; }
+.stars-90:after { width: 90%; }
+.stars-100:after { width: 100; }
+*/
+
+
+
+
+
+/*--------------- Vurox Custom Events -------------*/
+
+/* .vurox-dark-version .event-with-details{
+    text-align: left;
+    border: none;
+    position: relative;
+    min-height: 119px;
+    border-radius: 3px;
+}
+.vurox-dark-version .event-with-details .single-event-heading{
+    background: #131e29;
+    padding: 7px;
+    border-radius: 3px 3px 0 0;
+}
+.vurox-dark-version .event-with-details .single-event-heading img{
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    display: inline-block;
+}
+.vurox-dark-version .event-with-details .single-event-heading p{
+    display: inline-block;
+    margin: 0 0 0 6px;
+    color: #b4c9de;
+    opacity: 0.7;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.vurox-dark-version .event-with-details .single-event-content{
+    text-align: center;
+    padding: 20px 8px;
+}
+.vurox-dark-version .event-with-details .single-event-content p{
+    margin: 0;
+    opacity: 0.6;
+    font-weight: 600;
+}
+.vurox-dark-version .event-with-details .single-event-content img{
+    display: inline-block;
+    width: 20px;
+    border-radius: 50px;
+}
+.vurox-dark-version .event-with-details .single-event-content h5{
+    display: inline-block;
+    margin: 1px 1px 0 8px;
+    vertical-align: middle;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.vurox-dark-version .event-with-details .single-event-content span{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 3px 7px 2px 7px;
+	margin-right: 5px;
+	text-transform: uppercase;
+	font-size: 6px;
+	letter-spacing: 0.5px;
+}
+
+.fc-event-container .fc-time-grid-event.fc-event,
+.fc-event-container .fc-day-grid-event.fc-event{
+	background-color: transparent;
+}
+.fc-event-container .fc-time-grid-event,
+.fc-event-container .fc-day-grid-event{
+	border: none;
+	border-radius: 3px;
+}
+.fc-event-container .fc-day-grid-event.fc-event .event-with-details{
+
+min-height: inherit;
+}
+.fc-event-container .fc-day-grid-event.fc-event .event-with-details .single-event-heading,
+.fc-event-container .fc-day-grid-event.fc-event .event-with-details .single-event-content p,
+.fc-event-container .fc-day-grid-event.fc-event .event-with-details .single-event-content span{
+    display: none;
+}
+.fc-event-container .fc-day-grid-event.fc-event .event-with-details .single-event-content{
+    text-align: left;
+    padding: 7px 8px;
+}
+.fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead{
+	border-color:transparent;
+}
+.vurox-short-calendar .fc-dayGridMonth-view .fc-day-top{
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    font-size: 10px;
+}
+.vurox-short-calendar .fc-dayGridMonth-view .fc-day-top span{
+    float: none !important;
+}
+.vurox-short-calendar .fc-dayGridMonth-view table tbody tr td{
+	height: 10px;
+}
+
+.vurox-sm-events span{
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	border-radius: 10px;
+	right: 50%;
+}
+.vurox-dark-version .vurox-short-calendar .fc-dayGridMonth-view table tr th,
+.vurox-dark-version .vurox-short-calendar .fc-dayGridMonth-view table tr td{
+	border-color: transparent;
+}
+.vurox-dark-version .vurox-short-calendar .fc-scroller {
+   overflow-y: hidden !important;
+}
+.vurox-dark-version .vurox-short-calendar .fc-dayGridMonth-view table tr td.fc-event-container{
+
+height: 0;
+}
+.fc-day-top{
+	position: relative;
+}
+.fc-day-top.less-left{
+	transform: translateX(-6.5%);
+}
+.fc-event-dot{width: 5px;height: 5px;border-radius: 10px;float: left;top: 20px;left: 50%;position: relative;margin: 0 1px;} 
