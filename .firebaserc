@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "tastiest-dishes",
+    "staging": "tastiest-dishes",
+    "production": "tastiest-dishes"
+  }
+}

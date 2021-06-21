@@ -1,20 +1,13 @@
 {
-  "presets": ["next/babel"],
+  "env": {
+    "development": {
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "presets": ["next/babel"]
+    }
+  },
   "plugins": [
-    [
-      "import", {
-        "libraryName": "antd"
-      }
-    ],
-    [
-    	"module-resolver", {
-	      "root": ["."],
-	      "alias": {
-	        "Components": "./Components",
-	        "Templates": "./Templates",
-	        "Styles": "./public/style"
-	      }
-	    }
-    ]
+    ["tailwind", { "ssr": true, "displayName": true, "preprocess": false }]
   ]
 }
