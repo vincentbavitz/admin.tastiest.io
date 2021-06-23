@@ -1,9 +1,11 @@
+import { transformPriceFromStripe } from '@tastiest-io/tastiest-utils';
 import InfoCard from 'components/InfoCard';
 import UsersTable from 'components/tables/homeCustomersTable/UsersTable';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import nookies from 'nookies';
 import React, { useContext } from 'react';
+import Stripe from 'stripe';
 import { dlog } from 'utils/development';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 import { METADATA } from '../constants';
@@ -46,10 +48,56 @@ export const getServerSideProps = async context => {
 
   const data = [];
 
+  const stripe = new Stripe(process.env.STRIPE_LIVE_SECRET_KEY, {
+    apiVersion: '2020-08-27',
+  });
+
+  const connectAccounts = (await stripe.accounts.list())?.data;
+  const connectAccountIds = connectAccounts
+    .map(account => account.id)
+    .filter(account => Boolean(account));
+
+  const owedToRestaurantsEach = await Promise.all(
+    connectAccountIds.map(async stripeAccount => {
+      const balance = await stripe.balance.retrieve({
+        stripeAccount,
+      });
+
+      const pendingBalance = transformPriceFromStripe(
+        balance?.pending.reduce((a, b) => a + b?.amount ?? 0, 0) +
+          balance?.available.reduce((a, b) => a + b?.amount ?? 0, 0),
+      );
+
+      return pendingBalance;
+    }),
+  );
+
+  const owedToRestaurants = owedToRestaurantsEach.reduce((a, b) => a + b, 0);
+
+  // All payouts are in GBP
+  const payouts = (await stripe.payouts.list())?.data;
+  const totalProfit = transformPriceFromStripe(
+    payouts.filter(payout => payout.livemode).reduce((a, b) => a + b.amount, 0),
+  );
+
+  const charges = (await stripe.charges.list())?.data;
+  const completeCharges = charges
+    .filter(charge => charge.livemode && charge.paid)
+    .map(charge => charge.amount);
+
+  const revenue = completeCharges.reduce(
+    (a, b) => a + transformPriceFromStripe(b),
+    0,
+  );
+
   return {
     props: {
       adminUserId,
       adminEmail,
+      totalProfit,
+      charges,
+      revenue,
+      owedToRestaurants,
     },
   };
 };
@@ -57,9 +105,17 @@ export const getServerSideProps = async context => {
 const Index = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) => {
-  const { adminUserId } = props;
+  const {
+    adminUserId,
+    charges,
+    revenue,
+    totalProfit,
+    owedToRestaurants,
+  } = props;
 
   const { isDesktop } = useContext(ScreenContext);
+  dlog('index ➡️ charges:', charges);
+  dlog('index ➡️ revenue:', revenue);
 
   return (
     <>
@@ -90,7 +146,7 @@ const Index = (
             <InfoCard
               color="primary"
               label="Total Revenue"
-              info={`£${(3194).toFixed(2)}`}
+              info={`£${revenue.toFixed(2)}`}
             />
           </div>
 
@@ -98,7 +154,7 @@ const Index = (
             <InfoCard
               color="primary-2"
               label="Total Profit"
-              info={`£${(133).toFixed(2)}`}
+              info={`£${totalProfit.toFixed(2)}`}
             />
           </div>
 
@@ -106,7 +162,7 @@ const Index = (
             <InfoCard
               color="alt-1"
               label="Owed to Restaurants"
-              info={`£${(194).toFixed(2)}`}
+              info={`£${owedToRestaurants.toFixed(2)}`}
             />
           </div>
         </div>

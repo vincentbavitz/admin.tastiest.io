@@ -1,7 +1,6 @@
 import { Button, Input, TextArea } from '@tastiest-io/tastiest-components';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { IRestaurant } from '@tastiest-io/tastiest-utils';
-import { useSupport } from 'hooks/useSupport';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import React, { useContext, useEffect, useState } from 'react';
@@ -22,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Support: NextPage<Props> = () => {
   const { isDesktop } = useContext(ScreenContext);
-  const { makeSupportRequest } = useSupport();
+  // const { makeSupportRequest } = useSupport();
 
   const [sendable, setSendable] = useState(false);
   const [hasSent, setHasSent] = useState(false);
@@ -35,18 +34,18 @@ const Support: NextPage<Props> = () => {
   // const { userData } = useUserData(user);
 
   const submit = async () => {
-    const { success, errors } = await makeSupportRequest(
-      name,
-      subject,
-      message,
-    );
+    // const { success, errors } = await makeSupportRequest(
+    //   name,
+    //   subject,
+    //   message,
+    // );
 
-    if (success) {
-      setHasSent(true);
-      setSendable(false);
-    }
+    // if (success) {
+    //   setHasSent(true);
+    //   setSendable(false);
+    // }
 
-    dlog('support ➡️ errors:', errors);
+    dlog('support ➡️ errors:');
   };
 
   // Update sendable status
