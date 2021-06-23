@@ -2,6 +2,8 @@
 import { dlog, IUserData } from '@tastiest-io/tastiest-utils';
 import Table from 'components/Table';
 import moment from 'moment';
+import Link from 'next/link';
+import { UserRecord } from 'pages/api/getUsers';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
@@ -75,12 +77,14 @@ export default function UsersTable() {
     {
       id: 'userName',
       Header: 'Name',
-      accessor: (row: IUserData) => {
+      accessor: (row: UserRecord) => {
         return (
-          <p className="font-medium">
-            {row.details.firstName +
-              (row?.details?.lastName ? ' ' + row.details.lastName : '')}
-          </p>
+          <Link href={`/customers/${row.id}`}>
+            <a className="font-medium hover:underline">
+              {row.details.firstName +
+                (row?.details?.lastName ? ' ' + row.details.lastName : '')}
+            </a>
+          </Link>
         );
       },
     },

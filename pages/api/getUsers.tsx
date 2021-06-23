@@ -6,6 +6,8 @@ import {
 import { NextApiRequest, NextApiResponse } from 'next';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 
+export type UserRecord = IUserData & { id: string };
+
 /**
  * Gets all users from Firestore
  * Requires the query parameter `adminUserId` and `token` from
@@ -38,8 +40,10 @@ export default async function getUsers(
       .limit(limit)
       .get();
 
-    const users: IUserData[] = [];
-    usersSnapshot.forEach(doc => users.push(doc.data() as IUserData));
+    const users: UserRecord[] = [];
+    usersSnapshot.forEach(doc =>
+      users.push({ id: doc.id, ...doc.data() } as UserRecord),
+    );
 
     dlog('getUsers ➡️ usersSnapshot:', usersSnapshot);
 
