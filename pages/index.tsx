@@ -1,15 +1,16 @@
-import { transformPriceFromStripe } from '@tastiest-io/tastiest-utils';
 import InfoCard from 'components/InfoCard';
 import UsersTable from 'components/tables/homeCustomersTable/UsersTable';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import nookies from 'nookies';
 import React, { useContext } from 'react';
-import Stripe from 'stripe';
+import useSWR from 'swr';
+import { LocalEndpoint } from 'types/api';
 import { dlog } from 'utils/development';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 import { METADATA } from '../constants';
 import { ScreenContext } from '../contexts/screen';
+import { GetDashboardMetricsResponse } from './api/getDashboardMetrics';
 
 interface Props {
   adminUserId?: string;
@@ -29,10 +30,8 @@ export const getServerSideProps = async context => {
     };
   }
 
-  dlog('index ➡️ cookieToken:', cookieToken);
-  const token = await firebaseAdmin.auth().verifyIdToken(cookieToken);
-
   // Admin details
+  const token = await firebaseAdmin.auth().verifyIdToken(cookieToken);
   const adminUserId = token.uid;
   const adminEmail = token.email;
 
@@ -46,58 +45,10 @@ export const getServerSideProps = async context => {
     };
   }
 
-  const data = [];
-
-  const stripe = new Stripe(process.env.STRIPE_LIVE_SECRET_KEY, {
-    apiVersion: '2020-08-27',
-  });
-
-  const connectAccounts = (await stripe.accounts.list())?.data;
-  const connectAccountIds = connectAccounts
-    .map(account => account.id)
-    .filter(account => Boolean(account));
-
-  const owedToRestaurantsEach = await Promise.all(
-    connectAccountIds.map(async stripeAccount => {
-      const balance = await stripe.balance.retrieve({
-        stripeAccount,
-      });
-
-      const pendingBalance = transformPriceFromStripe(
-        balance?.pending.reduce((a, b) => a + b?.amount ?? 0, 0) +
-          balance?.available.reduce((a, b) => a + b?.amount ?? 0, 0),
-      );
-
-      return pendingBalance;
-    }),
-  );
-
-  const owedToRestaurants = owedToRestaurantsEach.reduce((a, b) => a + b, 0);
-
-  // All payouts are in GBP
-  const payouts = (await stripe.payouts.list())?.data;
-  const totalProfit = transformPriceFromStripe(
-    payouts.filter(payout => payout.livemode).reduce((a, b) => a + b.amount, 0),
-  );
-
-  const charges = (await stripe.charges.list())?.data;
-  const completeCharges = charges
-    .filter(charge => charge.livemode && charge.paid)
-    .map(charge => charge.amount);
-
-  const revenue = completeCharges.reduce(
-    (a, b) => a + transformPriceFromStripe(b),
-    0,
-  );
-
   return {
     props: {
       adminUserId,
       adminEmail,
-      totalProfit,
-      charges,
-      revenue,
-      owedToRestaurants,
     },
   };
 };
@@ -105,13 +56,23 @@ export const getServerSideProps = async context => {
 const Index = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) => {
+  const { adminUserId, adminEmail } = props;
+
+  const { data: dashboardMetrics } = useSWR<GetDashboardMetricsResponse>(
+    `${LocalEndpoint.GET_DASHBOARD_METRICS}?adminUserId=${adminUserId}&adminEmail=${adminEmail}`,
+    {
+      refreshInterval: 15000,
+      initialData: null,
+      refreshWhenHidden: true,
+    },
+  );
+
   const {
-    adminUserId,
-    charges,
-    revenue,
-    totalProfit,
-    owedToRestaurants,
-  } = props;
+    totalProfit = null,
+    charges = null,
+    revenue = null,
+    owedToRestaurants = null,
+  } = dashboardMetrics ?? {};
 
   const { isDesktop } = useContext(ScreenContext);
   dlog('index ➡️ charges:', charges);
@@ -138,7 +99,7 @@ const Index = (
           restaurantName={restaurantDetails?.name}
         /> */}
 
-        <div className="grid w-full grid-cols-2 gap-4 tablet:grid-cols-3">
+        <div className="flex space-x-4">
           {/* <div style={{ maxWidth: '400px' }} className="w-7/12">
             <TimelineBarChart restaurantId={''} />
           </div> */}
@@ -146,7 +107,7 @@ const Index = (
             <InfoCard
               color="primary"
               label="Total Revenue"
-              info={`£${revenue.toFixed(2)}`}
+              info={revenue ? `£${revenue.toFixed(2)}` : ' '}
             />
           </div>
 
@@ -154,15 +115,20 @@ const Index = (
             <InfoCard
               color="primary-2"
               label="Total Profit"
-              info={`£${totalProfit.toFixed(2)}`}
+              info={totalProfit ? `£${totalProfit.toFixed(2)}` : ' '}
             />
           </div>
 
-          <div style={{ maxWidth: '300px' }} className="flex-1">
+          <div
+            style={{ minWidth: '250px', maxWidth: '350px' }}
+            className="flex-1"
+          >
             <InfoCard
               color="alt-1"
               label="Owed to Restaurants"
-              info={`£${owedToRestaurants.toFixed(2)}`}
+              info={
+                owedToRestaurants ? `£${owedToRestaurants.toFixed(2)}` : ' '
+              }
             />
           </div>
         </div>
@@ -172,29 +138,5 @@ const Index = (
     </>
   );
 };
-
-interface IntroductionProps {
-  restaurantName: string;
-  payoutTotal: number;
-}
-
-const Introduction = ({ restaurantName, payoutTotal }: IntroductionProps) => (
-  <div className="flex items-center justify-between text-gray-500">
-    <div>
-      <h2 className="text-xl font-medium text-black font-somatic">
-        {restaurantName}
-      </h2>
-      <p className="">Welcome to your dashboard</p>
-    </div>
-
-    <div className="text-right">
-      <p className="text-sm">Total Payout</p>
-      <p className="text-lg font-medium tracking-wider text-black font-somatic">
-        <span className="-mt-px font-roboto">£</span>
-        {payoutTotal ?? 0}
-      </p>
-    </div>
-  </div>
-);
 
 export default Index;

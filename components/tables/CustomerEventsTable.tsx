@@ -11,6 +11,38 @@ interface Props {
   userDetails: Partial<IUserDetails>;
 }
 
+const AccordianElement = ({ row }: { row: UserEvent }) => {
+  dlog('CustomerEventsTable ➡️ row?.event_properties:', row?.event_properties);
+  return (
+    <div
+      style={{ minHeight: '2.5rem' }}
+      className="flex flex-col w-full px-3 py-2 text-sm bg-gray-100 rounded-md"
+    >
+      <h4 className="text-base font-medium">Properties</h4>
+      <table style={{ minWidth: '300px' }} className="w-full">
+        <tbody>
+          {Object.entries(row.event_properties).map(([property, value]) => {
+            // Try to resolve object to avoid [object: Object]
+            let resolvedValue = '';
+            try {
+              resolvedValue = JSON.stringify(value as any);
+            } catch {
+              resolvedValue = String(value);
+            }
+
+            return value ? (
+              <tr key={property}>
+                <td>{property}</td>
+                <td className="text-right break-all">{resolvedValue}</td>
+              </tr>
+            ) : null;
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 export default function CustomerEventsTable(props: Props) {
   const { userDetails } = props;
 
@@ -42,15 +74,10 @@ export default function CustomerEventsTable(props: Props) {
     },
     {
       id: 'timestamp',
-      Header: 'Timerstamp',
+      Header: 'Time',
       accessor: (row: UserEvent) => {
         return <p>{moment(row.timestamp * 1000).fromNow()}</p>;
       },
-    },
-    {
-      id: 'orders',
-      Header: 'Orders',
-      accessor: (row: UserEvent) => <p>{33}</p>,
     },
   ];
 
@@ -81,6 +108,7 @@ export default function CustomerEventsTable(props: Props) {
         columns={columns}
         data={userEvents ?? []}
         noDataLabel="No events yet"
+        rowAccordianElement={AccordianElement}
         // updateData={updateData}
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}

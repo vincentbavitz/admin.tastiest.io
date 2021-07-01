@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { dlog } from 'utils/development';
 
 export type UserEvent = {
   id: string;
@@ -48,11 +47,7 @@ export default async function getCustomerEvents(
     );
 
     const data = await eventsResponse.json();
-
-    dlog('getCustomerEvents ➡️ data:', data);
     const userEvents = data?.data ?? [];
-
-    dlog('getCustomerEvents ➡️     userEvents:', userEvents);
 
     response.json(userEvents);
     return;

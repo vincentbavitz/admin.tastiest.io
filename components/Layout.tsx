@@ -14,10 +14,7 @@ export default function Layout({ children }: Props) {
   const { adminUser } = useAuth();
 
   // Break default layout for certain pages
-  const pagesWithoutDefaultLayout = [
-    /^\/login/,
-    /^\/merchant-terms-and-conditions/,
-  ];
+  const pagesWithoutDefaultLayout = [/^\/login/];
 
   const { pathname } = useRouter();
   const shouldBreakLayout = pagesWithoutDefaultLayout.some(page =>

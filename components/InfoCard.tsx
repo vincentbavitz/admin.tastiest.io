@@ -69,8 +69,8 @@ export default function InfoCard(props: InfoCardProps) {
   const { label, info, chart, color = 'primary' } = props;
 
   return (
-    <div className={`w-full rounded-lg bg-${color} aspect-w-16 aspect-h-7`}>
-      <div className="px-6 py-4">
+    <div className={`w-full rounded-lg bg-${color} h-auto`}>
+      <div className="px-6 py-4 pb-10">
         <p className="text-lg text-white font-somatic">{label}</p>
         <p className="text-2xl tracking-wide text-white">{info}</p>
       </div>

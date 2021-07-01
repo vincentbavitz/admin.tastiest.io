@@ -9,14 +9,34 @@ export default function Sidebar() {
   console.log('Sidebar ➡️ router.pathname:', router.pathname);
 
   return (
-    <div className="flex flex-col h-full py-4 space-y-6 border-r-2 border-gray-200">
-      {NAVIGATION.SIDEBAR_ITEMS.map(item => (
-        <SidebarItem
-          key={item.page}
-          selected={router.pathname === item.page}
-          {...item}
-        />
-      ))}
+    <div className="flex flex-col justify-between h-full py-4 border-r-2 border-gray-200">
+      <div className="flex flex-col justify-start space-y-6">
+        {NAVIGATION.SIDEBAR_ITEMS.filter(
+          item => item.category === 'primary',
+        ).map(item => (
+          <SidebarItem
+            key={item.page}
+            selected={
+              router.pathname.split('/')?.[1] === item.page.replace(/\//g, '')
+            }
+            {...item}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-col justify-end space-y-6">
+        {NAVIGATION.SIDEBAR_ITEMS.filter(
+          item => item.category === 'secondary',
+        ).map(item => (
+          <SidebarItem
+            key={item.page}
+            selected={
+              router.pathname.split('/')?.[1] === item.page.replace(/\//g, '')
+            }
+            {...item}
+          />
+        ))}
+      </div>
     </div>
   );
 }

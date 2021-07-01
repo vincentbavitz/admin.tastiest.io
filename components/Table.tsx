@@ -12,6 +12,9 @@ interface TableProps {
   columns: any[];
   data: any[];
 
+  // Dropdown accordian Element for each row (optional)
+  rowAccordianElement?: React.FC<{ id: string; row: any }>;
+
   noDataLabel?: string;
   isLoadingInitialData?: boolean;
 
@@ -45,6 +48,7 @@ export default function Table(props: TableProps) {
     updateData = null,
     isLoadingInitialData = false,
     searchFunction = () => null,
+    rowAccordianElement,
   } = props;
 
   const [filteredData, setFilteredData] = useState(data);
@@ -85,6 +89,9 @@ export default function Table(props: TableProps) {
   console.log('Table ➡️ getTablePr5ops:', getTableProps());
   console.log('Table ➡️ headerGroups:', headerGroups);
   console.log('Table ➡️ rows:', rows);
+
+  // Used for Accordian Element
+  const [expandedRow, setExpandedRow] = useState(null);
 
   const leftAlignedColumns = [0];
 
@@ -160,21 +167,58 @@ export default function Table(props: TableProps) {
                   <tr
                     key={uuid()}
                     {...row.getRowProps()}
-                    className="border-t border-gray-300"
+                    className="flex flex-col border-t border-border-gray-300"
                   >
-                    {row.cells.map((cell, j) => {
-                      return (
-                        <td
-                          key={uuid()}
-                          {...cell.getCellProps()}
-                          className={clsx(j !== 0 && 'text-center')}
+                    <div className="relative flex w-full">
+                      {row.cells.map((cell, j) => {
+                        return (
+                          <td
+                            key={uuid()}
+                            {...cell.getCellProps()}
+                            className={clsx(
+                              j !== 0 &&
+                                'text-center flex justify-center items-center',
+                            )}
+                          >
+                            <div>
+                              <div className="py-2 pr-2 overflow-x-hidden whitespace-nowrap">
+                                {cell.render('Cell', { ...cell })}
+                              </div>
+                            </div>
+                          </td>
+                        );
+                      })}
+
+                      {rowAccordianElement && (
+                        <div
+                          onClick={() =>
+                            expandedRow ===
+                            setExpandedRow(
+                              expandedRow === row.id ? null : row.id,
+                            )
+                          }
+                          className="absolute right-0 flex items-center h-full -mr-2 cursor-pointer"
                         >
-                          <div className="py-2 pr-2 overflow-x-hidden whitespace-nowrap">
-                            {cell.render('Cell', { ...cell })}
-                          </div>
-                        </td>
-                      );
-                    })}
+                          <TriangleIcon
+                            className={clsx(
+                              'w-2 text-gray-600 duration-200 transform fill-current',
+                              expandedRow === row.id
+                                ? '-rotate-90'
+                                : 'rotate-90',
+                            )}
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {rowAccordianElement && expandedRow === row.id && (
+                      <div className="pb-3">
+                        <props.rowAccordianElement
+                          id={row.id}
+                          row={row.original}
+                        />
+                      </div>
+                    )}
                   </tr>
                 );
               })}
