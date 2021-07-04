@@ -227,6 +227,7 @@ export default function UsersTable() {
     {
       id: 'lastActive',
       Header: 'Last Active',
+      maxWidth: 100,
       accessor: (row: IUserData) => {
         return (
           <p className="text-sm opacity-75">
@@ -242,6 +243,7 @@ export default function UsersTable() {
     {
       id: 'orders',
       Header: 'Orders',
+      width: 80,
       accessor: (row: IUserData) => (
         <p>
           {row.metrics?.totalBookings ? (
@@ -255,6 +257,7 @@ export default function UsersTable() {
     {
       id: 'totalSpent',
       Header: 'Total Spent',
+      width: 80,
       accessor: (row: IUserData) => (
         <p className="">
           {row.metrics?.totalSpent?.['GBP'] > 0 ? (

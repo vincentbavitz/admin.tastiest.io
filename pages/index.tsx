@@ -1,4 +1,4 @@
-import InfoCard from 'components/InfoCard';
+import { InfoCard } from '@tastiest-io/tastiest-components';
 import UsersTable from 'components/tables/homeCustomersTable/UsersTable';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
@@ -94,19 +94,13 @@ const Index = (
       </Head>
 
       <div className="flex flex-col h-full space-y-8">
-        {/* <Introduction
-          payoutTotal={payoutTotal}
-          restaurantName={restaurantDetails?.name}
-        /> */}
-
         <div className="flex space-x-4">
-          {/* <div style={{ maxWidth: '400px' }} className="w-7/12">
-            <TimelineBarChart restaurantId={''} />
-          </div> */}
           <div style={{ maxWidth: '300px' }} className="flex-1">
             <InfoCard
               color="primary"
               label="Total Revenue"
+              isLoading={!revenue}
+              polyfillInfo={'£00.00'}
               info={revenue ? `£${revenue.toFixed(2)}` : ' '}
             />
           </div>
@@ -115,6 +109,8 @@ const Index = (
             <InfoCard
               color="primary-2"
               label="Total Profit"
+              isLoading={!totalProfit}
+              polyfillInfo={'£00.00'}
               info={totalProfit ? `£${totalProfit.toFixed(2)}` : ' '}
             />
           </div>
@@ -126,6 +122,8 @@ const Index = (
             <InfoCard
               color="alt-1"
               label="Owed to Restaurants"
+              isLoading={!owedToRestaurants}
+              polyfillInfo={'£00.00'}
               info={
                 owedToRestaurants ? `£${owedToRestaurants.toFixed(2)}` : ' '
               }

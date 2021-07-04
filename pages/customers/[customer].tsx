@@ -2,9 +2,9 @@
 // Get IDs like this https://a.klaviyo.com/api/v2/people/search?email=vincent@bavitz.org&api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf
 // https://a.klaviyo.com/api/v1/person/01F7GJRAW02J07TMDVKYZ7Y5PS/metrics/timeline?api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf&count=100&sort=desc
 
+import { InfoCard } from '@tastiest-io/tastiest-components';
 import { UserData, UserDataApi } from '@tastiest-io/tastiest-utils';
 import { CustomerProfileSection } from 'components/CustomerProfileSection';
-import InfoCard from 'components/InfoCard';
 import CustomerEventsTable from 'components/tables/CustomerEventsTable';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
@@ -70,6 +70,8 @@ function Customer(
     },
   );
 
+  const totalSpent = profile?.userData?.metrics?.totalSpent?.['GBP'] ?? 0;
+
   return (
     <div>
       <div className="flex pb-10 space-x-10">
@@ -85,7 +87,9 @@ function Customer(
           <InfoCard
             color="primary"
             label="Total Spent"
-            info={`£${profile?.userData?.metrics?.totalSpent ?? 0}`}
+            isLoading={!profile}
+            polyfillInfo={'£00.00'}
+            info={`£${totalSpent.toFixed(2)}`}
           />
         </div>
 

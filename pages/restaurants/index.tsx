@@ -1,6 +1,5 @@
-import { Button } from '@tastiest-io/tastiest-components';
+import { Button, InfoCard } from '@tastiest-io/tastiest-components';
 import { PlusIcon } from '@tastiest-io/tastiest-icons';
-import InfoCard from 'components/InfoCard';
 import Link from 'next/link';
 import React from 'react';
 
