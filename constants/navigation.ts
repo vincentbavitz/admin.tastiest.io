@@ -1,3 +1,4 @@
+import { WarningOutlined } from '@ant-design/icons';
 import {
   CalendarIcon,
   CutleryIcon,
@@ -62,6 +63,12 @@ const SIDEBAR_ITEMS: ISidebarItem[] = [
     category: 'secondary',
   },
   { label: 'Ads', page: '/ads', icon: TrendingIcon, category: 'secondary' },
+  {
+    label: 'Errors',
+    page: '/errors',
+    icon: WarningOutlined,
+    category: 'secondary',
+  },
 ];
 
 const NAVIGATION = {

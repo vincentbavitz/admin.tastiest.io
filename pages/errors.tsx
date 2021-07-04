@@ -1,0 +1,31 @@
+import ErrorsTable from 'components/tables/ErrorsTable';
+import { NextPage } from 'next';
+import nookies from 'nookies';
+import React from 'react';
+
+export const getServerSideProps = async context => {
+  // Ensure user is authenticated
+  const cookieToken = nookies.get(context)?.token;
+
+  // If no user, redirect to login
+  if (!cookieToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
+
+const ErrorsPage: NextPage = () => {
+  return (
+    <div>
+      <ErrorsTable />
+    </div>
+  );
+};
+
+export default ErrorsPage;

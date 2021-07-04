@@ -5,4 +5,5 @@ export enum LocalEndpoint {
   GET_CUSTOMER_PROFILE = '/api/getCustomerProfile',
   GET_BOOKINGS = '/api/getBookings',
   GET_DASHBOARD_METRICS = '/api/getDashboardMetrics',
+  GET_INTERNAL_ERRORS = '/api/getInternalErrors',
 }
