@@ -61,6 +61,8 @@ export default function ErrorsTable() {
     {
       id: 'code',
       Header: 'Error Code',
+      maxWidth: 200,
+      minWidth: 80,
       accessor: (row: TastiestInternalError) => {
         return (
           <div className="flex items-center justify-start">
@@ -74,6 +76,7 @@ export default function ErrorsTable() {
     {
       id: 'message',
       Header: 'Message',
+      width: 200,
       accessor: (row: TastiestInternalError) => {
         return (
           <div className="">
@@ -115,6 +118,7 @@ export default function ErrorsTable() {
         data={internalErrors ?? []}
         noDataLabel="No internal errors"
         searchFunction={searchFunction}
+        leftAlignedColumns={[0, 1, 2]}
         rowAccordianElement={AccordianElement}
         isLoadingInitialData={isInitialLoading}
       />

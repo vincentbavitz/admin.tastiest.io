@@ -15,6 +15,8 @@ interface TableProps {
   // Dropdown accordian Element for each row (optional)
   rowAccordianElement?: React.FC<{ id: string; row: any }>;
 
+  leftAlignedColumns?: number[];
+
   noDataLabel?: string;
   isLoadingInitialData?: boolean;
 
@@ -49,6 +51,7 @@ export default function Table(props: TableProps) {
     isLoadingInitialData = false,
     searchFunction = () => null,
     rowAccordianElement,
+    leftAlignedColumns = [0],
   } = props;
 
   const [filteredData, setFilteredData] = useState(data);
@@ -92,8 +95,6 @@ export default function Table(props: TableProps) {
 
   // Used for Accordian Element
   const [expandedRow, setExpandedRow] = useState(null);
-
-  const leftAlignedColumns = [0];
 
   return (
     <div className="relative">
@@ -176,8 +177,9 @@ export default function Table(props: TableProps) {
                             key={uuid()}
                             {...cell.getCellProps()}
                             className={clsx(
-                              j !== 0 &&
-                                'text-center flex justify-center items-center',
+                              'flex items-center',
+                              !leftAlignedColumns.some(c => c === j) &&
+                                'text-center justify-center',
                             )}
                           >
                             <div>

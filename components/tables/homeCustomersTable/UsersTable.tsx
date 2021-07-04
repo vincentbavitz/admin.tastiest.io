@@ -18,11 +18,7 @@ import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 
-enum EditableBookingFields {
-  BOOKING_DATE = 'bookingDate',
-  HAS_ARRIVED = 'hasArrived',
-  HAS_CANCELLED = 'hasCancelled',
-}
+const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 
 // Update any field in the current booking
 // instantly using mutate SWR
@@ -88,7 +84,7 @@ const AccordianElement = ({ id, row }: UserDataRow) => {
       <div className="flex justify-between h-10 px-2 mb-2 bg-gray-200 rounded-md">
         <div className="flex items-center justify-start w-full space-x-4">
           <Tooltip placement="top-left" content="View user profile">
-            <Link href={profile ? `/customers/${profile?.userId}` : null}>
+            <Link href={profile ? `/customers/${profile?.userId}` : '#'}>
               <a>
                 <EyeOutlined className="text-xl text-alt-1" />
               </a>
@@ -187,7 +183,7 @@ const AccordianElement = ({ id, row }: UserDataRow) => {
 
 export default function UsersTable() {
   const { data: users } = useSWR<IUserData[]>(`${LocalEndpoint.GET_USERS}`, {
-    refreshInterval: 5000,
+    refreshInterval: 30000,
     initialData: null,
     refreshWhenHidden: true,
   });
@@ -206,15 +202,21 @@ export default function UsersTable() {
     {
       id: 'userName',
       Header: 'Name',
+      width: '200',
       accessor: (row: UserRecord) => {
         return (
           <div className="flex flex-col">
-            <Link href={`/customers/${row.id}`}>
-              <a className="font-medium hover:underline">
-                {row.details.firstName +
-                  (row?.details?.lastName ? ' ' + row.details.lastName : '')}
-              </a>
-            </Link>
+            <div className="flex items-center space-x-1">
+              {Date.now() - row.details.lastActive < MS_IN_TEN_MINUTES && (
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              )}
+              <Link href={`/customers/${row.id}`}>
+                <a className="font-medium hover:underline">
+                  {row.details.firstName +
+                    (row?.details?.lastName ? ' ' + row.details.lastName : '')}
+                </a>
+              </Link>
+            </div>
             <Link href={`/customers/${row.id}`}>
               <a className="text-sm opacity-75">{row.details.email}</a>
             </Link>
@@ -227,10 +229,12 @@ export default function UsersTable() {
       Header: 'Last Active',
       accessor: (row: IUserData) => {
         return (
-          <p>
-            {row.details.lastActive
-              ? moment(row.details.lastActive).local().fromNow()
-              : '—'}
+          <p className="text-sm opacity-75">
+            {row.details.lastActive ? (
+              moment(row.details.lastActive).local().fromNow()
+            ) : (
+              <span className="opacity-50">—</span>
+            )}
           </p>
         );
       },
@@ -238,14 +242,26 @@ export default function UsersTable() {
     {
       id: 'orders',
       Header: 'Orders',
-      accessor: (row: IUserData) => <p>{row.metrics?.totalBookings ?? 0}</p>,
+      accessor: (row: IUserData) => (
+        <p>
+          {row.metrics?.totalBookings ? (
+            row.metrics.totalBookings
+          ) : (
+            <span className="opacity-50">0</span>
+          )}
+        </p>
+      ),
     },
     {
       id: 'totalSpent',
       Header: 'Total Spent',
       accessor: (row: IUserData) => (
-        <p className="font-medium">
-          £{Number(row.metrics?.totalSpent?.['GBP'] ?? 0)?.toFixed(2)}
+        <p className="">
+          {row.metrics?.totalSpent?.['GBP'] > 0 ? (
+            <>£{Number(row.metrics?.totalSpent?.['GBP'] ?? 0)?.toFixed(2)}</>
+          ) : (
+            <span className="opacity-50"> £{(0).toFixed(2)}</span>
+          )}
         </p>
       ),
     },
@@ -282,7 +298,6 @@ export default function UsersTable() {
         data={users ?? []}
         noDataLabel="No users yet"
         rowAccordianElement={AccordianElement}
-        // updateData={updateData}
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
       />

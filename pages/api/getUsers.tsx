@@ -1,8 +1,4 @@
-import {
-  dlog,
-  FirestoreCollection,
-  IUserData,
-} from '@tastiest-io/tastiest-utils';
+import { FirestoreCollection, IUserData } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 
@@ -25,8 +21,6 @@ export default async function getUsers(
     return;
   }
 
-  // Timestamp to start at (for pagination)
-  const startAt = Number(request?.query?.startAt ?? Number.MAX_SAFE_INTEGER);
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
@@ -44,8 +38,6 @@ export default async function getUsers(
     usersSnapshot.forEach(doc =>
       users.push({ id: doc.id, ...doc.data() } as UserRecord),
     );
-
-    dlog('getUsers ➡️ usersSnapshot:', usersSnapshot);
 
     if (!users?.length) {
       response.json([]);

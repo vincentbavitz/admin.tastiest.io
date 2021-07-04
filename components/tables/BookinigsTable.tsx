@@ -60,9 +60,7 @@ enum EditableBookingFields {
 // }
 
 export default function BookingsTable() {
-  const [usingTestData, toggleUsingTestData] = useToggle(
-    process.env.NODE_ENV === 'development',
-  );
+  const [usingTestData, toggleUsingTestData] = useToggle(false);
 
   const { data: bookings } = useSWR<IBooking[]>(
     `${LocalEndpoint.GET_BOOKINGS}?useTestData=${usingTestData}`,
