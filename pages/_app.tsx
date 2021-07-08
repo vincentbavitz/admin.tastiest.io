@@ -3,12 +3,12 @@ import Layout from 'components/Layout';
 import AmbianceProvider from 'contexts/ambiance';
 import 'firebase/auth';
 import 'firebase/firestore'; // <- needed if using firestore
+import { ScreenProvider } from 'hooks/useScreenSize';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import { METADATA } from '../constants';
 import { AuthProvider } from '../contexts/auth';
-import ScreenProvider from '../contexts/screen';
 import '../styles/style.scss';
 
 function App(props: AppProps) {

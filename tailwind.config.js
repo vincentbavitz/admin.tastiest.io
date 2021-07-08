@@ -6,7 +6,7 @@ module.exports = {
       // mobile:my-class, for example.
       // -> @media (min-width: {}px) { ... }
       mobile: '500px',
-      tablet: '715px',
+      tablet: '850px',
       desktop: '1100px',
     },
     fontFamily: {

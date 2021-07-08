@@ -1,15 +1,16 @@
 import { InfoCard } from '@tastiest-io/tastiest-components';
+import clsx from 'clsx';
 import UsersTable from 'components/tables/homeCustomersTable/UsersTable';
+import { useScreenSize } from 'hooks/useScreenSize';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import nookies from 'nookies';
-import React, { useContext } from 'react';
+import React from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 import { dlog } from 'utils/development';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 import { METADATA } from '../constants';
-import { ScreenContext } from '../contexts/screen';
 import { GetDashboardMetricsResponse } from './api/getDashboardMetrics';
 
 interface Props {
@@ -74,7 +75,7 @@ const Index = (
     owedToRestaurants = null,
   } = dashboardMetrics ?? {};
 
-  const { isDesktop } = useContext(ScreenContext);
+  const { isDesktop, isHuge } = useScreenSize();
   dlog('index ➡️ charges:', charges);
   dlog('index ➡️ revenue:', revenue);
 
@@ -94,34 +95,34 @@ const Index = (
       </Head>
 
       <div className="flex flex-col h-full space-y-8">
-        <div className="flex space-x-4">
-          <div style={{ maxWidth: '300px' }} className="flex-1">
+        <div className="grid grid-cols-1 gap-2 mobile:grid-cols-2 tablet:gap-4 tablet:grid-cols-3">
+          <div className="flex-1">
             <InfoCard
               color="primary"
               label="Total Revenue"
+              compact={!isHuge}
               isLoading={!revenue}
               polyfillInfo={'£00.00'}
               info={revenue ? `£${revenue.toFixed(2)}` : ' '}
             />
           </div>
 
-          <div style={{ maxWidth: '300px' }} className="flex-1">
+          <div className="flex-1">
             <InfoCard
               color="primary-2"
               label="Total Profit"
+              compact={!isHuge}
               isLoading={!totalProfit}
               polyfillInfo={'£00.00'}
               info={totalProfit ? `£${totalProfit.toFixed(2)}` : ' '}
             />
           </div>
 
-          <div
-            style={{ minWidth: '250px', maxWidth: '350px' }}
-            className="flex-1"
-          >
+          <div style={{ minWidth: '200px' }} className={clsx('flex-1')}>
             <InfoCard
               color="alt-1"
               label="Owed to Restaurants"
+              compact={!isHuge}
               isLoading={!owedToRestaurants}
               polyfillInfo={'£00.00'}
               info={

@@ -46,7 +46,7 @@ const SIDEBAR_ITEMS: ISidebarItem[] = [
   },
   {
     label: 'Statistics',
-    page: '/financial',
+    page: '/statistics',
     icon: GagueIcon,
     category: 'secondary',
   },
@@ -58,7 +58,7 @@ const SIDEBAR_ITEMS: ISidebarItem[] = [
   },
   {
     label: 'SEO',
-    page: '/financial',
+    page: '/seo',
     icon: MessageIcon,
     category: 'secondary',
   },

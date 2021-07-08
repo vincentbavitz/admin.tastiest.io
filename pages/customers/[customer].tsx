@@ -6,6 +6,7 @@ import { InfoCard } from '@tastiest-io/tastiest-components';
 import { UserData, UserDataApi } from '@tastiest-io/tastiest-utils';
 import { CustomerProfileSection } from 'components/CustomerProfileSection';
 import CustomerEventsTable from 'components/tables/CustomerEventsTable';
+import { useScreenSize } from 'hooks/useScreenSize';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
 import { TastiestCustomerProfile } from 'pages/api/getCustomerProfile';
@@ -60,6 +61,7 @@ function Customer(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const { userDetails } = props;
+  const { isDesktop } = useScreenSize();
 
   const { data: profile } = useSWR<TastiestCustomerProfile>(
     `${LocalEndpoint.GET_CUSTOMER_PROFILE}?email=${userDetails.email}`,
@@ -87,6 +89,7 @@ function Customer(
           <InfoCard
             color="primary"
             label="Total Spent"
+            compact={!isDesktop}
             isLoading={!profile}
             polyfillInfo={'£00.00'}
             info={`£${totalSpent.toFixed(2)}`}

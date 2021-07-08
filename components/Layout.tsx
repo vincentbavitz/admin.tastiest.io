@@ -1,6 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
 import { useAuth } from 'hooks/useAuth';
+import { useScreenSize } from 'hooks/useScreenSize';
 import { useRouter } from 'next/router';
 import React, { ReactNode } from 'react';
 import Header from './Header';
@@ -12,6 +13,7 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const { adminUser } = useAuth();
+  const { isDesktop } = useScreenSize();
 
   // Break default layout for certain pages
   const pagesWithoutDefaultLayout = [/^\/login/];
@@ -50,8 +52,10 @@ export default function Layout({ children }: Props) {
 
         <div className="relative flex-grow w-full">
           <div
-            style={{ minWidth: '700px' }}
-            className="absolute inset-0 flex h-full px-8 py-6 overflow-auto bg-gray-100"
+            className={clsx(
+              'absolute inset-0 flex h-full py-6 overflow-auto bg-gray-100',
+              isDesktop ? 'px-8' : 'px-5',
+            )}
           >
             <div style={{ height: 'max-content' }} className="w-full ">
               {children}

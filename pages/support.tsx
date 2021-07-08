@@ -1,12 +1,12 @@
 import { Button, Input, TextArea } from '@tastiest-io/tastiest-components';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { IRestaurant } from '@tastiest-io/tastiest-utils';
+import { useScreenSize } from 'hooks/useScreenSize';
 import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dlog } from 'utils/development';
 import { METADATA } from '../constants';
-import { ScreenContext } from '../contexts/screen';
 
 interface Props {
   resaurant?: IRestaurant;
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Support: NextPage<Props> = () => {
-  const { isDesktop } = useContext(ScreenContext);
+  const { isDesktop } = useScreenSize();
   // const { makeSupportRequest } = useSupport();
 
   const [sendable, setSendable] = useState(false);

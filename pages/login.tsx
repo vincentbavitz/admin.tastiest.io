@@ -3,15 +3,15 @@ import { Button, Input } from '@tastiest-io/tastiest-components';
 import clsx from 'clsx';
 import Header from 'components/Header';
 import { useAuth } from 'hooks/useAuth';
+import { useScreenSize } from 'hooks/useScreenSize';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import nookies from 'nookies';
 import { ChefIllustration } from 'public/assets/illustrations';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useWindowSize } from 'react-use';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 import { METADATA } from '../constants';
-import { ScreenContext } from '../contexts/screen';
 
 export const getServerSideProps = async context => {
   // Is user already signed in?
@@ -38,7 +38,7 @@ export const getServerSideProps = async context => {
 };
 
 const LogIn: NextPage = () => {
-  const { isDesktop } = useContext(ScreenContext);
+  const { isDesktop } = useScreenSize();
 
   const { signIn, error: authError } = useAuth();
   const { height } = useWindowSize();
