@@ -99,7 +99,7 @@ export default function Table(props: TableProps) {
   return (
     <div className="relative">
       <div className="flex items-center justify-between w-full mb-2">
-        {label && <div className="text-xl font-somatic">{label}</div>}
+        {label && <div className="pr-4 text-xl font-somatic">{label}</div>}
         <div style={{ width: '300px' }} className="">
           <Input
             color="neutral"

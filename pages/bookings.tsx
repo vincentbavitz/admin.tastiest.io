@@ -47,7 +47,7 @@ const Bookings: NextPage = () => {
             label="Total Bookings"
             compact={false}
             isLoading={!bookings?.length}
-            info={bookings.length}
+            info={bookings?.length}
             polyfillInfo={'0'}
           />
           <InfoCard
@@ -55,7 +55,7 @@ const Bookings: NextPage = () => {
             label="YTD"
             compact={false}
             isLoading={!bookings?.length}
-            info={bookings.length}
+            info={bookings?.length}
             polyfillInfo={'0'}
           />
         </div>

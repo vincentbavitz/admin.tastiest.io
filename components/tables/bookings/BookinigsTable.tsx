@@ -8,6 +8,7 @@ import { useToggle } from 'react-use';
 import { mutate } from 'swr';
 import { LocalEndpoint } from 'types/api';
 import { BookingDateCell } from './BookingDateCell';
+import BookingsTableAccordian from './BookingsTableAccordian';
 import { HasArrivedCell } from './HasArrivedCell';
 import { HasCancelledCell } from './HasCancelledCell';
 // import { BookingDateCell } from './BookingDateCell';
@@ -190,6 +191,7 @@ export default function BookingsTable({ bookings }: Props) {
         noDataLabel="No bookings yet."
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
+        rowAccordianElement={BookingsTableAccordian}
       />
     </div>
   );

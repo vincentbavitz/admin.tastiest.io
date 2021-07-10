@@ -15,12 +15,12 @@ import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 import { dlog } from 'utils/development';
 
-interface UserTableAccordianProsp {
+interface UserTableAccordianProps {
   id: string;
   row: IUserData;
 }
 
-const UserTableAccordian = ({ row }: UserTableAccordianProsp) => {
+const UserTableAccordian = ({ row }: UserTableAccordianProps) => {
   const { data: profile, error } = useSWR<TastiestCustomerProfile>(
     `${LocalEndpoint.GET_CUSTOMER_PROFILE}?email=${row.details.email}`,
     {
@@ -39,18 +39,18 @@ const UserTableAccordian = ({ row }: UserTableAccordianProsp) => {
       style={{ minHeight: '2.5rem' }}
       className="flex flex-col w-full pb-2 text-sm bg-gray-100 rounded-md"
     >
-      <div className="flex justify-between h-10 px-2 bg-gray-200 rounded-t-md">
+      <div className="flex justify-between h-10 px-4 bg-gray-200 rounded-t-md">
         <div className="flex items-center justify-start w-full space-x-4">
           <Tooltip placement="top-left" content="View user profile">
             <Link href={profile ? `/customers/${profile?.userId}` : '#'}>
               <a>
-                <EyeOutlined className="text-xl text-alt-1" />
+                <EyeOutlined className="text-xl text-black" />
               </a>
             </Link>
           </Tooltip>
 
           <Tooltip placement="top-left" content="Update user">
-            <EditOutlined onClick={() => null} className="text-xl text-alt-1" />
+            <EditOutlined onClick={() => null} className="text-xl text-black" />
           </Tooltip>
 
           <Tooltip placement="top-left" content="Reward">
@@ -78,7 +78,7 @@ const UserTableAccordian = ({ row }: UserTableAccordianProsp) => {
         </div>
       </div>
 
-      <div className="flex flex-col px-1 pt-2 space-x-0 tablet:space-x-5 tablet:flex-row">
+      <div className="flex flex-col px-3 pt-2 space-x-0 space-y-4 tablet:space-x-5 tablet:flex-row">
         <table className="flex-1">
           <tbody>
             <tr>
@@ -90,33 +90,27 @@ const UserTableAccordian = ({ row }: UserTableAccordianProsp) => {
               <td>Email</td>
               <td className="text-right">{profile?.email}</td>
             </tr>
-            {profile?.userData?.details?.mobile && (
-              <tr>
-                <td>Mobile</td>
-                <td className="text-right">
-                  {profile?.userData.details.mobile}
-                </td>
-              </tr>
-            )}
-            {profile?.userData?.details?.birthday && (
-              <tr>
-                <td>Birthday</td>
-                <td className="text-right">
-                  {profile?.userData.details.birthday.day}/
-                  {profile?.userData.details.birthday.month}/
-                  {profile?.userData.details.birthday.year}
-                </td>
-              </tr>
-            )}
-            {profile?.city && (
-              <tr>
-                <td>Location</td>
-                <td className="text-right">
-                  {profile?.city}
-                  {profile?.country ? ', ' + profile?.country : ''}
-                </td>
-              </tr>
-            )}
+            <tr>
+              <td>Mobile</td>
+              <td className="text-right">
+                {profile?.userData?.details?.mobile}
+              </td>
+            </tr>
+            <tr>
+              <td>Birthday</td>
+              <td className="text-right">
+                {profile?.userData?.details?.birthday?.day}/
+                {profile?.userData?.details?.birthday?.month}/
+                {profile?.userData?.details?.birthday?.year}
+              </td>
+            </tr>
+            <tr>
+              <td>Location</td>
+              <td className="text-right">
+                {profile?.city}
+                {profile?.country ? ', ' + profile?.country : ''}
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -127,12 +121,12 @@ const UserTableAccordian = ({ row }: UserTableAccordianProsp) => {
             {userNotesEditing ? (
               <CheckIcon
                 onClick={() => setUserNotesEditing(false)}
-                className="w-3 cursor-pointer text-alt-1"
+                className="w-3 pb-1 cursor-pointer text-alt-1"
               />
             ) : (
               <EditOutlined
                 onClick={() => setUserNotesEditing(true)}
-                className="text-base cursor-pointer text-alt-1"
+                className="pb-1 text-base cursor-pointer text-alt-1"
               />
             )}
           </div>

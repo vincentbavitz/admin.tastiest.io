@@ -166,7 +166,7 @@ export default function UsersTable() {
   };
 
   return (
-    <div>
+    <div className="text-xs mobile:text-base">
       <Table
         label="Users"
         columns={columns}
