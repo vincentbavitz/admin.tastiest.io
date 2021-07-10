@@ -1,17 +1,121 @@
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import {
+  LeftOutlined,
+  RightOutlined,
+  WarningOutlined,
+} from '@ant-design/icons';
+import {
+  CalendarIcon,
+  CutleryIcon,
+  GagueIcon,
+  HomeIcon,
+  MessageIcon,
+  SupportIcon,
+  TrendingIcon,
+  UserIcon,
+} from '@tastiest-io/tastiest-icons';
 import clsx from 'clsx';
-import NAVIGATION from 'constants/navigation';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { useToggle } from 'react-use';
 import SidebarItem from './SidebarItem';
+
+export interface ISidebarItem {
+  icon: FC<any>;
+  label: string;
+  page: string;
+  category: 'primary' | 'secondary';
+  counter?: number;
+}
+
+enum SidebarItemKey {
+  HOME = 'HOME',
+  BOOKINGS = 'BOOKINGS',
+  CUSTOMERS = 'CUSTOMERS',
+  RESTAURANTS = 'RESTAURANTS',
+  SUPPORT = 'SUPPORT',
+  STATISTICS = 'STATISTICS',
+  INFLUENCERS = 'INFLUENCERS',
+  SEO = 'SEO',
+  ADS = 'ADS',
+  ERRORS = 'ERRORS',
+}
 
 export default function Sidebar() {
   const router = useRouter();
 
   const { isDesktop } = useScreenSize();
   const [collapsed, toggleCollapsed] = useToggle(!isDesktop);
+
+  const supportCounter = 0;
+  const errorCounter = 0;
+  const bookingCounter = 0;
+
+  const sidebarItems: { [id: string]: ISidebarItem } = useMemo(
+    () => ({
+      [SidebarItemKey.HOME]: {
+        label: 'Home',
+        page: '/',
+        icon: HomeIcon,
+        category: 'primary',
+      },
+      [SidebarItemKey.BOOKINGS]: {
+        label: 'Bookings',
+        page: '/bookings',
+        icon: CalendarIcon,
+        category: 'primary',
+      },
+      [SidebarItemKey.CUSTOMERS]: {
+        label: 'Customers',
+        page: '/customers',
+        icon: UserIcon,
+        category: 'primary',
+      },
+      [SidebarItemKey.RESTAURANTS]: {
+        label: 'Restaurants',
+        page: '/restaurants',
+        icon: CutleryIcon,
+        category: 'primary',
+      },
+      [SidebarItemKey.SUPPORT]: {
+        label: 'Support',
+        page: '/support',
+        icon: SupportIcon,
+        category: 'primary',
+      },
+      [SidebarItemKey.STATISTICS]: {
+        label: 'Statistics',
+        page: '/statistics',
+        icon: GagueIcon,
+        category: 'secondary',
+      },
+      [SidebarItemKey.INFLUENCERS]: {
+        label: 'Influencers',
+        page: '/influencers',
+        icon: UserIcon,
+        category: 'secondary',
+      },
+      [SidebarItemKey.SEO]: {
+        label: 'SEO',
+        page: '/seo',
+        icon: MessageIcon,
+        category: 'secondary',
+      },
+      [SidebarItemKey.ADS]: {
+        label: 'Ads',
+        page: '/ads',
+        icon: TrendingIcon,
+        category: 'secondary',
+      },
+      [SidebarItemKey.ERRORS]: {
+        label: 'Errors',
+        page: '/errors',
+        icon: WarningOutlined,
+        category: 'secondary',
+      },
+    }),
+    [supportCounter, errorCounter, bookingCounter],
+  );
 
   // Collapse on small screens
   useEffect(() => {
@@ -50,33 +154,35 @@ export default function Sidebar() {
         </div>
 
         <div className="flex flex-col justify-start space-y-6">
-          {NAVIGATION.SIDEBAR_ITEMS.filter(
-            item => item.category === 'primary',
-          ).map(item => (
-            <SidebarItem
-              key={item.page}
-              collapsed={collapsed}
-              selected={
-                router.pathname.split('/')?.[1] === item.page.replace(/\//g, '')
-              }
-              {...item}
-            />
-          ))}
+          {Object.values(sidebarItems)
+            .filter(item => item.category === 'primary')
+            .map(item => (
+              <SidebarItem
+                key={item.page}
+                collapsed={collapsed}
+                selected={
+                  router.pathname.split('/')?.[1] ===
+                  item.page.replace(/\//g, '')
+                }
+                {...item}
+              />
+            ))}
         </div>
 
         <div className="flex flex-col justify-end space-y-6">
-          {NAVIGATION.SIDEBAR_ITEMS.filter(
-            item => item.category === 'secondary',
-          ).map(item => (
-            <SidebarItem
-              key={item.page}
-              collapsed={collapsed}
-              selected={
-                router.pathname.split('/')?.[1] === item.page.replace(/\//g, '')
-              }
-              {...item}
-            />
-          ))}
+          {Object.values(sidebarItems)
+            .filter(item => item.category === 'secondary')
+            .map(item => (
+              <SidebarItem
+                key={item.page}
+                collapsed={collapsed}
+                selected={
+                  router.pathname.split('/')?.[1] ===
+                  item.page.replace(/\//g, '')
+                }
+                {...item}
+              />
+            ))}
         </div>
       </div>
     </div>

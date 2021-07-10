@@ -46,8 +46,9 @@ export default async function getInternalErrors(
 
     response.json(internalErrors);
   } catch (error) {
-    response.status(400).statusMessage = `Error: ${error}`;
-    response.end();
+    response.json([]);
+    // response.status(400).statusMessage = `Error: ${error}`;
+    // response.end();
     return;
   }
 }

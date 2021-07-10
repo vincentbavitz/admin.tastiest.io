@@ -1,9 +1,8 @@
-import { Tooltip } from '@tastiest-io/tastiest-components';
 import classNames from 'classnames';
 import clsx from 'clsx';
-import { ISidebarItem } from 'constants/navigation';
 import Link from 'next/link';
 import React from 'react';
+import { ISidebarItem } from './Sidebar';
 
 export interface Props extends ISidebarItem {
   selected?: boolean;
@@ -42,13 +41,7 @@ export default function SidebarItem(props: Props) {
         collapsed ? 'px-3' : 'px-4',
       )}
     >
-      {collapsed ? (
-        <Tooltip light placement="left" content={label}>
-          <InnerContent />
-        </Tooltip>
-      ) : (
-        <InnerContent />
-      )}
+      <InnerContent />
     </div>
   );
 }
