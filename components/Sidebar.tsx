@@ -24,7 +24,7 @@ export default function Sidebar() {
   const isDrawer = !isDesktop;
 
   return (
-    <div style={{ minWidth: '3rem' }} className="relative">
+    <div style={{ minWidth: isDrawer ? '3rem' : 'auto' }} className="relative">
       <div
         style={{
           boxShadow: 'inset 0px 20px 15px -20px rgba(0,0,0,0.08)',

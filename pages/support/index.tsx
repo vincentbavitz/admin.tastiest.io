@@ -1,22 +1,34 @@
 import { Button, Input, TextArea } from '@tastiest-io/tastiest-components';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { IRestaurant } from '@tastiest-io/tastiest-utils';
+import SupportTable from 'components/tables/SupportTable';
 import { useScreenSize } from 'hooks/useScreenSize';
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
+import nookies from 'nookies';
 import React, { useEffect, useState } from 'react';
 import { dlog } from 'utils/development';
-import { METADATA } from '../constants';
+import { METADATA } from '../../constants';
 
 interface Props {
   resaurant?: IRestaurant;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {},
-    revalidate: 60,
-  };
+export const getServerSideProps = async context => {
+  // Ensure user is authenticated
+  const cookieToken = nookies.get(context)?.token;
+
+  // If no user, redirect to login
+  if (!cookieToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 };
 
 const Support: NextPage<Props> = () => {
@@ -62,6 +74,10 @@ const Support: NextPage<Props> = () => {
       <Head>
         <title>Support - {METADATA.TITLE_SUFFIX}</title>
       </Head>
+
+      <div>
+        <SupportTable />
+      </div>
 
       <div style={{ height: '600px', width: '100%' }}>
         <p className="mb-2 text-lg font-somatic">Support</p>

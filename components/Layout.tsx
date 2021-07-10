@@ -57,7 +57,7 @@ export default function Layout({ children }: Props) {
               isDesktop ? 'px-8' : 'px-5',
             )}
           >
-            <div style={{ height: 'max-content' }} className="w-full ">
+            <div style={{}} className="w-full">
               {children}
             </div>
           </div>

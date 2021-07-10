@@ -1,71 +1,22 @@
 /* eslint-disable react/display-name */
-import {
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
-  LoadingOutlined,
-  StopOutlined,
-  TrophyOutlined,
-} from '@ant-design/icons';
-import { Tooltip } from '@tastiest-io/tastiest-components';
-import { dlog, IUserData } from '@tastiest-io/tastiest-utils';
+import { Select } from '@tastiest-io/tastiest-components';
+import { TriangleIcon } from '@tastiest-io/tastiest-icons';
+import { IUserSupportRequest } from '@tastiest-io/tastiest-utils';
+import clsx from 'clsx';
 import Table from 'components/Table';
 import moment from 'moment';
 import Link from 'next/link';
-import { TastiestCustomerProfile } from 'pages/api/getCustomerProfile';
-import { UserRecord } from 'pages/api/getUsers';
 import React, { useEffect, useState } from 'react';
+import { useToggle } from 'react-use';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 
-// Update any field in the current booking
-// instantly using mutate SWR
-// async function setBookingField<T>(
-//   field: EditableBookingFields,
-//   value: T,
-//   bookings: IBooking[],
-//   rowIndex: number,
-// ) {
-//   const booking = bookings[rowIndex];
-//   if (!booking) {
-//     console.log('Booking not found');
-//     return;
-//   }
+type ResolvedStatus = 'all' | 'resolved' | 'unresolved';
 
-//   // Can't modify a cancelled booking
-//   if (booking.hasCancelled) {
-//     console.log("Can't modify a cancelled booking");
-//     return;
-//   }
-
-//   const updatedBookUsersTableings = bookings.map((row, index) =>
-//     index === rowIndex
-//       ? {
-//           ...booking,
-//           [field]: value,
-//         }
-//       : row,
-//   );
-
-//   // Update booking server side
-//   await postFetch<any, IBooking>(LocalEndpoint.UPDATE_BOOKING, {
-//     bookingId: booking.orderId,
-//     [field]: value,
-//   });
-
-//   mutate(
-//     `${LocalEndpoint.GET_BOOKINGS}?restaurantId=${booking.restaurantId}`,
-//     updatedBookings,
-//     false,
-//   );
-// }
-
-const MS_IN_TEN_MINUTES = 60 * 10 * 1000;
-type UserDataRow = { id: string; row: IUserData };
-
-const AccordianElement = ({ id, row }: UserDataRow) => {
-  const { data: profile, error } = useSWR<TastiestCustomerProfile>(
-    `${LocalEndpoint.GET_CUSTOMER_PROFILE}?email=${row.details.email}`,
+export default function SupportTable() {
+  const [filteredResults, setFilteredResults] = useState(null);
+  const { data: supportItems } = useSWR<IUserSupportRequest[]>(
+    LocalEndpoint.GET_USER_SUPPORT_REQUESTS,
     {
       refreshInterval: 30000,
       initialData: null,
@@ -73,197 +24,99 @@ const AccordianElement = ({ id, row }: UserDataRow) => {
     },
   );
 
-  return (
-    <div
-      style={{ minHeight: '2.5rem' }}
-      className="flex flex-col w-full px-2 py-2 text-sm bg-gray-100 rounded-md"
-    >
-      <div className="flex justify-between h-10 px-2 mb-2 bg-gray-200 rounded-md">
-        <div className="flex items-center justify-start w-full space-x-4">
-          <Tooltip placement="top-left" content="View user profile">
-            <Link href={profile ? `/customers/${profile?.userId}` : '#'}>
-              <a>
-                <EyeOutlined className="text-xl text-alt-1" />
-              </a>
-            </Link>
-          </Tooltip>
-
-          <Tooltip placement="top-left" content="Update user">
-            <EditOutlined onClick={() => null} className="text-xl text-alt-1" />
-          </Tooltip>
-
-          <Tooltip placement="top-left" content="Reward">
-            <TrophyOutlined
-              onClick={() => null}
-              className="text-xl text-yellow-600"
-            />
-          </Tooltip>
-        </div>
-
-        <div className="flex items-center justify-end w-full space-x-4">
-          <Tooltip placement="top-right" content="Ban user">
-            <StopOutlined
-              onClick={() => null}
-              className="text-xl text-yellow-600"
-            />
-          </Tooltip>
-
-          <Tooltip placement="top-right" content="Delete user">
-            <DeleteOutlined
-              onClick={() => null}
-              className="text-xl text-red-500 "
-            />
-          </Tooltip>
-        </div>
-      </div>
-
-      {profile ? (
-        <div className="px-1">
-          <table style={{ minWidth: '300px' }} className="w-1/2">
-            <tbody>
-              {profile.userId && (
-                <tr>
-                  <td>User ID</td>
-                  <td className="text-right">{profile?.userId}</td>
-                </tr>
-              )}
-
-              <tr>
-                <td>Email</td>
-                <td className="text-right">{profile?.email}</td>
-              </tr>
-
-              {profile?.userData?.details?.mobile && (
-                <tr>
-                  <td>Mobile</td>
-                  <td className="text-right">
-                    {profile?.userData.details.mobile}
-                  </td>
-                </tr>
-              )}
-
-              {profile?.userData?.details?.birthday && (
-                <tr>
-                  <td>Birthday</td>
-                  <td className="text-right">
-                    {profile?.userData.details.birthday.day}/
-                    {profile?.userData.details.birthday.month}/
-                    {profile?.userData.details.birthday.year}
-                  </td>
-                </tr>
-              )}
-
-              {profile?.city && (
-                <tr>
-                  <td>Location</td>
-                  <td className="text-right">
-                    {profile?.city}
-                    {profile?.country ? ', ' + profile?.country : ''}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <div className="flex items-center justify-center w-full h-full">
-          {error ? (
-            <p className="pt-1">No user profile generated yet.</p>
-          ) : (
-            <LoadingOutlined className="text-xl fill-current text-primary" />
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default function SupportTable() {
-  const { data: users } = useSWR<IUserData[]>(`${LocalEndpoint.GET_USERS}`, {
-    refreshInterval: 30000,
-    initialData: null,
-    refreshWhenHidden: true,
-  });
-
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
-    if (users) {
+    if (supportItems) {
       setIsInitialLoading(false);
     }
-  }, [users]);
-
-  dlog('UsersTable ➡️ users:', users);
+  }, [supportItems]);
 
   const columns = [
     {
-      id: 'userName',
-      Header: 'Name',
-      width: '200',
-      accessor: (row: UserRecord) => {
+      id: 'priority',
+      Header: 'Priority',
+      width: '120',
+      accessor: (row: IUserSupportRequest) => {
         return (
-          <div className="flex flex-col">
-            <div className="flex items-center space-x-1">
-              {Date.now() - row.details.lastActive < MS_IN_TEN_MINUTES && (
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              )}
-              <Link href={`/customers/${row.id}`}>
-                <a className="font-medium hover:underline">
-                  {row.details.firstName +
-                    (row?.details?.lastName ? ' ' + row.details.lastName : '')}
-                </a>
-              </Link>
-            </div>
-            <Link href={`/customers/${row.id}`}>
-              <a className="text-sm opacity-75">{row.details.email}</a>
-            </Link>
+          <div
+            className={clsx(
+              'py-px px-2 rounded-md text-center uppercase bg-opacity-25 w-20 text-sm',
+              row.priority === 'critical' && 'bg-danger',
+              row.priority === 'high' && 'bg-yellow-500',
+              row.priority === 'normal' && 'bg-blue-500',
+              row.priority === 'low' && 'bg-gray-200',
+              row.seen && 'opacity-50',
+            )}
+          >
+            {row.priority}
           </div>
         );
       },
     },
     {
-      id: 'lastActive',
-      Header: 'Last Active',
-      maxWidth: 100,
-      accessor: (row: IUserData) => {
+      id: 'userName',
+      Header: 'Name',
+      width: '120',
+      accessor: (row: IUserSupportRequest) => {
         return (
-          <p className="text-sm opacity-75">
-            {row.details.lastActive ? (
-              moment(row.details.lastActive).local().fromNow()
+          <div className={clsx(row.seen && 'opacity-50')}>
+            {row.userId ? (
+              <Link href={row.userId}>
+                <a
+                  className={clsx(
+                    'flex flex-col font-medium hover:underline cursor-pointer',
+                  )}
+                >
+                  {row.name}
+                </a>
+              </Link>
             ) : (
-              <span className="opacity-50">—</span>
+              <div className={'flex flex-col'}>{row.name}</div>
             )}
-          </p>
+          </div>
         );
       },
     },
     {
-      id: 'orders',
-      Header: 'Orders',
-      width: 80,
-      accessor: (row: IUserData) => (
-        <p>
-          {row.metrics?.totalBookings ? (
-            row.metrics.totalBookings
-          ) : (
-            <span className="opacity-50">0</span>
-          )}
-        </p>
-      ),
+      id: 'lastMessage',
+      Header: 'Request',
+      width: 300,
+      accessor: (row: IUserSupportRequest) => {
+        return (
+          <div className="overflow-hidden cursor-pointer hover:underline">
+            {row.seen ? (
+              <div className="font-medium opacity-50">
+                {row.conversation[0].message}
+              </div>
+            ) : (
+              <Link href={`/support/${row.id}`}>
+                <a className="font-medium">{row.conversation[0].message}</a>
+              </Link>
+            )}
+          </div>
+        );
+      },
     },
     {
-      id: 'totalSpent',
-      Header: 'Total Spent',
-      width: 80,
-      accessor: (row: IUserData) => (
-        <p className="">
-          {row.metrics?.totalSpent?.['GBP'] > 0 ? (
-            <>£{Number(row.metrics?.totalSpent?.['GBP'] ?? 0)?.toFixed(2)}</>
-          ) : (
-            <span className="opacity-50"> £{(0).toFixed(2)}</span>
-          )}
-        </p>
-      ),
+      id: 'type',
+      Header: 'Type',
+      width: 150,
+      accessor: (row: IUserSupportRequest) => {
+        return (
+          <div className="w-20 px-2 py-px text-sm text-center uppercase bg-opacity-25 rounded-md bg-secondary-2">
+            {row.type}
+          </div>
+        );
+      },
+    },
+    {
+      id: 'createdAt',
+      Header: 'Time',
+      width: '150',
+      accessor: (row: IUserSupportRequest) => {
+        return <div>{moment(row.createdAt).local().fromNow()}</div>;
+      },
     },
   ];
 
@@ -276,29 +129,96 @@ export default function SupportTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: IUserData[]) => {
+  const searchFunction = (query: string, data: IUserSupportRequest[]) => {
     // prettier-ignore
-    const result = data.filter(userData => {
-        const fullName = userData.details?.firstName + (userData.details?.lastName ? ' ' + userData.details.lastName : '');
-        
+    const result = data.filter(supportItem => {       
         return (
-          fullName?.toLowerCase().includes(query.toLowerCase()) ||
-          userData.details?.email?.toLowerCase().includes(query.toLowerCase())
+          supportItem.name?.toLowerCase().includes(query.toLowerCase()) ||
+          supportItem.email?.toLowerCase().includes(query.toLowerCase()) || 
+          supportItem.conversation?.[0]?.message?.toLowerCase().includes(query.toLowerCase())
         );
       });
 
     return result;
   };
 
+  // Managing filters
+  const [filtersOpen, toggleFiltersOpen] = useToggle(false);
+  const applyStatusFilter = (status: ResolvedStatus) => {
+    if (status === 'all') {
+      setFilteredResults(null);
+      return;
+    }
+
+    const filtered = supportItems.filter(item => {
+      return item.resolved === (status === 'resolved');
+    });
+
+    setFilteredResults(filtered);
+  };
+
   return (
     <div>
+      <div className="flex items-center justify-end mb-1 text-lg">
+        Filters{' '}
+        <span
+          onClick={() => toggleFiltersOpen()}
+          className="h-full px-1 cursor-pointer"
+        >
+          <TriangleIcon
+            className={clsx(
+              'h-2 ml-2 duration-150 transform fill-current text-gray-400',
+              filtersOpen ? '-rotate-90' : 'rotate-90',
+            )}
+          />
+        </span>
+      </div>
+
+      {filtersOpen && (
+        <div className="flex items-center justify-end w-full px-3 pt-2 pb-3 mb-4 space-x-6 bg-white rounded-md">
+          <div className="w-40">
+            <div className="font-medium">Status</div>
+            <Select
+              size="small"
+              onChange={value => applyStatusFilter(value as ResolvedStatus)}
+            >
+              <option value="all">All</option>
+              <option value="unresolved" selected>
+                Unresolved
+              </option>
+              <option value="resolved">Resolved</option>
+            </Select>
+          </div>
+
+          <div className="w-40">
+            <div className="font-medium">Type</div>
+            <Select size="small" onChange={() => null}>
+              <option>All</option>
+              <option>Critical</option>
+              <option>High</option>
+              <option>Normal</option>
+              <option>Low</option>
+            </Select>
+          </div>
+
+          <div className="w-40">
+            <div className="font-medium">From</div>
+            <Select size="small" onChange={() => null}>
+              <option value={'all'}>All</option>
+              <option value={'users'}>Users</option>
+              <option value={'restaurants'}>Restaurants</option>
+            </Select>
+          </div>
+        </div>
+      )}
+
       <Table
-        label="Users"
+        label="Support Requests"
         columns={columns}
-        data={users ?? []}
-        noDataLabel="No users yet"
-        rowAccordianElement={AccordianElement}
+        data={filteredResults ?? supportItems ?? []}
+        noDataLabel="No support requests"
         searchFunction={searchFunction}
+        leftAlignedColumns={[0, 1, 2]}
         isLoadingInitialData={isInitialLoading}
       />
     </div>

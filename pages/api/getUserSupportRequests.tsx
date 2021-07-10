@@ -1,4 +1,7 @@
-import { FirestoreCollection, IBooking } from '@tastiest-io/tastiest-utils';
+import {
+  FirestoreCollection,
+  IUserSupportRequest,
+} from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 
@@ -8,7 +11,7 @@ import { firebaseAdmin } from 'utils/firebaseAdmin';
  */
 export default async function getUserSupportRequests(
   request: NextApiRequest,
-  response: NextApiResponse<IBooking[]>,
+  response: NextApiResponse<IUserSupportRequest[]>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
@@ -23,20 +26,22 @@ export default async function getUserSupportRequests(
       .firestore()
       .collection(FirestoreCollection.SUPPORT_USERS);
 
-    const bookingsSnapshot = await query
-      .orderBy('timestamp', 'desc')
+    const supportItemsSnapshot = await query
+      .orderBy('createdAt', 'desc')
       .limit(limit)
       .get();
 
-    const bookings: IBooking[] = [];
-    bookingsSnapshot.forEach(doc => bookings.push(doc.data() as IBooking));
+    const supportItems: IUserSupportRequest[] = [];
+    supportItemsSnapshot.forEach(doc =>
+      supportItems.push(doc.data() as IUserSupportRequest),
+    );
 
-    if (!bookings?.length) {
+    if (!supportItems?.length) {
       response.json([]);
       return;
     }
 
-    response.json(bookings);
+    response.json(supportItems);
   } catch (error) {
     response.status(400).statusMessage = `Error: ${error}`;
     response.end();

@@ -7,4 +7,5 @@ export enum LocalEndpoint {
   UPDATE_BOOKING = '/api/updateBooking',
   GET_DASHBOARD_METRICS = '/api/getDashboardMetrics',
   GET_INTERNAL_ERRORS = '/api/getInternalErrors',
+  GET_USER_SUPPORT_REQUESTS = '/api/getUserSupportRequests',
 }
