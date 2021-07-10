@@ -1,7 +1,7 @@
-import { Button, Input } from '@tastiest-io/tastiest-components';
 import { CheckFilledIcon } from '@tastiest-io/tastiest-icons';
 import clsx from 'clsx';
-import { Modal } from 'components/Modal';
+import CodeSpan from 'components/CodeSpan';
+import { ConfirmationModal } from 'components/ConfirmationModal';
 import React, { useState } from 'react';
 
 export const HasArrivedCell = ({
@@ -26,32 +26,16 @@ export const HasArrivedCell = ({
 
   // Update locally and on server side on change
   const onClickIcon = () => {
-    // Open confirmation modal if not confirmed
-    if (!arrived && !modalIsOpen) {
-      setModalIsOpen(true);
-      return;
-    }
-
-    if (arrived) {
-      setTypedCode(null);
-      setArrived(false);
-      updateData(false, index, id);
-    }
+    setModalIsOpen(true);
   };
 
-  const submitCode = () => {
-    setCodeError(null);
+  const setArrivedFalse = () => {
+    setTypedCode(null);
+    setArrived(false);
+    updateData(false, index, id);
+  };
 
-    if (!typedCode?.length) {
-      return;
-    }
-
-    if (typedCode !== code) {
-      setCodeError('Invalid confirmation code');
-      return;
-    }
-
-    // Code success!
+  const setArrivedTrue = () => {
     setModalIsOpen(false);
     setArrived(true);
     updateData(true, index, id);
@@ -64,50 +48,38 @@ export const HasArrivedCell = ({
 
   return (
     <div className="flex items-center justify-center">
-      <Modal
-        title="Confirmation Code"
+      <ConfirmationModal
+        title="Are you sure?"
         isOpen={modalIsOpen}
+        acceptText="Yes"
+        rejectText="No"
+        onAccept={() => {
+          if (arrived) {
+            setArrivedFalse();
+          } else {
+            setArrivedTrue();
+          }
+        }}
+        onReject={() => setModalIsOpen(false)}
         close={() => setModalIsOpen(false)}
       >
         <div
-          style={{ maxWidth: '25rem' }}
+          style={{ maxWidth: '27rem' }}
           className="flex flex-col items-center mt-4 space-y-6"
         >
           <div>
-            <p className="text-sm text-gray-600">
-              Please ask the customer for the code they got in <br />
-              their confirmation email
+            <p className="leading-relaxed">
+              Are you sure you want to manually edit the{' '}
+              <CodeSpan>hasArrived</CodeSpan> property for{' '}
+              <span className="font-bold">{booking.eaterName}</span> to{' '}
+              <CodeSpan>
+                <span className="font-bold">{String(!arrived)}</span>
+              </CodeSpan>
+              ?
             </p>
           </div>
-
-          <div className="flex items-center space-x-2">
-            <div className="w-20">
-              <Input
-                center
-                value={typedCode}
-                onValueChange={setTypedCode}
-                placeholder={'0000'}
-                maxLength={4}
-              />
-            </div>
-
-            <Button
-              color="primary"
-              size="small"
-              className="h-10"
-              onClick={submitCode}
-            >
-              Confirm
-            </Button>
-          </div>
-
-          {codeError && (
-            <div className="">
-              <p className="text-sm text-danger">{codeError}</p>
-            </div>
-          )}
         </div>
-      </Modal>
+      </ConfirmationModal>
 
       <CheckFilledIcon
         onClick={onClickIcon}

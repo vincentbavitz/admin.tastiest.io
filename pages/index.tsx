@@ -1,6 +1,6 @@
 import { InfoCard } from '@tastiest-io/tastiest-components';
 import clsx from 'clsx';
-import UsersTable from 'components/tables/homeCustomersTable/UsersTable';
+import UsersTable from 'components/tables/UsersTable';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';

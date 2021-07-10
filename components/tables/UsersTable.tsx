@@ -7,7 +7,7 @@ import { UserRecord } from 'pages/api/getUsers';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
-import UserTableAccordian from '../UserTableAccordian';
+import UserTableAccordian from './UserTableAccordian';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 

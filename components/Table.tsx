@@ -98,11 +98,10 @@ export default function Table(props: TableProps) {
 
   return (
     <div className="relative">
-      <div className="flex items-center justify-between w-full">
-        {label && <div className="mb-2 text-lg font-somatic">{label}</div>}
+      <div className="flex items-center justify-between w-full mb-2">
+        {label && <div className="text-xl font-somatic">{label}</div>}
         <div style={{ width: '300px' }} className="">
           <Input
-            size="small"
             color="neutral"
             className="bg-white"
             value={searchQuery}
@@ -114,7 +113,10 @@ export default function Table(props: TableProps) {
 
       <div
         style={{ maxWidth: '100%' }}
-        className="w-full px-6 pb-6 overflow-x-auto bg-white rounded-xl"
+        className={clsx(
+          'w-full pb-6 overflow-x-auto bg-white rounded-xl',
+          rowAccordianElement ? 'pl-8 pr-4' : 'px-6',
+        )}
       >
         {data.length > 0 && (
           <table className="w-full" {...getTableProps()}>
@@ -199,11 +201,11 @@ export default function Table(props: TableProps) {
                               expandedRow === row.id ? null : row.id,
                             )
                           }
-                          className="absolute right-0 flex items-center h-full -mr-2 cursor-pointer"
+                          className="absolute left-0 flex items-center h-full px-2 py-2 -ml-6 text-gray-300 cursor-pointer hover:text-gray-500"
                         >
                           <TriangleIcon
                             className={clsx(
-                              'w-2 text-gray-600 duration-200 transform fill-current',
+                              'w-2 duration-200 transform fill-current',
                               expandedRow === row.id
                                 ? '-rotate-90'
                                 : 'rotate-90',

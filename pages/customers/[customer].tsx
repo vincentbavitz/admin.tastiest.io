@@ -76,20 +76,17 @@ function Customer(
 
   return (
     <div>
-      <div className="flex pb-10 space-x-10">
+      <h3 className="pb-4 text-xl font-semibold">
+        <span className="">{userDetails?.firstName ?? userDetails.email}</span>
+        {"'s "}
+        Profile
+      </h3>
+      <div className="flex pb-10 space-x-4">
         <div className="flex-grow">
-          <h3 className="pb-4 text-xl font-semibold">
-            <span className="">
-              {userDetails?.firstName ?? userDetails.email}
-            </span>
-            {"'s "}
-            Profile
-          </h3>
-
           <InfoCard
             color="primary"
             label="Total Spent"
-            compact={!isDesktop}
+            compact={true}
             isLoading={!profile}
             polyfillInfo={'£00.00'}
             info={`£${totalSpent.toFixed(2)}`}
