@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import { IBooking, postFetch, titleCase } from '@tastiest-io/tastiest-utils';
 import Table from 'components/Table';
+import { useNotifier } from 'hooks/useNotifier';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { useToggle } from 'react-use';
 import { mutate } from 'swr';
 import { LocalEndpoint } from 'types/api';
 import { BookingDateCell } from './BookingDateCell';
@@ -68,14 +68,16 @@ async function setBookingField<T>(
 }
 
 export default function BookingsTable({ bookings }: Props) {
-  const [usingTestData, toggleUsingTestData] = useToggle(false);
-
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  const { notify, permission } = useNotifier();
 
   useEffect(() => {
     if (bookings) {
       setIsInitialLoading(false);
     }
+
+    notify('Testing sound', { body: 'asddfadf', href: '/users' });
   }, [bookings]);
 
   const columns = [

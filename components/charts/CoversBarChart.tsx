@@ -7,10 +7,10 @@ interface Props {
   bookings: IBooking[];
 }
 
-export default function BookingsBarChart({ bookings }: Props) {
-  const bookingHistory =
+export default function CoversBarChart({ bookings }: Props) {
+  const coverHistory =
     bookings?.map(booking => ({
-      bookings: booking.heads,
+      covers: booking.heads,
       timestamp: booking.paidAt,
     })) ?? [];
 
@@ -32,40 +32,37 @@ export default function BookingsBarChart({ bookings }: Props) {
     startOfTodayTimestamp,
   ];
 
-  // Get bookings for each day of the week
-  const bookingsOverPastSevenDays = pastSevenDays.map(timestamp => {
+  // Get covers for each day of the week
+  const coversOverPastSevenDays = pastSevenDays.map(timestamp => {
     // First, let's just do today.
-    let bookingsForThisDay = 0;
+    let coversForThisDay = 0;
     const dayName = daysOfTheWeek[new Date(timestamp).getDay()];
 
-    bookingHistory.forEach(bookingRecord => {
+    coverHistory.forEach(coverRecord => {
       if (
-        bookingRecord.timestamp >= timestamp &&
-        bookingRecord.timestamp < timestamp + ONE_DAY_IN_MS
+        coverRecord.timestamp >= timestamp &&
+        coverRecord.timestamp < timestamp + ONE_DAY_IN_MS
       ) {
-        bookingsForThisDay += bookingRecord.bookings;
+        coversForThisDay += coverRecord.covers;
       }
     });
 
-    return { day: dayName, bookings: bookingsForThisDay };
+    return { day: dayName, covers: coversForThisDay };
   });
 
-  const totalBookings = bookingsOverPastSevenDays.reduce(
-    (a, b) => a + b.bookings,
-    0,
-  );
+  const totalCovers = coversOverPastSevenDays.reduce((a, b) => a + b.covers, 0);
 
   return (
     <div className="flex flex-col h-full px-2 py-4 bg-white rounded-xl">
       <h4 className="px-4 pb-2 text-xl text-primary">
-        {totalBookings} <span className="text-sm">bookings</span>
+        {totalCovers} <span className="text-sm">covers</span>
       </h4>
 
       <div className="relative flex flex-grow w-full">
         <BarChart
-          data={bookingsOverPastSevenDays}
+          data={coversOverPastSevenDays}
           indexBy="day"
-          keys={['bookings']}
+          keys={['covers']}
         />
       </div>
     </div>

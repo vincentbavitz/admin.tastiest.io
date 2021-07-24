@@ -3,7 +3,7 @@ import {
   TastiestInternalError,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 /**
  * Gets all internal errors from Firestore
@@ -24,9 +24,7 @@ export default async function getInternalErrors(
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
-    const query = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.ERRORS);
+    const query = await db(FirestoreCollection.ERRORS);
 
     const internalErrorsSnapshot = await query
       .orderBy('timestamp', 'desc')

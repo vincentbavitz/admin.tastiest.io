@@ -1,6 +1,6 @@
 import { InfoCard } from '@tastiest-io/tastiest-components';
 import { IBooking } from '@tastiest-io/tastiest-utils';
-import BookingsBarChart from 'components/charts/BookingsBarChart';
+import CoversBarChart from 'components/charts/CoversBarChart';
 import BookingsTable from 'components/tables/bookings/BookinigsTable';
 import { NextPage } from 'next';
 import nookies from 'nookies';
@@ -61,7 +61,7 @@ const Bookings: NextPage = () => {
         </div>
 
         <div className="col-span-8">
-          <BookingsBarChart bookings={bookings} />
+          <CoversBarChart bookings={bookings} />
         </div>
       </div>
 

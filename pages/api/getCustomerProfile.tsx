@@ -6,7 +6,7 @@ import {
 import { IAddress } from '@tastiest-io/tastiest-utils/dist/types/geography';
 import DeviceDetector from 'device-detector-js';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 interface KlaviyoProfile {
   object: string;
@@ -110,9 +110,7 @@ export default async function getCustomerProfile(
       : '';
 
     // Get supplementary information from Firebase
-    const userDataRef = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.USERS)
+    const userDataRef = await db(FirestoreCollection.USERS)
       .where('details.email', '==', email)
       .get();
 

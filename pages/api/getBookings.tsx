@@ -4,7 +4,7 @@ import {
   IBooking,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 /**
  * Gets all bookings from Firestore
@@ -28,9 +28,7 @@ export default async function getBookings(
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
-    const query = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.BOOKINGS);
+    const query = await db(FirestoreCollection.BOOKINGS);
 
     dlog('getBookings ➡️ useTestData:', useTestData);
 

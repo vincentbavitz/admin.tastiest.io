@@ -4,7 +4,7 @@ import {
   IBooking,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 export type UpdateBookingReturn = FunctionsResponse<{
   booking: IBooking | null;
@@ -60,12 +60,7 @@ export default async function updateBooking(
 
   try {
     // Fetch the booking from Firestore
-    const doc = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.BOOKINGS)
-      .doc(bookingId)
-      .get();
-
+    const doc = await db(FirestoreCollection.BOOKINGS).doc(bookingId).get();
     const booking = doc.data() as IBooking;
 
     // Does the booking exist?
@@ -102,9 +97,7 @@ export default async function updateBooking(
     }
 
     // Sync with Firestore
-    await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.BOOKINGS)
+    await db(FirestoreCollection.BOOKINGS)
       .doc(bookingId)
       .set(updatedBooking, { merge: true });
 

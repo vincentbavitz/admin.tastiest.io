@@ -1,6 +1,6 @@
 import { FirestoreCollection, IUserData } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 export type UserRecord = IUserData & { id: string };
 
@@ -24,9 +24,7 @@ export default async function getUsers(
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
-    const query = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.USERS);
+    const query = await db(FirestoreCollection.USERS);
 
     const usersSnapshot = await query
       // .orderBy('paidAt', 'desc')

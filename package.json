@@ -25,7 +25,7 @@
     "@segment/snippet": "^4.13.1",
     "@stripe/stripe-js": "^1.12.1",
     "@svgr/cli": "^5.5.0",
-    "@tastiest-io/tastiest-components": "^0.43.0",
+    "@tastiest-io/tastiest-components": "^0.52.0",
     "@tastiest-io/tastiest-icons": "^0.24.0",
     "@tastiest-io/tastiest-utils": "^0.157.0",
     "@types/analytics-node": "^3.1.4",

@@ -3892,10 +3892,10 @@
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
-"@tastiest-io/tastiest-components@^0.43.0":
-  version "0.43.0"
-  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-components/0.43.0/43f405aaed6f2d5df440ea41e5adccf1a468e834d6cac2a2c6cd92533f2bf6ed#3dacfd94e0ddd287b8954d292d39f0f02dee3bfa"
-  integrity sha512-Km1E5dsCbPb78R1+8NOUeCTpfXRlj17KEbxca4fq8ei0aiA1W1qyFCpv5soXJkFXA8rrNpl6IshMPxrSjwChfw==
+"@tastiest-io/tastiest-components@^0.52.0":
+  version "0.52.0"
+  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-components/0.52.0/404fff1b3e8fc5f61c6b4d0820ff670de4e486b11dc3ac2f5d6f4d994bf3c24c#9da8a87c478452994aa64f465d3f56bd68ea3d58"
+  integrity sha512-YttpzfX7zK4ZfvhHc1ITk9af51Mu+cU/tINmgoLEbGypGQ3j+4t866YqtbNSBojd2m7mw/uQe337PpXhGVSIEg==
   dependencies:
     "@nivo/core" "^0.72.0"
     "@nivo/line" "^0.72.0"

@@ -11,7 +11,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>,
@@ -40,15 +40,13 @@ export const getServerSideProps = async (
   }
 
   // Attempts to find user support request
-  const userRequestSnapshot = await firebaseAdmin
-    .firestore()
-    .collection(FirestoreCollection.SUPPORT_USERS)
+  const userRequestSnapshot = await db(FirestoreCollection.SUPPORT_USERS)
     .doc(supportRequestId)
     .get();
 
-  const restaurantRequestSnapshot = await firebaseAdmin
-    .firestore()
-    .collection(FirestoreCollection.SUPPORT_RESTAURANTS)
+  const restaurantRequestSnapshot = await db(
+    FirestoreCollection.SUPPORT_RESTAURANTS,
+  )
     .doc(supportRequestId)
     .get();
 

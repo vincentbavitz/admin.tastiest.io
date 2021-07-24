@@ -3,7 +3,7 @@ import {
   IUserSupportRequest,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firebaseAdmin } from 'utils/firebaseAdmin';
+import { db } from 'utils/firebaseAdmin';
 
 /**
  * Gets support requests from users in Firestore
@@ -22,9 +22,7 @@ export default async function getUserSupportRequests(
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
-    const query = await firebaseAdmin
-      .firestore()
-      .collection(FirestoreCollection.SUPPORT_USERS);
+    const query = await db(FirestoreCollection.SUPPORT_USERS);
 
     const supportItemsSnapshot = await query
       .orderBy('createdAt', 'desc')
