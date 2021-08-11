@@ -40,7 +40,12 @@ export default async function getBookings(
       .get();
 
     const bookings: IBooking[] = [];
-    bookingsSnapshot.forEach(doc => bookings.push(doc.data() as IBooking));
+    bookingsSnapshot.forEach(doc => {
+      const booking = doc.data() as IBooking;
+      if (!booking.isTest) {
+        bookings.push(booking);
+      }
+    });
 
     if (!bookings?.length) {
       response.json([]);
