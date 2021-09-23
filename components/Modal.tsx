@@ -11,10 +11,19 @@ interface Props {
   // size: 'small' | 'regular' | 'large';
   className?: string;
   close?: () => void;
+
+  headerLeftElement?: ReactNode; // on the left side of the close icon; optional
 }
 
 export function Modal(props: Props) {
-  const { title, isOpen, close, className, children } = props;
+  const {
+    title,
+    isOpen,
+    close,
+    className,
+    headerLeftElement,
+    children,
+  } = props;
 
   const ref = useRef(null);
   const boxRef = useRef(null);
@@ -46,7 +55,7 @@ export function Modal(props: Props) {
         )}
       >
         <div className="flex items-center justify-between w-full py-3 space-x-6">
-          <div className="w-8"></div>
+          <div className="w-8">{headerLeftElement ?? null}</div>
 
           <div className="flex-1 text-center">
             {title && (

@@ -1,8 +1,31 @@
 import { Button, InfoCard } from '@tastiest-io/tastiest-components';
 import { PlusIcon } from '@tastiest-io/tastiest-icons';
+import RestaurantsTable from 'components/tables/RestaurantsTable';
 import { useScreenSize } from 'hooks/useScreenSize';
+import { GetServerSidePropsContext } from 'next';
 import Link from 'next/link';
+import nookies from 'nookies';
+import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext<ParsedUrlQuery>,
+) => {
+  // Ensure user is authenticated
+  const cookieToken = nookies.get(context)?.token;
+
+  // If no user, redirect to login
+  if (!cookieToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+};
 
 function Restaurants() {
   const { isDesktop } = useScreenSize();
@@ -39,6 +62,10 @@ function Restaurants() {
           compact={!isDesktop}
           info={`£${3}`}
         />
+      </div>
+
+      <div className="pt-10">
+        <RestaurantsTable />
       </div>
     </div>
   );

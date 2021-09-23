@@ -43,7 +43,7 @@ export const getServerSideProps = async (
   }
 
   const userDataApi = new UserDataApi(firebaseAdmin, userId);
-  const userDetails = await userDataApi.getUserData(UserData.DETAILS);
+  const userDetails = await userDataApi.getUserField(UserData.DETAILS);
 
   if (!userDetails) {
     return {
