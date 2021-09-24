@@ -1,56 +1,56 @@
 import { EditOutlined } from '@ant-design/icons';
-import { IRestaurantData, WeekQuietTimes } from '@tastiest-io/tastiest-utils';
-import { QuietTimesProvider } from 'components/restautants/QuietTimesSelector/QuietTimesContext';
+import { IRestaurantData, WeekOpenTimes } from '@tastiest-io/tastiest-utils';
+import { BookingSlotsProvider } from 'components/restautants/BookingSlotsSelector/BookingSlotsContext';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 import { minsIntoHumanTime } from 'utils/time';
 import { TIME } from '../../constants';
-import QuietTimesSelector from '../restautants/QuietTimesSelector';
+import BookingSlotsSelector from '../restautants/BookingSlotsSelector';
 import BlockTemplate from './BlockTemplate';
 
 interface Props {
   restaurantData: Partial<IRestaurantData>;
 }
 
-export default function QuietTimesBlock(props: Props) {
+export default function BookingSlotsBlock(props: Props) {
   return (
-    <QuietTimesProvider>
-      <QuietTimesBlockInner {...props} />
-    </QuietTimesProvider>
+    <BookingSlotsProvider>
+      <BookingSlotsBlockInner {...props} />
+    </BookingSlotsProvider>
   );
 }
 
-function QuietTimesBlockInner(props: Props) {
+function BookingSlotsBlockInner(props: Props) {
   const { restaurantData } = props;
-  const [quietTimesSelectorOpen, setQuietTimesSelectorOpen] = useState(false);
+  const [openTimesSelectorOpen, setOpenTimesSelectorOpen] = useState(false);
 
-  const { data: quietTimes } = useSWR<WeekQuietTimes>(
-    `${LocalEndpoint.GET_QUIET_TIMES}?restaurantId=${restaurantData.details.id}`,
+  const { data: openTimes } = useSWR<WeekOpenTimes>(
+    `${LocalEndpoint.GET_OPEN_TIMES}?restaurantId=${restaurantData.details.id}`,
     {
       refreshInterval: 30000,
       refreshWhenHidden: true,
-      initialData: restaurantData.metrics.quietTimes,
+      initialData: restaurantData.metrics.openTimes,
     },
   );
 
   return (
     <>
-      <QuietTimesSelector
+      <BookingSlotsSelector
         restaurantId={restaurantData.details.id}
-        isOpen={quietTimesSelectorOpen}
-        close={() => setQuietTimesSelectorOpen(false)}
+        isOpen={openTimesSelectorOpen}
+        close={() => setOpenTimesSelectorOpen(false)}
       />
 
       <BlockTemplate
-        title="Quiet Times"
+        title="Trading Hours"
         theme="alt-1"
         icon={EditOutlined}
-        onIconClick={() => setQuietTimesSelectorOpen(true)}
+        onIconClick={() => setOpenTimesSelectorOpen(true)}
       >
         <div className="flex flex-col">
-          {Object.entries(quietTimes).map(([key, day]) => {
-            return day.active ? (
+          {Object.entries(openTimes).map(([key, day]) => {
+            return day.open ? (
               <div
                 key={key}
                 className="flex justify-between py-2 text-base text-alt"

@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import 'rsuite/dist/styles/rsuite-default.css';
 import {
   QuietTimesContext,
-  QuietTimesProvider,
   QuietTimesSelectorSteps,
 } from './QuietTimesContext';
 import { QuietTimesSelectorCoversSection } from './QuietTimesSelectorCoversSection';
@@ -17,14 +16,6 @@ interface Props {
 }
 
 export default function QuietTimesSelector(props: Props) {
-  return (
-    <QuietTimesProvider>
-      <QuietTimesSelectorInner {...props} />
-    </QuietTimesProvider>
-  );
-}
-
-const QuietTimesSelectorInner = (props: Props) => {
   const { restaurantId, isOpen, close } = props;
   const { step, resetToDefaults } = useContext(QuietTimesContext);
 
@@ -56,4 +47,4 @@ const QuietTimesSelectorInner = (props: Props) => {
       </div>
     </Modal>
   );
-};
+}

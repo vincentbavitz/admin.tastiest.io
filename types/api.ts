@@ -9,5 +9,10 @@ export enum LocalEndpoint {
   GET_DASHBOARD_METRICS = '/api/getDashboardMetrics',
   GET_INTERNAL_ERRORS = '/api/getInternalErrors',
   GET_USER_SUPPORT_REQUESTS = '/api/getUserSupportRequests',
+
+  // Metrics
+  GET_QUIET_TIMES = '/api/getQuietTimes',
   SET_QUIET_TIMES = '/api/setQuietTimes',
+  GET_OPEN_TIMES = '/api/getOpenTimes',
+  SET_OPEN_TIMES = '/api/setOpenTimes',
 }

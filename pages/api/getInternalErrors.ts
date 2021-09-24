@@ -24,8 +24,7 @@ export default async function getInternalErrors(
   const limit = Number(request?.query?.limit ?? 100);
 
   try {
-    const query = await db(FirestoreCollection.ERRORS);
-
+    const query = db(FirestoreCollection.ERRORS);
     const internalErrorsSnapshot = await query
       .orderBy('timestamp', 'desc')
       .startAt(startAt)
@@ -45,8 +44,6 @@ export default async function getInternalErrors(
     response.json(internalErrors);
   } catch (error) {
     response.json([]);
-    // response.status(400).statusMessage = `Error: ${error}`;
-    // response.end();
     return;
   }
 }

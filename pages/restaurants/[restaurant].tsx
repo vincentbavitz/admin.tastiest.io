@@ -4,7 +4,8 @@
 
 import { InfoCard } from '@tastiest-io/tastiest-components';
 import { RestaurantDataApi } from '@tastiest-io/tastiest-utils';
-import QuietTimesBlock from 'components/QuietTimesBlock';
+import BookingSlotsBlock from 'components/blocks/BookingSlotsBlock';
+import QuietTimesBlock from 'components/blocks/QuietTimesBlock';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
 import { ParsedUrlQuery } from 'querystring';
@@ -92,8 +93,14 @@ function Restaurant(
         {/* <CustomerProfileSection profile={profile} /> */}
       </div>
 
-      <div className="w-1/2">
-        <QuietTimesBlock restaurantData={restaurantData} />
+      <div className="flex space-x-4">
+        <div className="flex-1">
+          <BookingSlotsBlock restaurantData={restaurantData} />
+        </div>
+
+        <div className="flex-1">
+          <QuietTimesBlock restaurantData={restaurantData} />
+        </div>
       </div>
     </div>
   );

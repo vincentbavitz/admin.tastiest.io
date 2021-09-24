@@ -3927,10 +3927,10 @@
   resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-icons/0.24.0/d9451e8f78ac4f0a4172b2dcb5c268308de93a450ce0e5e9558b210667d22248#ece4ade86e9bd8343401e9a802f52200666cc04f"
   integrity sha512-TnkOoS2qq8WqLGtBCIAAvImfkYSyZ33J+CN0gdIPEiCjl1NoPgDr0Iph4LxVMFQiMuD6Z9rDqydI9ntxYY9yfA==
 
-"@tastiest-io/tastiest-utils@^0.214.0":
-  version "0.214.0"
-  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/0.214.0/c7375589f9f7fa122b33204bdc9d0c36962e24010985917c7294b5fa263f745e#4d738901c2391982e1e32aa5aa303b367f7d2dc8"
-  integrity sha512-1eKKcLucekMQNu/M+q+vScjWHtbbaW549itXTDkJuHrBfzHPD/34o0Lm0HBD4O9+64HT5wqWw007HOCBkciFWQ==
+"@tastiest-io/tastiest-utils@^0.217.0":
+  version "0.217.0"
+  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/0.217.0/5d483cb3a25cb9dcb286935d0d2ee5c75faa82a9f33fea46b6985989085b5bfa#5ae98979855fe4e0a805eaefabee71ff1afb950a"
+  integrity sha512-L2FgicYiV8FY78gyxsTz1ZB2ZlpVP398ce4pNoEJ36VEHYNK3eVAq32PmqbNQN7C2Llx8Pd1YP7Uyec+7V710A==
   dependencies:
     "@contentful/rich-text-types" "^14.1.2"
     "@shopify/shopify-api" "^1.4.0"
