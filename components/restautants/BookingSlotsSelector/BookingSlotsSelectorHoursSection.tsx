@@ -1,26 +1,29 @@
 import { Button } from '@tastiest-io/tastiest-components';
+import {
+  humanTimeIntoMins,
+  minsIntoHumanTime,
+  TIME,
+} from '@tastiest-io/tastiest-utils';
 import { TimeRange } from '@tastiest-io/tastiest-utils/dist/types/time';
 import React, { useContext } from 'react';
 import { RangeSlider } from 'rsuite';
-import { humanTimeIntoMins, minsIntoHumanTime } from 'utils/time';
-import { TIME } from '../../../constants';
 import {
   BookingSlotsContext,
   BookingSlotsSelectorSteps,
 } from './BookingSlotsContext';
 
 export const BookingSlotsSelectorHoursSection = () => {
-  const { days, setStep } = useContext(BookingSlotsContext);
+  const { openTimesMetric, setStep } = useContext(BookingSlotsContext);
 
   return (
     <>
       <div className="">
         <h4 className="pb-6 text-base font-medium leading-tight text-center">
-          During which hours are you the most busy?
+          Select your open hours for each day.
         </h4>
 
         <div className="flex flex-col space-y-8">
-          {days.map((day, index) =>
+          {openTimesMetric.map((day, index) =>
             day.open ? <HoursSelector key={index} numeral={index} /> : null,
           )}
         </div>
@@ -33,7 +36,7 @@ export const BookingSlotsSelectorHoursSection = () => {
         >
           Back
         </Button>
-        <Button onClick={() => setStep(BookingSlotsSelectorSteps.COVERS)}>
+        <Button onClick={() => setStep(BookingSlotsSelectorSteps.SLOTS)}>
           Next
         </Button>
       </div>
@@ -46,15 +49,17 @@ interface HoursSelectorProps {
 }
 
 const HoursSelector = ({ numeral }: HoursSelectorProps) => {
-  const { days, setDays } = useContext(BookingSlotsContext);
+  const { openTimesMetric, setOpenTimesMetric } = useContext(
+    BookingSlotsContext,
+  );
 
   const setRange = (range: TimeRange) => {
-    const updatedDays = [...days];
+    const updatedDays = [...openTimesMetric];
     updatedDays[numeral] = { ...updatedDays[numeral], range };
-    setDays(updatedDays);
+    setOpenTimesMetric(updatedDays);
   };
 
-  const day = days[numeral];
+  const day = openTimesMetric[numeral];
 
   return (
     <div>

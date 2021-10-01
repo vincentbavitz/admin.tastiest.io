@@ -1,9 +1,8 @@
 import { CheckOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from '@tastiest-io/tastiest-components';
-import { titleCase } from '@tastiest-io/tastiest-utils';
+import { TIME, titleCase } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import React, { useContext, useState } from 'react';
-import { TIME } from '../../../constants';
 import {
   QuietTimesContext,
   QuietTimesSelectorSteps,
@@ -33,7 +32,7 @@ export const QuietTimesSelectorDaysSection = () => {
 
   return (
     <>
-      <div className="">
+      <div className="w-full">
         <h4 className="w-full pb-3 text-base font-medium text-center">
           Which days are usually the most quiet?
         </h4>

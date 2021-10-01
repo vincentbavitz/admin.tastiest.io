@@ -3,19 +3,24 @@ import {
   RestaurantData,
   RestaurantDataApi,
 } from '@tastiest-io/tastiest-utils';
-import { QuietTimesArray } from 'components/restautants/QuietTimesSelector/QuietTimesContext';
+import { OpenTimesArray } from 'components/restautants/BookingSlotsSelector/BookingSlotsContext';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 
+export type GetBookingSlotsReturn = {
+  openTimes: OpenTimesArray;
+  seatingDuration: number;
+};
+
 /**
- * Gets the quiet times of a restaurant.
+ * Gets the booking slots of a restaurant.
  * Requires the parameter `restaurantId`
  *
  * Intended to be used exclusively with useSWR
  */
-export default async function getQuietTimes(
+export default async function getBookingSlots(
   request: NextApiRequest,
-  response: NextApiResponse<QuietTimesArray>,
+  response: NextApiResponse<GetBookingSlotsReturn>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
@@ -35,25 +40,26 @@ export default async function getQuietTimes(
     );
 
     const {
-      quietTimes: quietTimesObject,
+      seatingDuration,
+      openTimes: openTimesObject,
     } = await restaurantDataApi.getRestaurantField(RestaurantData.METRICS);
 
-    if (!quietTimesObject) {
+    if (!openTimesObject && !seatingDuration) {
       response.status(400).end();
       return;
     }
 
-    const quietTimes: QuietTimesArray = [
-      quietTimesObject[DayOfWeek.SUNDAY],
-      quietTimesObject[DayOfWeek.MONDAY],
-      quietTimesObject[DayOfWeek.TUESDAY],
-      quietTimesObject[DayOfWeek.WEDNESDAY],
-      quietTimesObject[DayOfWeek.THURSDAY],
-      quietTimesObject[DayOfWeek.FRIDAY],
-      quietTimesObject[DayOfWeek.SATURDAY],
+    const openTimes: OpenTimesArray = [
+      openTimesObject[DayOfWeek.SUNDAY],
+      openTimesObject[DayOfWeek.MONDAY],
+      openTimesObject[DayOfWeek.TUESDAY],
+      openTimesObject[DayOfWeek.WEDNESDAY],
+      openTimesObject[DayOfWeek.THURSDAY],
+      openTimesObject[DayOfWeek.FRIDAY],
+      openTimesObject[DayOfWeek.SATURDAY],
     ];
 
-    response.json(quietTimes);
+    response.json({ openTimes, seatingDuration });
   } catch (error) {
     response.status(400).statusMessage = `Error: ${error}`;
     response.end();

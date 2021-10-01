@@ -3927,10 +3927,10 @@
   resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-icons/0.24.0/d9451e8f78ac4f0a4172b2dcb5c268308de93a450ce0e5e9558b210667d22248#ece4ade86e9bd8343401e9a802f52200666cc04f"
   integrity sha512-TnkOoS2qq8WqLGtBCIAAvImfkYSyZ33J+CN0gdIPEiCjl1NoPgDr0Iph4LxVMFQiMuD6Z9rDqydI9ntxYY9yfA==
 
-"@tastiest-io/tastiest-utils@^0.217.0":
-  version "0.217.0"
-  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/0.217.0/5d483cb3a25cb9dcb286935d0d2ee5c75faa82a9f33fea46b6985989085b5bfa#5ae98979855fe4e0a805eaefabee71ff1afb950a"
-  integrity sha512-L2FgicYiV8FY78gyxsTz1ZB2ZlpVP398ce4pNoEJ36VEHYNK3eVAq32PmqbNQN7C2Llx8Pd1YP7Uyec+7V710A==
+"@tastiest-io/tastiest-utils@^0.219.0":
+  version "0.219.0"
+  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/0.219.0/719ffcdb0cb3e0ffab6d223c70809e050de1d27f68c9d8af58f473bcf15c8887#8ff46e267ffc557400cf6e4227862bbeee2f0672"
+  integrity sha512-2Ny0tIJ0XDlKZAVfAYj7E/DIWKJcR+Lvi89Ur5OHEIidMUsFZovCuf8+NOsP1jGw1en8i54XWZQfb9MIbOjsUw==
   dependencies:
     "@contentful/rich-text-types" "^14.1.2"
     "@shopify/shopify-api" "^1.4.0"
@@ -6400,6 +6400,11 @@ caniuse-lite@^1.0.30001219:
   version "1.0.30001236"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001236.tgz#0a80de4cdf62e1770bb46a30d884fc8d633e3958"
   integrity sha512-o0PRQSrSCGJKCPZcgMzl5fUaj5xHe8qA2m4QRvnyY4e1lITqoNkr7q/Oh1NcpGSy0Th97UZ35yoKcINPoq7YOQ==
+
+caniuse-lite@^1.0.30001263:
+  version "1.0.30001263"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001263.tgz#7ce7a6fb482a137585cbc908aaf38e90c53a16a4"
+  integrity sha512-doiV5dft6yzWO1WwU19kt8Qz8R0/8DgEziz6/9n2FxUasteZNwNNYSmJO3GLBH8lCVE73AB1RPDPAeYbcO5Cvw==
 
 capture-exit@^2.0.0:
   version "2.0.0"

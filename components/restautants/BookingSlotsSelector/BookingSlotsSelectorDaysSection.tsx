@@ -1,27 +1,28 @@
 import { CheckOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from '@tastiest-io/tastiest-components';
-import { titleCase } from '@tastiest-io/tastiest-utils';
+import { TIME, titleCase } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import React, { useContext, useState } from 'react';
-import { TIME } from '../../../constants';
 import {
   BookingSlotsContext,
   BookingSlotsSelectorSteps,
 } from './BookingSlotsContext';
 
 export const BookingSlotsSelectorDaysSection = () => {
-  const { days, setDays, setStep } = useContext(BookingSlotsContext);
+  const { openTimesMetric, setOpenTimesMetric, setStep } = useContext(
+    BookingSlotsContext,
+  );
   const [error, setError] = useState<string | null>(null);
 
   const toggleDay = (day: number) => {
-    const updated = [...days];
-    updated[day] = { ...updated[day], active: !updated[day].active };
-    setDays(updated);
+    const updated = [...openTimesMetric];
+    updated[day] = { ...updated[day], open: !updated[day].open };
+    setOpenTimesMetric(updated);
   };
 
   const nextStep = () => {
     // If no days are selected, prompt them
-    if (!days.some(d => d.active)) {
+    if (!openTimesMetric.some(d => d.open)) {
       setError('Please select at least one day');
       setTimeout(() => setError(null), 4000);
       return;
@@ -33,15 +34,15 @@ export const BookingSlotsSelectorDaysSection = () => {
 
   return (
     <>
-      <div className="">
+      <div className="w-full">
         <h4 className="w-full pb-3 text-base font-medium text-center">
-          Which days are usually the most quiet?
+          Which days are you open?
         </h4>
 
         <div className="flex flex-col items-center flex-grow space-y-4">
           <div className="flex flex-col w-full overflow-hidden rounded-md">
             {TIME.DAYS_OF_THE_WEEK.map((day, key) => {
-              const selected = days[key].active;
+              const selected = openTimesMetric[key].open;
 
               return (
                 <div

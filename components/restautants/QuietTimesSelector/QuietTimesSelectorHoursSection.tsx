@@ -1,9 +1,12 @@
 import { Button } from '@tastiest-io/tastiest-components';
+import {
+  humanTimeIntoMins,
+  minsIntoHumanTime,
+  TIME,
+} from '@tastiest-io/tastiest-utils';
 import { TimeRange } from '@tastiest-io/tastiest-utils/dist/types/time';
 import React, { useContext } from 'react';
 import { RangeSlider } from 'rsuite';
-import { humanTimeIntoMins, minsIntoHumanTime } from 'utils/time';
-import { TIME } from '../../../constants';
 import {
   QuietTimesContext,
   QuietTimesSelectorSteps,

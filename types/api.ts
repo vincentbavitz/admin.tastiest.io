@@ -13,6 +13,6 @@ export enum LocalEndpoint {
   // Metrics
   GET_QUIET_TIMES = '/api/getQuietTimes',
   SET_QUIET_TIMES = '/api/setQuietTimes',
-  GET_OPEN_TIMES = '/api/getOpenTimes',
-  SET_OPEN_TIMES = '/api/setOpenTimes',
+  GET_BOOKING_SLOTS = '/api/getBookingSlots',
+  SET_BOOKING_SLOTS = '/api/setBookingSlots',
 }

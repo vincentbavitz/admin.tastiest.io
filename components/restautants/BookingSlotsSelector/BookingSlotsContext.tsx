@@ -1,14 +1,19 @@
-import { DayOfWeek, OpenTimesMetricDay } from '@tastiest-io/tastiest-utils';
+import {
+  DayOfWeek,
+  humanTimeIntoMins,
+  OpenTimesMetricDay,
+  postFetch,
+  TIME,
+} from '@tastiest-io/tastiest-utils';
+import { SetBookingSlotsParams } from 'pages/api/setBookingSlots';
 import React, { useState } from 'react';
 import { mutate } from 'swr';
 import { LocalEndpoint } from 'types/api';
-import { humanTimeIntoMins } from 'utils/time';
-import { TIME } from '../../../constants';
 
 export enum BookingSlotsSelectorSteps {
   DAYS,
   HOURS,
-  COVERS,
+  SLOTS,
 }
 
 export type OpenTimesArray = [
@@ -26,6 +31,7 @@ type BookingSlots = {
   setStep: React.Dispatch<React.SetStateAction<BookingSlotsSelectorSteps>>;
   saving: boolean;
   seatingDuration: number; // in minutes
+  setSeatingDuration: React.Dispatch<React.SetStateAction<number>>;
   openTimesMetric: OpenTimesMetricDay[];
   setOpenTimesMetric: React.Dispatch<
     React.SetStateAction<OpenTimesMetricDay[]>
@@ -58,13 +64,16 @@ export const BookingSlotsProvider = ({ children }) => {
     Array(TIME.DAYS_IN_WEEK).fill(defaultValue) as OpenTimesArray,
   );
 
+  // In minutes
+  const [seatingDuration, setSeatingDuration] = useState(15);
+
   const saveBookingSlots = async (restaurantId: string) => {
-    if (step !== BookingSlotsSelectorSteps.COVERS) {
+    if (step !== BookingSlotsSelectorSteps.SLOTS) {
       return;
     }
 
     mutate(
-      `${LocalEndpoint.GET_OPEN_TIMES}?restaurantId=${restaurantId}`,
+      `${LocalEndpoint.GET_BOOKING_SLOTS}?restaurantId=${restaurantId}`,
       {
         [DayOfWeek.SUNDAY]: openTimesMetric[DayOfWeek.SUNDAY],
         [DayOfWeek.MONDAY]: openTimesMetric[DayOfWeek.MONDAY],
@@ -78,10 +87,11 @@ export const BookingSlotsProvider = ({ children }) => {
     );
 
     setSaving(true);
-    // await postFetch<SetBookingSlotsParams>(LocalEndpoint.SET_QUIET_TIMES, {
-    //   restaurantId,
-    //   quietTimesArray: days,
-    // });
+    await postFetch<SetBookingSlotsParams>(LocalEndpoint.SET_BOOKING_SLOTS, {
+      restaurantId,
+      openTimesArray: openTimesMetric,
+      seatingDuration,
+    });
 
     setSaving(false);
   };
@@ -101,6 +111,8 @@ export const BookingSlotsProvider = ({ children }) => {
     resetToDefaults,
     openTimesMetric,
     setOpenTimesMetric,
+    seatingDuration,
+    setSeatingDuration,
   };
 
   return (

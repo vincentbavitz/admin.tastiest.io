@@ -7,6 +7,7 @@ import {
 } from './BookingSlotsContext';
 import { BookingSlotsSelectorDaysSection } from './BookingSlotsSelectorDaysSection';
 import { BookingSlotsSelectorHoursSection } from './BookingSlotsSelectorHoursSection';
+import { BookingSlotsSelectorSlotsSection } from './BookingSlotsSelectorSlotsSection';
 
 interface Props {
   restaurantId: string;
@@ -24,7 +25,7 @@ export default function BookingSlotsSelector(props: Props) {
   };
 
   return (
-    <Modal isOpen={isOpen} title="Quiet times" close={closeSelector}>
+    <Modal isOpen={isOpen} title="Booking Slots" close={closeSelector}>
       <div
         style={{ width: '300px', minHeight: '300px' }}
         className="relative flex flex-col items-center justify-between h-full"
@@ -37,12 +38,12 @@ export default function BookingSlotsSelector(props: Props) {
           <BookingSlotsSelectorHoursSection />
         )}
 
-        {/* {step === BookingSlotsSelectorSteps.COVERS && (
-          <BookingSlotsSelectorCoversSection
+        {step === BookingSlotsSelectorSteps.SLOTS && (
+          <BookingSlotsSelectorSlotsSection
             restaurantId={restaurantId}
             close={close}
           />
-        )} */}
+        )}
       </div>
     </Modal>
   );

@@ -1,12 +1,16 @@
 import { EditOutlined } from '@ant-design/icons';
-import { IRestaurantData, WeekOpenTimes } from '@tastiest-io/tastiest-utils';
-import { BookingSlotsProvider } from 'components/restautants/BookingSlotsSelector/BookingSlotsContext';
+import {
+  dlog,
+  IRestaurantData,
+  minsIntoHumanTime,
+  TIME,
+} from '@tastiest-io/tastiest-utils';
+import { GetBookingSlotsReturn } from 'pages/api/getBookingSlots';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
-import { minsIntoHumanTime } from 'utils/time';
-import { TIME } from '../../constants';
 import BookingSlotsSelector from '../restautants/BookingSlotsSelector';
+import { BookingSlotsProvider } from '../restautants/BookingSlotsSelector/BookingSlotsContext';
 import BlockTemplate from './BlockTemplate';
 
 interface Props {
@@ -25,14 +29,20 @@ function BookingSlotsBlockInner(props: Props) {
   const { restaurantData } = props;
   const [openTimesSelectorOpen, setOpenTimesSelectorOpen] = useState(false);
 
-  const { data: openTimes } = useSWR<WeekOpenTimes>(
-    `${LocalEndpoint.GET_OPEN_TIMES}?restaurantId=${restaurantData.details.id}`,
+  const {
+    data: { openTimes, seatingDuration } = {
+      openTimes: null,
+      seatingDuration: null,
+    },
+  } = useSWR<GetBookingSlotsReturn>(
+    `${LocalEndpoint.GET_BOOKING_SLOTS}?restaurantId=${restaurantData.details.id}`,
     {
       refreshInterval: 30000,
       refreshWhenHidden: true,
-      initialData: restaurantData.metrics.openTimes,
     },
   );
+
+  dlog('BookingSlotsBlock ➡️ openTimes:', openTimes);
 
   return (
     <>
@@ -43,27 +53,39 @@ function BookingSlotsBlockInner(props: Props) {
       />
 
       <BlockTemplate
-        title="Trading Hours"
+        title="Booking Slots"
         theme="alt-1"
         icon={EditOutlined}
         onIconClick={() => setOpenTimesSelectorOpen(true)}
       >
         <div className="flex flex-col">
-          {Object.entries(openTimes).map(([key, day]) => {
-            return day.open ? (
-              <div
-                key={key}
-                className="flex justify-between py-2 text-base text-alt"
-              >
-                <div className="font-medium">{TIME.DAYS_OF_THE_WEEK[key]}</div>
-                <div className="">
-                  {minsIntoHumanTime(day.range[0])}
-                  <div className="inline px-1 font-mono">→</div>
-                  {minsIntoHumanTime(day.range[1])}
+          <div className="pb-3 text-left">
+            Seating duration: {seatingDuration} mins
+          </div>
+
+          {openTimes ? (
+            Object.entries(openTimes).map(([key, day]) => {
+              return day.open ? (
+                <div
+                  key={key}
+                  className="flex justify-between py-2 text-base text-alt"
+                >
+                  <div className="font-medium">
+                    {TIME.DAYS_OF_THE_WEEK[key]}
+                  </div>
+                  <div className="">
+                    {minsIntoHumanTime(day.range[0])}
+                    <div className="inline px-1 font-mono">→</div>
+                    {minsIntoHumanTime(day.range[1])}
+                  </div>
                 </div>
-              </div>
-            ) : null;
-          })}
+              ) : null;
+            })
+          ) : (
+            <div className="flex items-center justify-center h-20">
+              No booking slots set.
+            </div>
+          )}
         </div>
       </BlockTemplate>
     </>

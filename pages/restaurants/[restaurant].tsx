@@ -87,7 +87,7 @@ function Restaurant(
           compact={true}
           isLoading={false}
           polyfillInfo={'£00.00'}
-          info={restaurantData.metrics.followers.length ?? 0}
+          info={restaurantData.metrics?.followers?.length ?? 0}
         />
 
         {/* <CustomerProfileSection profile={profile} /> */}

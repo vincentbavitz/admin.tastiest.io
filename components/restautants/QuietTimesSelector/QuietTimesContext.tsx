@@ -1,14 +1,14 @@
 import {
   DayOfWeek,
+  humanTimeIntoMins,
   postFetch,
   QuietTimesMetricDay,
+  TIME,
 } from '@tastiest-io/tastiest-utils';
 import { SetQuietTimesParams } from 'pages/api/setQuietTimes';
 import React, { useState } from 'react';
 import { mutate } from 'swr';
 import { LocalEndpoint } from 'types/api';
-import { humanTimeIntoMins } from 'utils/time';
-import { TIME } from '../../../constants';
 
 export enum QuietTimesSelectorSteps {
   DAYS,
