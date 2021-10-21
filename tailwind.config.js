@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   theme: {
     screens: {
       // Constants taken from UI constants.
@@ -6,14 +7,13 @@ module.exports = {
       // mobile:my-class, for example.
       // -> @media (min-width: {}px) { ... }
       mobile: '500px',
-      tablet: '850px',
+      tablet: '715px',
       desktop: '1100px',
     },
     fontFamily: {
+      primary: ['Marmelad'],
+      secondary: ['Poppins'],
       mono: ['SourceCodePro'],
-      somatic: ['SomaticRounded'],
-      roboto: ['Roboto'],
-      robotoslab: ['RobotoSlab'],
     },
     fontSize: {
       '2xs': ['.66rem'],
@@ -32,35 +32,17 @@ module.exports = {
       '8xl': ['6rem'],
       '9xl': ['7rem'],
     },
-    filter: {
-      grayscale: 'grayscale(1)',
-    },
     extend: {
       colors: {
-        primary: '#fe4c00',
-        'primary-1': '#f1732b',
-        'primary-2': '#ff7d37',
-        secondary: '#ffd505',
-        'secondary-1': '#ffd400',
-        'secondary-2': '#ffe499',
-        subtle: '#ff9100',
-        'subtle-1': '#ffb255',
-        'subtle-2': '#ffdb94',
-        alt: '#0c1d24',
-        'alt-1': '#1f3440',
-        'alt-2': '#57758f',
-        soft: '#ffeec4',
-        'soft-1': '#fff1d3',
-        'aux-orange': '#ffb200',
-        'aux-brown': '#dd8e00',
-        'aux-gray': '#8ee2d9',
-        'aux-blue': '#005d80',
-        'aux-green': '#97ca67',
+        primary: '#274f73',
+        secondary: '#3882bb',
+        tertiary: '#9EB8CC',
+        dark: '#07151b',
+        light: '#fafafa',
+        danger: '#bc1818',
+        success: '#28c625',
       },
       display: ['huge', 'desktop', 'tablet', 'mobile'],
-      backgroundOpacity: {
-        '10': '0.1',
-      },
     },
   },
   variants: {
@@ -71,14 +53,16 @@ module.exports = {
       'children-odd',
       'children-even',
       'children-not-first',
+      'children-not-last',
     ],
     margin: ['children-last'],
     fontWeight: ['children-last'],
-    textAlign: ['children-first'],
+    extend: {
+      brightness: ['hover', 'focus'],
+    },
   },
   plugins: [
     require('tailwindcss-children'),
-    require('tailwindcss-filters'),
     require('@tailwindcss/aspect-ratio'),
     // require('@tailwindcss/forms'),
   ],

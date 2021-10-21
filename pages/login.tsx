@@ -1,4 +1,3 @@
-import { LoadingOutlined } from '@ant-design/icons';
 import { Button, Input } from '@tastiest-io/tastiest-components';
 import clsx from 'clsx';
 import Header from 'components/Header';
@@ -7,7 +6,6 @@ import { useScreenSize } from 'hooks/useScreenSize';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import nookies from 'nookies';
-import { ChefIllustration } from 'public/assets/illustrations';
 import React, { useState } from 'react';
 import { useWindowSize } from 'react-use';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
@@ -63,10 +61,13 @@ const LogIn: NextPage = () => {
         style={{ height: '100vh' }}
         className="relative w-full overflow-hidden"
       >
+        <div style={{ zIndex: -1 }} className="absolute bottom-0 w-full">
+          <img src="/assets/illustrations/hero.svg" />
+        </div>
+
         <div
           className={clsx(
-            'flex flex-col h-full mt-32 space-y-10 items-center',
-            isDesktop && height < 850 && '-ml-64',
+            'flex flex-col z-10 h-full mt-32  space-y-10 items-center',
           )}
         >
           <div className="w-full text-center">
@@ -78,8 +79,8 @@ const LogIn: NextPage = () => {
           </div>
           <div
             className={clsx(
-              'flex flex-col p-10 space-y-4 border-2 border-primary rounded-xl',
-              isDesktop && height < 850 && 'w-auto',
+              'flex flex-col p-10 space-y-4 filter drop-shadow-xl glass rounded-md',
+              'w-auto',
             )}
           >
             <div className="w-64">
@@ -98,36 +99,15 @@ const LogIn: NextPage = () => {
               />
             </div>
 
-            <Button
-              wide
-              onClick={submit}
-              prefix={loading ? <LoadingOutlined /> : null}
-            >
+            <Button wide onClick={submit} loading={loading}>
               Sign In
             </Button>
           </div>
-          <h3 className="text-2xl font-medium text-center text-secondary font-somatic">
-            {METADATA.TAGLINE}
-          </h3>
         </div>
 
         <div className="absolute top-0 w-full">
           <Header blank />
         </div>
-
-        {isDesktop && (
-          <div className="absolute bottom-0 right-0 pointer-events-none">
-            <div
-              style={{
-                width: '25rem',
-                height: '40rem',
-                boxShadow: 'inset 25px 25px 33px -33px rgba(0,0,0,0.33)',
-              }}
-              className="transform translate-x-1/2 translate-y-1/2 rounded-full bg-primary "
-            ></div>
-            <ChefIllustration className="absolute bottom-0 right-0 w-64 transform" />
-          </div>
-        )}
       </div>
     </>
   );

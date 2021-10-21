@@ -1,4 +1,4 @@
-import { BrandIcon, LogoIcon } from '@tastiest-io/tastiest-icons';
+import { TastiestBrand } from '@tastiest-io/tastiest-components';
 import { useScreenSize } from 'hooks/useScreenSize';
 import Link from 'next/link';
 import React from 'react';
@@ -17,9 +17,9 @@ export default function Header({ blank }: Props) {
         <Link href="/">
           <a>
             {isDesktop ? (
-              <BrandIcon className="fill-current w-36 text-primary" />
+              <TastiestBrand />
             ) : (
-              <LogoIcon className="w-8 fill-current text-primary" />
+              <TastiestBrand type="initial-ring" />
             )}
           </a>
         </Link>

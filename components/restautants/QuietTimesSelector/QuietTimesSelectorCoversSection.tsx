@@ -1,7 +1,7 @@
 import { Button } from '@tastiest-io/tastiest-components';
+import { TIME } from '@tastiest-io/tastiest-utils';
 import React, { useContext } from 'react';
 import { Slider } from 'rsuite';
-import { TIME } from '../../../constants';
 import {
   QuietTimesContext,
   QuietTimesSelectorSteps,
@@ -40,7 +40,7 @@ export const QuietTimesSelectorCoversSection = (props: Props) => {
 
       <div className="flex justify-center pt-6 space-x-2">
         <Button
-          color="neutral"
+          color="light"
           onClick={() => setStep(QuietTimesSelectorSteps.HOURS)}
         >
           Back
