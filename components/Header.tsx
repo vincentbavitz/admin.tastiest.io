@@ -1,4 +1,4 @@
-import { TastiestBrand } from '@tastiest-io/tastiest-components';
+import { TastiestBrand } from '@tastiest-io/tastiest-ui';
 import { useScreenSize } from 'hooks/useScreenSize';
 import Link from 'next/link';
 import React from 'react';

@@ -1,4 +1,4 @@
-import { InfoCard } from '@tastiest-io/tastiest-components';
+import { InfoCard } from '@tastiest-io/tastiest-ui';
 import clsx from 'clsx';
 import UsersTable from 'components/tables/UsersTable';
 import { useScreenSize } from 'hooks/useScreenSize';

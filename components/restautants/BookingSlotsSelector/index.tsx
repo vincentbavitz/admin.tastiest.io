@@ -1,6 +1,5 @@
 import { Modal } from 'components/Modal';
 import React, { useContext } from 'react';
-import 'rsuite/dist/styles/rsuite-default.css';
 import {
   BookingSlotsContext,
   BookingSlotsSelectorSteps,

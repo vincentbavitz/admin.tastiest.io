@@ -1,4 +1,4 @@
-import { Button, Input } from '@tastiest-io/tastiest-components';
+import { Button, Input } from '@tastiest-io/tastiest-ui';
 import clsx from 'clsx';
 import Header from 'components/Header';
 import { useAuth } from 'hooks/useAuth';

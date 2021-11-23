@@ -1,5 +1,5 @@
-import { Button, InfoCard } from '@tastiest-io/tastiest-components';
 import { PlusIcon } from '@tastiest-io/tastiest-icons';
+import { Button, InfoCard } from '@tastiest-io/tastiest-ui';
 import RestaurantsTable from 'components/tables/RestaurantsTable';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { GetServerSidePropsContext } from 'next';
@@ -36,7 +36,7 @@ function Restaurants() {
         <span className="text-xl font-somatic">Restaurants</span>
         <Link href="/restaurants/create">
           <a>
-            <Button color="neutral" type="outline">
+            <Button color="light" type="outline">
               <PlusIcon className="w-5 mr-2 fill-current" /> New
             </Button>
           </a>

@@ -66,5 +66,9 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     // require('@tailwindcss/forms'),
   ],
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './layouts/**/*.{js,ts,jsx,tsx}',
+  ],
 };

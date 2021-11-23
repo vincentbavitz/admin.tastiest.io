@@ -1,4 +1,4 @@
-import { Button } from '@tastiest-io/tastiest-components';
+import { Button } from '@tastiest-io/tastiest-ui';
 import { TIME } from '@tastiest-io/tastiest-utils';
 import React, { useContext } from 'react';
 import { Slider } from 'rsuite';

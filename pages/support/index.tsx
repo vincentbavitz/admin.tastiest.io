@@ -1,5 +1,5 @@
-import { Button, Input, TextArea } from '@tastiest-io/tastiest-components';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
+import { Button, Input, TextArea } from '@tastiest-io/tastiest-ui';
 import { IRestaurant } from '@tastiest-io/tastiest-utils';
 import SupportTable from 'components/tables/SupportTable';
 import { useScreenSize } from 'hooks/useScreenSize';

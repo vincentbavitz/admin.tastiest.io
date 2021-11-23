@@ -4,7 +4,7 @@ import {
   StopOutlined,
   TrophyOutlined,
 } from '@ant-design/icons';
-import { Tooltip } from '@tastiest-io/tastiest-components';
+import { Tooltip } from '@tastiest-io/tastiest-ui';
 import { IBooking } from '@tastiest-io/tastiest-utils';
 import React from 'react';
 
@@ -21,11 +21,11 @@ const BookingsTableAccordian = ({ row }: BookingsTableAccordianProps) => {
     >
       <div className="flex justify-between h-10 px-4 bg-gray-200 rounded-t-md">
         <div className="flex items-center justify-start w-full space-x-4">
-          <Tooltip placement="top-left" content="Update user">
+          <Tooltip placement="top-start" content="Update user">
             <EditOutlined onClick={() => null} className="text-xl text-black" />
           </Tooltip>
 
-          <Tooltip placement="top-left" content="Reward">
+          <Tooltip placement="top-start" content="Reward">
             <TrophyOutlined
               onClick={() => null}
               className="text-xl text-yellow-600"
@@ -34,14 +34,14 @@ const BookingsTableAccordian = ({ row }: BookingsTableAccordianProps) => {
         </div>
 
         <div className="flex items-center justify-end w-full space-x-4">
-          <Tooltip placement="top-right" content="Ban user">
+          <Tooltip placement="top-start" content="Ban user">
             <StopOutlined
               onClick={() => null}
               className="text-xl text-yellow-600"
             />
           </Tooltip>
 
-          <Tooltip placement="top-right" content="Delete user">
+          <Tooltip placement="top-start" content="Delete user">
             <DeleteOutlined
               onClick={() => null}
               className="text-xl text-red-500 "

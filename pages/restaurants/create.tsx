@@ -1,4 +1,4 @@
-import { Input } from '@tastiest-io/tastiest-components';
+import { Input } from '@tastiest-io/tastiest-ui';
 import React from 'react';
 
 function CreateRestaurant() {

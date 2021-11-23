@@ -1,4 +1,4 @@
-import { Button } from '@tastiest-io/tastiest-components';
+import { Button } from '@tastiest-io/tastiest-ui';
 import React, { ReactNode } from 'react';
 import { Modal } from './Modal';
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
+import { Table } from '@tastiest-io/tastiest-ui';
 import { TastiestInternalError } from '@tastiest-io/tastiest-utils';
-import Table from 'components/Table';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';

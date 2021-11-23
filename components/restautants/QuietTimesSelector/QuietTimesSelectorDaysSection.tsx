@@ -1,5 +1,5 @@
 import { CheckOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from '@tastiest-io/tastiest-components';
+import { Button, Tooltip } from '@tastiest-io/tastiest-ui';
 import { TIME, titleCase } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import React, { useContext, useState } from 'react';

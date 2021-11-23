@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
+import { Table } from '@tastiest-io/tastiest-ui';
 import { dlog, IUserData } from '@tastiest-io/tastiest-utils';
-import Table from 'components/Table';
 import moment from 'moment';
 import Link from 'next/link';
 import { UserRecord } from 'pages/api/getUsers';

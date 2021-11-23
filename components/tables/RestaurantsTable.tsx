@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
+import { Table } from '@tastiest-io/tastiest-ui';
 import { dlog, IRestaurantData } from '@tastiest-io/tastiest-utils';
-import Table from 'components/Table';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -124,6 +124,14 @@ export default function RestaurantsTable() {
         </p>
       ),
     },
+    {
+      id: 'avgBooking',
+      Header: 'Avg. Booking',
+      width: 95,
+      accessor: (row: IRestaurantData) => {
+        return <p>£0.00</p>;
+      },
+    },
   ];
 
   // Update data depending on the column
@@ -152,10 +160,11 @@ export default function RestaurantsTable() {
       <Table
         label="Restaurants"
         columns={columns}
-        data={restaurants ?? []}
+        data={[...restaurants, ...restaurants, ...restaurants] ?? []}
         noDataLabel="No restaurants yet"
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
+        paginateInterval={2}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { InfoCard } from '@tastiest-io/tastiest-components';
+import { InfoCard } from '@tastiest-io/tastiest-ui';
 import { IBooking } from '@tastiest-io/tastiest-utils';
 import CoversBarChart from 'components/charts/CoversBarChart';
 import BookingsTable from 'components/tables/bookings/BookinigsTable';

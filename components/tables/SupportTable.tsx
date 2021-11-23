@@ -1,9 +1,8 @@
 /* eslint-disable react/display-name */
-import { Select } from '@tastiest-io/tastiest-components';
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
+import { Select, Table } from '@tastiest-io/tastiest-ui';
 import { IUserSupportRequest } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
-import Table from 'components/Table';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -180,7 +179,7 @@ export default function SupportTable() {
             <div className="font-medium">Status</div>
             <Select
               size="small"
-              onChange={value => applyStatusFilter(value as ResolvedStatus)}
+              onSelect={value => applyStatusFilter(value as ResolvedStatus)}
             >
               <option value="all">All</option>
               <option value="unresolved" selected>
@@ -192,7 +191,7 @@ export default function SupportTable() {
 
           <div className="w-40">
             <div className="font-medium">Type</div>
-            <Select size="small" onChange={() => null}>
+            <Select size="small" onSelect={() => null}>
               <option>All</option>
               <option>Critical</option>
               <option>High</option>
@@ -203,7 +202,7 @@ export default function SupportTable() {
 
           <div className="w-40">
             <div className="font-medium">From</div>
-            <Select size="small" onChange={() => null}>
+            <Select size="small" onSelect={() => null}>
               <option value={'all'}>All</option>
               <option value={'users'}>Users</option>
               <option value={'restaurants'}>Restaurants</option>

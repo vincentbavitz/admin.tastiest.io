@@ -1,4 +1,4 @@
-import { Select } from '@tastiest-io/tastiest-components';
+import { Select } from '@tastiest-io/tastiest-ui';
 import {
   dlog,
   FirestoreCollection,
