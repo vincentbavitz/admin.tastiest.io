@@ -121,12 +121,12 @@ const UserTableAccordian = ({ row }: UserTableAccordianProps) => {
             {userNotesEditing ? (
               <CheckIcon
                 onClick={() => setUserNotesEditing(false)}
-                className="w-3 pb-1 cursor-pointer text-alt-1"
+                className="w-3 pb-1 cursor-pointer text-gray-500"
               />
             ) : (
               <EditOutlined
                 onClick={() => setUserNotesEditing(true)}
-                className="pb-1 text-base cursor-pointer text-alt-1"
+                className="pb-1 text-base cursor-pointer text-gray-500"
               />
             )}
           </div>

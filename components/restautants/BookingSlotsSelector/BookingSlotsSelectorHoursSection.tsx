@@ -31,7 +31,7 @@ export const BookingSlotsSelectorHoursSection = () => {
 
       <div className="flex justify-center pt-6 space-x-2">
         <Button
-          color="neutral"
+          color="light"
           onClick={() => setStep(BookingSlotsSelectorSteps.DAYS)}
         >
           Back

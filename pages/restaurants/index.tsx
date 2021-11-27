@@ -1,5 +1,6 @@
 import { PlusIcon } from '@tastiest-io/tastiest-icons';
 import { Button, InfoCard } from '@tastiest-io/tastiest-ui';
+import EmailTemplatesTable from 'components/tables/EmailTemplatesTable';
 import RestaurantsTable from 'components/tables/RestaurantsTable';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { GetServerSidePropsContext } from 'next';
@@ -36,8 +37,8 @@ function Restaurants() {
         <span className="text-xl font-somatic">Restaurants</span>
         <Link href="/restaurants/create">
           <a>
-            <Button color="light" type="outline">
-              <PlusIcon className="w-5 mr-2 fill-current" /> New
+            <Button color="light" prefix={<PlusIcon className="w-4" />}>
+              New
             </Button>
           </a>
         </Link>
@@ -45,27 +46,29 @@ function Restaurants() {
 
       <div className="grid grid-cols-3 gap-4">
         <InfoCard
-          color="primary-2"
+          color="primary"
           label="Restaurants"
           compact={!isDesktop}
           info={`39`}
         />
         <InfoCard
-          color="primary-2"
+          color="secondary"
           label="Restaurants"
           compact={!isDesktop}
           info={`£${3}`}
         />
         <InfoCard
-          color="primary-2"
+          color="alt-2"
           label="Restaurants"
           compact={!isDesktop}
           info={`£${3}`}
         />
       </div>
 
-      <div className="pt-10">
+      <div className="flex flex-col space-y-10 pt-10">
         <RestaurantsTable />
+
+        <EmailTemplatesTable />
       </div>
     </div>
   );

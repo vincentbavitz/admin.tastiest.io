@@ -160,11 +160,11 @@ export default function RestaurantsTable() {
       <Table
         label="Restaurants"
         columns={columns}
-        data={[...restaurants, ...restaurants, ...restaurants] ?? []}
+        data={restaurants ?? []}
         noDataLabel="No restaurants yet"
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
-        paginateInterval={2}
+        paginateInterval={5}
       />
     </div>
   );

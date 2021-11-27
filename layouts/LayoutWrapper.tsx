@@ -10,7 +10,7 @@ import {
   UserIcon,
 } from '@tastiest-io/tastiest-icons';
 import { Sidebar } from '@tastiest-io/tastiest-ui';
-import Header from 'components/Header';
+import Header, { HEADER_HEIGHT_REM } from 'components/Header';
 import React from 'react';
 import { LayoutProps } from './LayoutHandler';
 
@@ -93,7 +93,12 @@ export default function LayoutWrapper({
         <div className="relative flex-grow w-full">
           <Header />
 
-          <div className="relative h-full">{children}</div>
+          <div
+            style={{ height: `calc(100vh - ${HEADER_HEIGHT_REM}rem)` }}
+            className="relative"
+          >
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -2,11 +2,11 @@ import { Button, Input } from '@tastiest-io/tastiest-ui';
 import clsx from 'clsx';
 import Header from 'components/Header';
 import { useAuth } from 'hooks/useAuth';
-import { useScreenSize } from 'hooks/useScreenSize';
-import { NextPage } from 'next';
+import { Layouts } from 'layouts/LayoutHandler';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import nookies from 'nookies';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 import { METADATA } from '../constants';
@@ -35,11 +35,16 @@ export const getServerSideProps = async context => {
   };
 };
 
-const LogIn: NextPage = () => {
-  const { isDesktop } = useScreenSize();
+const LogIn = () => {
+  const router = useRouter();
 
   const { signIn, error: authError } = useAuth();
   const { height } = useWindowSize();
+
+  // Pre-fetch dashboard
+  useEffect(() => {
+    router.prefetch('/');
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -106,11 +111,12 @@ const LogIn: NextPage = () => {
         </div>
 
         <div className="absolute top-0 w-full">
-          <Header blank />
+          <Header />
         </div>
       </div>
     </>
   );
 };
 
+LogIn.layout = Layouts.AUTH;
 export default LogIn;

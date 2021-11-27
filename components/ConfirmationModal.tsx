@@ -1,6 +1,5 @@
-import { Button } from '@tastiest-io/tastiest-ui';
+import { Button, Modal } from '@tastiest-io/tastiest-ui';
 import React, { ReactNode } from 'react';
-import { Modal } from './Modal';
 
 interface Props {
   // Text
@@ -31,7 +30,7 @@ export function ConfirmationModal(props: Props) {
   } = props;
 
   return (
-    <Modal title={title} isOpen={isOpen} close={close}>
+    <Modal title={title} show={isOpen} close={close}>
       <div style={{ maxWidth: '33rem' }} className="flex flex-col space-y-6">
         <div>{children}</div>
 
@@ -40,7 +39,7 @@ export function ConfirmationModal(props: Props) {
             {acceptText}
           </Button>
           {onReject && (
-            <Button size="small" onClick={onReject} color="neutral">
+            <Button size="small" onClick={onReject} color="light">
               {rejectText}
             </Button>
           )}

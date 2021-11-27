@@ -175,6 +175,7 @@ export default function UsersTable() {
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
         rowAccordianElement={UserTableAccordian}
+        paginateInterval={8}
       />
     </div>
   );

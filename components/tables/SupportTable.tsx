@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
-import { Select, Table } from '@tastiest-io/tastiest-ui';
+import { Popover, Select, Table } from '@tastiest-io/tastiest-ui';
 import { IUserSupportRequest } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -158,58 +158,57 @@ export default function SupportTable() {
 
   return (
     <div>
-      <div className="flex items-center justify-end mb-1 text-lg">
-        Filters{' '}
-        <span
-          onClick={() => toggleFiltersOpen()}
-          className="h-full px-1 cursor-pointer"
-        >
-          <TriangleIcon
-            className={clsx(
-              'h-2 ml-2 duration-150 transform fill-current text-gray-400',
-              filtersOpen ? '-rotate-90' : 'rotate-90',
-            )}
-          />
-        </span>
+      <div className="flex w-full justify-end">
+        <Popover>
+          <Popover.Trigger>
+            <div className="flex items-center mb-1 text-lg cursor-pointer">
+              Filters
+              <TriangleIcon
+                className={clsx(
+                  'h-2 ml-2 duration-150 transform fill-current text-gray-400',
+                  'rotate-90',
+                )}
+              />
+            </div>
+          </Popover.Trigger>
+
+          <Popover.Panel>
+            <div className="flex items-center justify-end w-full px-3 pt-2 pb-3 mb-4 space-x-6 bg-white rounded-md">
+              <div className="w-40">
+                <div className="font-medium">Status</div>
+                <Select
+                  size="small"
+                  onSelect={value => applyStatusFilter(value as ResolvedStatus)}
+                >
+                  <Select.Option id="all" value="All" />
+                  <Select.Option id="unresolved" value="Unresolved" />
+                  <Select.Option id="resolved" value="Resolved" />
+                </Select>
+              </div>
+
+              <div className="w-40">
+                <div className="font-medium">Type</div>
+                <Select size="small" onSelect={() => null}>
+                  <Select.Option id="all" value="All" />
+                  <Select.Option id="critical" value="Critical" />
+                  <Select.Option id="high" value="High" />
+                  <Select.Option id="normal" value="Normal" />
+                  <Select.Option id="low" value="Low" />
+                </Select>
+              </div>
+
+              <div className="w-40">
+                <div className="font-medium">From</div>
+                <Select size="small" onSelect={() => null}>
+                  <Select.Option id="all" value="All" />
+                  <Select.Option id="users" value="Users" />
+                  <Select.Option id="restaurants" value="Restaurants" />
+                </Select>
+              </div>
+            </div>
+          </Popover.Panel>
+        </Popover>
       </div>
-
-      {filtersOpen && (
-        <div className="flex items-center justify-end w-full px-3 pt-2 pb-3 mb-4 space-x-6 bg-white rounded-md">
-          <div className="w-40">
-            <div className="font-medium">Status</div>
-            <Select
-              size="small"
-              onSelect={value => applyStatusFilter(value as ResolvedStatus)}
-            >
-              <option value="all">All</option>
-              <option value="unresolved" selected>
-                Unresolved
-              </option>
-              <option value="resolved">Resolved</option>
-            </Select>
-          </div>
-
-          <div className="w-40">
-            <div className="font-medium">Type</div>
-            <Select size="small" onSelect={() => null}>
-              <option>All</option>
-              <option>Critical</option>
-              <option>High</option>
-              <option>Normal</option>
-              <option>Low</option>
-            </Select>
-          </div>
-
-          <div className="w-40">
-            <div className="font-medium">From</div>
-            <Select size="small" onSelect={() => null}>
-              <option value={'all'}>All</option>
-              <option value={'users'}>Users</option>
-              <option value={'restaurants'}>Restaurants</option>
-            </Select>
-          </div>
-        </div>
-      )}
 
       <Table
         label="Support Requests"
@@ -219,6 +218,7 @@ export default function SupportTable() {
         searchFunction={searchFunction}
         leftAlignedColumns={[0, 1, 2]}
         isLoadingInitialData={isInitialLoading}
+        paginateInterval={6}
       />
     </div>
   );

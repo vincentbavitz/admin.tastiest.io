@@ -1,67 +1,46 @@
-import { Dropdown } from '@tastiest-io/tastiest-ui';
-import classNames from 'classnames';
+import {
+  DownOutlined,
+  ExportOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
+import { Avatar, AvatarProps, Dropdown } from '@tastiest-io/tastiest-ui';
+import { titleCase } from '@tastiest-io/tastiest-utils';
 import { useAuth } from 'hooks/useAuth';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-export interface AvatarProps {
-  // Size is in the same units as Tailwind units
-  size?: 8 | 10 | 12 | 16 | 20;
-}
-
-export function HeaderAvatar(props: AvatarProps) {
-  const { size = '8' } = props;
+export function HeaderAvatar(props: Pick<AvatarProps, 'size'>) {
+  const { size = 8 } = props;
 
   const { adminUser, signOut } = useAuth();
-  const router = useRouter();
+  const initial = adminUser?.email?.[0]?.toUpperCase();
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const initial = adminUser.email[0].toUpperCase();
-
-  // Close dropdown on route change
-  useEffect(() => {
-    setIsDropdownOpen(false);
-  }, [router.pathname]);
-
-  const onAvatarClick = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  const name = titleCase(adminUser?.email?.split('@')[0]);
 
   return (
-    <div>
-      <Dropdown>
-        <Dropdown.Trigger>
-          <div
-            className={classNames(
-              'relative flex justify-center items-center rounded-full cursor-pointer duration-300 bg-opacity-75 hover:bg-opacity-100',
-              'bg-primary',
-              `h-${size} w-${size}`,
-            )}
-          >
-            <div
-              className="flex items-center justify-center w-full h-full"
-              onClick={onAvatarClick}
-            >
-              <div className="flex items-center justify-center w-full h-full text-xl text-white font-somatic">
-                {initial}
-              </div>
-            </div>
-          </div>
-        </Dropdown.Trigger>
+    <Dropdown>
+      <Dropdown.Trigger>
+        <div className="flex cursor-pointer items-center space-x-2 text-gray-800">
+          <Avatar initial={initial ?? 'T'} size={size} />
 
-        {/* {dropdownItems.map(item => (
-          <Dropdown.Item id={item.id} key={item.id} href={item.href}>
-            {item.name}
-          </Dropdown.Item>
-        ))} */}
+          <p>{name}</p>
+          <DownOutlined className="text-xs text-gray-400" />
+        </div>
+      </Dropdown.Trigger>
 
-        <Dropdown.Divider />
+      <Dropdown.Item icon={<SettingOutlined />} href={'/settings'}>
+        Preferences
+      </Dropdown.Item>
 
-        <Dropdown.Item key={'sign-out'} onClick={signOut}>
-          Sign Out
-        </Dropdown.Item>
-      </Dropdown>
-    </div>
+      <Dropdown.Divider />
+
+      <Dropdown.Item
+        icon={<ExportOutlined />}
+        onClick={() => {
+          signOut();
+        }}
+      >
+        Sign Out
+      </Dropdown.Item>
+    </Dropdown>
   );
 }

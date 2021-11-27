@@ -109,7 +109,7 @@ const Index = (
 
           <div className="flex-1">
             <InfoCard
-              color="primary-2"
+              color="alt-2"
               label="Total Profit"
               compact={!isHuge}
               isLoading={!totalProfit}
@@ -126,7 +126,9 @@ const Index = (
               isLoading={!owedToRestaurants}
               polyfillInfo={'£00.00'}
               info={
-                owedToRestaurants ? `£${owedToRestaurants.toFixed(2)}` : ' '
+                owedToRestaurants
+                  ? `£${Math.max(0, owedToRestaurants).toFixed(2)}`
+                  : ' '
               }
             />
           </div>

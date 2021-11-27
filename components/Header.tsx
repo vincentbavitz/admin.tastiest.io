@@ -1,31 +1,43 @@
-import { TastiestBrand } from '@tastiest-io/tastiest-ui';
-import { useScreenSize } from 'hooks/useScreenSize';
-import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { HeaderAvatar } from './HeaderAvatar';
 
-interface Props {
-  blank?: boolean;
-}
+export const HEADER_HEIGHT_REM = 2.5;
 
-export default function Header({ blank }: Props) {
-  const { isDesktop } = useScreenSize();
+/**
+ * The header as shown in the dashboard.
+ * Do not get this confued with the login page header.
+ */
+export default function Header() {
+  const [query, setQuery] = useState<string>();
+
+  const search = () => {
+    return null;
+  };
 
   return (
-    <div className="flex items-center w-full px-6 py-4 space-between">
+    <div
+      style={{ height: `${HEADER_HEIGHT_REM}rem` }}
+      className="flex items-center w-full px-6 space-between"
+    >
       <div className="flex items-center flex-grow space-x-6">
-        <Link href="/">
-          <a>
-            {isDesktop ? (
-              <TastiestBrand />
-            ) : (
-              <TastiestBrand type="initial-ring" />
-            )}
-          </a>
-        </Link>
+        {/* <div style={{ maxWidth: '300px' }} className="flex-grow">
+          <Input
+            size="small"
+            color="neutral"
+            value={query}
+            onValueChange={setQuery}
+            className="bg-gray-100"
+            suffix={
+              <SearchOutlined
+                className="text-gray-400 cursor-pointer fill-current"
+                onClick={search}
+              />
+            }
+          />
+        </div> */}
       </div>
 
-      {!blank && <HeaderAvatar />}
+      <HeaderAvatar size={6} />
     </div>
   );
 }

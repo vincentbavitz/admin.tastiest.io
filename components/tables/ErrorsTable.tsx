@@ -121,6 +121,7 @@ export default function ErrorsTable() {
         leftAlignedColumns={[0, 1, 2]}
         rowAccordianElement={AccordianElement}
         isLoadingInitialData={isInitialLoading}
+        paginateInterval={10}
       />
     </div>
   );

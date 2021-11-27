@@ -35,14 +35,18 @@ module.exports = {
     extend: {
       colors: {
         primary: '#274f73',
+        '-primary-1': '#1c3a54',
         secondary: '#3882bb',
         tertiary: '#9EB8CC',
         dark: '#07151b',
         light: '#fafafa',
         danger: '#bc1818',
-        success: '#28c625',
+        success: '#008C1E',
+        'alt-1': '#BC5CEF',
+        'alt-2': '#F179AD',
+        'alt-3': '#FFEFDE',
       },
-      display: ['huge', 'desktop', 'tablet', 'mobile'],
+      display: ['xl', 'lg', 'md', 'sm'],
     },
   },
   variants: {

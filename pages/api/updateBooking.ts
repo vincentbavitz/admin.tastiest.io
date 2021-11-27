@@ -93,7 +93,7 @@ export default async function updateBooking(
 
     // Adding hasCancelled to booking
     if (typeof bookingDate === 'number') {
-      updatedBooking.bookingDate = bookingDate;
+      updatedBooking.bookedForTimestamp = bookingDate;
     }
 
     // Sync with Firestore

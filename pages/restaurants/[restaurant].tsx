@@ -73,7 +73,7 @@ function Restaurant(
         />
 
         <InfoCard
-          color="primary-2"
+          color="primary"
           label="Total Revenue"
           compact={true}
           isLoading={false}

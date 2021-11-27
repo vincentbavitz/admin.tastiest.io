@@ -103,11 +103,9 @@ function SupportRequest(
 
       <div className="">
         <div>Reply As</div>
-        <Select size="small" onChange={() => null}>
+        <Select size="small" onSelect={() => null}>
           {tastiestSupportEmails.map(email => (
-            <option key={email} value={email}>
-              {email}
-            </option>
+            <Select.Option key={email} id={email} value={email} />
           ))}
         </Select>
       </div>

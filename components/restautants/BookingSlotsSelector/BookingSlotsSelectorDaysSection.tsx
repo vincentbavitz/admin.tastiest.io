@@ -77,7 +77,7 @@ export const BookingSlotsSelectorDaysSection = () => {
           trigger="manual"
           content={error}
           placement="bottom"
-          isOpen={Boolean(error)}
+          show={Boolean(error)}
         >
           <Button onClick={nextStep}>Next</Button>
         </Tooltip>

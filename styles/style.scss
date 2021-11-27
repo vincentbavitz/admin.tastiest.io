@@ -8,10 +8,10 @@
 }
 
 a {
-  @apply cursor-pointer;
+  @apply cursor-pointer hover:underline hover:text-secondary;
 
-  &:not(.no-underline):hover {
-    @apply underline;
+  &.no-underline {
+    text-decoration: none !important;
   }
 }
 

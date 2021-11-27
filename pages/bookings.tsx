@@ -43,7 +43,7 @@ const Bookings: NextPage = () => {
       <div className="grid grid-cols-12 gap-4">
         <div className="grid grid-cols-1 col-span-4 grid-rows-2 gap-4">
           <InfoCard
-            color="alt-2"
+            color="primary"
             label="Total Bookings"
             compact={false}
             isLoading={!bookings?.length}
@@ -51,7 +51,7 @@ const Bookings: NextPage = () => {
             polyfillInfo={'0'}
           />
           <InfoCard
-            color="alt-1"
+            color="secondary"
             label="YTD"
             compact={false}
             isLoading={!bookings?.length}

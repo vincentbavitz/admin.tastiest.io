@@ -1,4 +1,4 @@
-import { Modal } from 'components/Modal';
+import { Modal } from '@tastiest-io/tastiest-ui';
 import React, { useContext } from 'react';
 import {
   QuietTimesContext,
@@ -24,7 +24,7 @@ export default function QuietTimesSelector(props: Props) {
   };
 
   return (
-    <Modal isOpen={isOpen} title="Quiet times" close={closeSelector}>
+    <Modal show={isOpen} title="Quiet times" close={closeSelector}>
       <div
         style={{ width: '300px', minHeight: '300px' }}
         className="relative flex flex-col items-center justify-between h-full"

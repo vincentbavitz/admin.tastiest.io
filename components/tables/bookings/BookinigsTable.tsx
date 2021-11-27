@@ -111,7 +111,7 @@ export default function BookingsTable({ bookings }: Props) {
               style={{
                 width: '200px',
               }}
-              className="text-sm leading-4 break-words whitespace-normal opacity-75"
+              className="text-xs leading-none break-words whitespace-normal opacity-50"
             >
               {titleCase(row.dealName).slice(0, maxDealNameLength)}
               {row.dealName.length > maxDealNameLength && '...'}
@@ -194,6 +194,7 @@ export default function BookingsTable({ bookings }: Props) {
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
         rowAccordianElement={BookingsTableAccordian}
+        paginateInterval={10}
       />
     </div>
   );
