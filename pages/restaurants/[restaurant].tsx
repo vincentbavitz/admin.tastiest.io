@@ -75,6 +75,7 @@ function Restaurant(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const { restaurantData } = props;
+  const displayLocation = restaurantData.details.location?.displayLocation;
 
   useMap('map', {
     lat: restaurantData.details.location.lat,
@@ -92,8 +93,8 @@ function Restaurant(
   return (
     <div>
       <div className="text-xl pb-1 border-b-2 mb-4">
-        {restaurantData.details.name} -{' '}
-        {restaurantData.details.location.displayLocation}
+        {restaurantData.details.name}
+        {displayLocation ? ` - ${displayLocation}` : null}
       </div>
 
       <div className="flex pb-10 flex-wrap gap-4">
@@ -161,17 +162,22 @@ interface CommissionRowProps {
 const CommissionRow = (props: CommissionRowProps) => {
   const { restaurantData } = props;
 
-  // prettier-ignore
-  const commission = {
-    defaultRestaurantCut: restaurantData?.financial?.commission?.defaultRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_DEFAULT_PC,
-    followersRestaurantCut: restaurantData?.financial?.commission?.followersRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_FOLLOWERS_PC,
-  };
+  const [
+    savedCommission,
+    setSavedCommission,
+  ] = useState<RestaurantCommissionStructure | null>(null);
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [hasModified, setHasModified] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  // prettier-ignore
+  const commission: RestaurantCommissionStructure = {
+    defaultRestaurantCut: savedCommission?.defaultRestaurantCut ?? restaurantData?.financial?.commission?.defaultRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_DEFAULT_PC,
+    followersRestaurantCut: savedCommission?.followersRestaurantCut ?? restaurantData?.financial?.commission?.followersRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_FOLLOWERS_PC,
+  };
 
   const [restaurantDefaultCut, setRestaurantDefaultCut] = useState(
     commission.defaultRestaurantCut,
@@ -231,8 +237,10 @@ const CommissionRow = (props: CommissionRowProps) => {
     );
 
     setSaving(false);
-    if (error) setError(error);
+    setHasModified(false);
+    setSavedCommission(_commission);
     if (success) setShowModal(false);
+    if (error) setError(error);
   };
 
   const resetToDefaults = () => {

@@ -31,7 +31,7 @@ export default async function getUserSupportRequests(
 
     const supportItems: IUserSupportRequest[] = [];
     supportItemsSnapshot.forEach(doc =>
-      supportItems.push(doc.data() as IUserSupportRequest),
+      supportItems.push({ ...doc.data(), id: doc.id } as IUserSupportRequest),
     );
 
     if (!supportItems?.length) {

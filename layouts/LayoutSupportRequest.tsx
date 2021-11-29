@@ -1,12 +1,8 @@
 import React from 'react';
-import { LayoutProps } from './LayoutHandler';
+import { LayoutDefaultProps } from './LayoutDefault';
 import LayoutWrapper from './LayoutWrapper';
 
-export interface LayoutDefaultProps extends LayoutProps {
-  children: any;
-}
-
-export default function LayoutDefault({
+export default function LayoutSupportRequest({
   router,
   pageProps,
   children: Component,
@@ -15,7 +11,7 @@ export default function LayoutDefault({
     <LayoutWrapper router={router} pageProps={pageProps}>
       <div
         style={{ minWidth: '700px' }}
-        className="absolute inset-0 flex h-full px-8 py-6 overflow-auto bg-gray-100"
+        className="absolute inset-0 flex h-full overflow-auto bg-gray-100"
       >
         <div style={{ height: '100%' }} className="relative w-full">
           <Component {...pageProps} />

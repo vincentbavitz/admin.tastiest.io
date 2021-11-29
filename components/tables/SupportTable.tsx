@@ -61,7 +61,7 @@ export default function SupportTable() {
         return (
           <div className={clsx(row.seen && 'opacity-50')}>
             {row.userId ? (
-              <Link href={row.userId}>
+              <Link href={`/customers/${row.userId}`}>
                 <a
                   className={clsx(
                     'flex flex-col font-medium hover:underline cursor-pointer',
@@ -211,7 +211,7 @@ export default function SupportTable() {
       </div>
 
       <Table
-        label="Support Requests"
+        label="User Support Requests"
         columns={columns}
         data={filteredResults ?? supportItems ?? []}
         noDataLabel="No support requests"

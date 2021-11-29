@@ -2,15 +2,18 @@ import { NextComponentType, NextPageContext } from 'next';
 import { Router } from 'next/router';
 import LayoutAuth from './LayoutAuth';
 import LayoutDefault from './LayoutDefault';
+import LayoutSupportRequest from './LayoutSupportRequest';
 
 export enum Layouts {
   DEFAULT = 'default',
   AUTH = 'auth',
+  SUPPORT_REQUEST = 'support-request',
 }
 
 const layouts = {
   [Layouts.DEFAULT]: LayoutDefault,
   [Layouts.AUTH]: LayoutAuth,
+  [Layouts.SUPPORT_REQUEST]: LayoutSupportRequest,
 };
 
 type ChildrenWithLayout = { layout?: Layouts } & NextComponentType<

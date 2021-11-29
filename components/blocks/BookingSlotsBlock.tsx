@@ -65,7 +65,7 @@ function BookingSlotsBlockInner(props: Props) {
 
           {openTimes ? (
             Object.entries(openTimes).map(([key, day]) => {
-              return day.open ? (
+              return day?.open ? (
                 <div
                   key={key}
                   className="flex justify-between py-2 text-base text-alt"

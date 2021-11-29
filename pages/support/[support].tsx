@@ -1,4 +1,3 @@
-import { Select } from '@tastiest-io/tastiest-ui';
 import {
   dlog,
   FirestoreCollection,
@@ -7,6 +6,7 @@ import {
 } from '@tastiest-io/tastiest-utils';
 import SupportChatScreen from 'components/SupportChatScreen';
 import { useScreenSize } from 'hooks/useScreenSize';
+import { Layouts } from 'layouts/LayoutHandler';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
 import { ParsedUrlQuery } from 'querystring';
@@ -86,31 +86,32 @@ function SupportRequest(
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="pb-4 text-xl font-semibold">
-        Support Request <span className="pl-1 opacity-25">{request.id}</span>
-      </h3>
-
-      <div className="flex flex-grow space-x-6 overflow-y-auto">
+      <div className="flex flex-grow gap-4 pr-6 overflow-y-auto">
         <SupportChatScreen request={request} />
 
         <div
-          style={{ height: 'min-content' }}
+          style={{ height: 'min-content', width: '400px' }}
           className="p-4 bg-white rounded-lg whitespace-nowrap"
         >
+          <h3 className="pb-4 text-xl font-semibold">
+            Support Request{' '}
+            <span className="pl-1 opacity-25">{request.id}</span>
+          </h3>
           Mark Resolved (toggle)
         </div>
       </div>
 
-      <div className="">
+      {/* <div className="">
         <div>Reply As</div>
         <Select size="small" onSelect={() => null}>
           {tastiestSupportEmails.map(email => (
             <Select.Option key={email} id={email} value={email} />
           ))}
         </Select>
-      </div>
+      </div> */}
     </div>
   );
 }
 
+SupportRequest.layout = Layouts.SUPPORT_REQUEST;
 export default SupportRequest;
