@@ -80,7 +80,7 @@ const Support: NextPage<Props> = () => {
       </div>
 
       <div style={{ height: '600px', width: '100%' }}>
-        <p className="mb-2 text-lg font-somatic">Support</p>
+        <p className="mb-2 text-lg font-primary">Support</p>
 
         <form>
           <div className="flex flex-col mt-6 space-y-4">

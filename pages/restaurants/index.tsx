@@ -34,7 +34,7 @@ function Restaurants() {
   return (
     <div>
       <div className="flex items-center justify-between w-full pb-4">
-        <span className="text-xl font-somatic">Restaurants</span>
+        <span className="text-xl font-primary">Restaurants</span>
         <Link href="/restaurants/create">
           <a>
             <Button color="light" prefix={<PlusIcon className="w-4" />}>

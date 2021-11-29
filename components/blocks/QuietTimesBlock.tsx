@@ -47,7 +47,7 @@ function QuietTimesBlockInner(props: Props) {
 
       <BlockTemplate
         title="Quiet Times"
-        theme="alt-1"
+        theme="secondary"
         icon={EditOutlined}
         onIconClick={() => setQuietTimesSelectorOpen(true)}
       >

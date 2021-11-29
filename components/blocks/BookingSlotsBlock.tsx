@@ -54,7 +54,7 @@ function BookingSlotsBlockInner(props: Props) {
 
       <BlockTemplate
         title="Booking Slots"
-        theme="alt-1"
+        theme="secondary"
         icon={EditOutlined}
         onIconClick={() => setOpenTimesSelectorOpen(true)}
       >

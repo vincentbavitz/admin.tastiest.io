@@ -6,9 +6,10 @@ module.exports = {
       // Think of them as 'beyond this breakpoint' when using
       // mobile:my-class, for example.
       // -> @media (min-width: {}px) { ... }
-      mobile: '500px',
-      tablet: '715px',
-      desktop: '1100px',
+      sm: '500px',
+      md: '715px',
+      lg: '900px',
+      xl: '1100px',
     },
     fontFamily: {
       primary: ['Marmelad'],

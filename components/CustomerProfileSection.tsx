@@ -111,7 +111,7 @@ export function CustomerProfileSection(props: Props) {
           {profileKeyLabelMap.map(item => (
             <tr key={uuid()}>
               {item.title && (
-                <td className="pr-10 text-lg font-medium text-secondary font-somatic">
+                <td className="pr-10 text-lg font-medium text-secondary font-primary">
                   {item.title}
                 </td>
               )}

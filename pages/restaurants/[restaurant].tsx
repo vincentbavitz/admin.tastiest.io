@@ -2,14 +2,32 @@
 // Get IDs like this https://a.klaviyo.com/api/v2/people/search?email=vincent@bavitz.org&api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf
 // https://a.klaviyo.com/api/v1/person/01F7GJRAW02J07TMDVKYZ7Y5PS/metrics/timeline?api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf&count=100&sort=desc
 
-import { InfoCard } from '@tastiest-io/tastiest-ui';
-import { RestaurantDataApi } from '@tastiest-io/tastiest-utils';
+import { EditOutlined, UndoOutlined } from '@ant-design/icons';
+import {
+  Button,
+  InfoCard,
+  Modal,
+  Tooltip,
+  useMap,
+} from '@tastiest-io/tastiest-ui';
+import {
+  IRestaurantData,
+  PAYMENTS,
+  postFetch,
+  RestaurantCommissionStructure,
+  RestaurantDataApi,
+} from '@tastiest-io/tastiest-utils';
+import BlockTemplate from 'components/blocks/BlockTemplate';
 import BookingSlotsBlock from 'components/blocks/BookingSlotsBlock';
 import QuietTimesBlock from 'components/blocks/QuietTimesBlock';
+// import 'mapbox-gl/dist/mapbox-gl.css';
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import nookies from 'nookies';
+import { SetRestaurantCommissionParams } from 'pages/api/setRestaurantCommission';
 import { ParsedUrlQuery } from 'querystring';
-import React from 'react';
+import React, { useState } from 'react';
+import { Slider } from 'rsuite';
+import { LocalEndpoint } from 'types/api';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
 
 export const getServerSideProps = async (
@@ -58,52 +76,312 @@ function Restaurant(
 ) {
   const { restaurantData } = props;
 
+  useMap('map', {
+    lat: restaurantData.details.location.lat,
+    lng: restaurantData.details.location.lon,
+    zoom: 12,
+    pitch: 0,
+    markers: [
+      {
+        lat: restaurantData.details.location.lat,
+        lng: restaurantData.details.location.lon,
+      },
+    ],
+  });
+
   return (
     <div>
-      <div className="text-xl font-somatic">Restaurants</div>
+      <div className="text-xl pb-1 border-b-2 mb-4">
+        {restaurantData.details.name} -{' '}
+        {restaurantData.details.location.displayLocation}
+      </div>
 
-      <div className="flex pb-10 space-x-4">
-        <InfoCard
-          color="primary"
-          label="Total Earned"
-          compact={true}
-          isLoading={false}
-          polyfillInfo={'£00.00'}
-          info={`£`}
-        />
+      <div className="flex pb-10 flex-wrap gap-4">
+        <div
+          style={{ height: 'min-content' }}
+          className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <InfoCard
+            color="primary"
+            label="Total Earned"
+            compact={true}
+            isLoading={false}
+            polyfillInfo={'£00.00'}
+            info={`£`}
+          />
 
-        <InfoCard
-          color="primary"
-          label="Total Revenue"
-          compact={true}
-          isLoading={false}
-          polyfillInfo={'£00.00'}
-          info={`£`}
-        />
+          <InfoCard
+            color="primary"
+            label="Total Revenue"
+            compact={true}
+            isLoading={false}
+            polyfillInfo={'£00.00'}
+            info={`£`}
+          />
 
-        <InfoCard
-          color="alt-1"
-          label="Followers"
-          compact={true}
-          isLoading={false}
-          polyfillInfo={'£00.00'}
-          info={restaurantData.metrics?.followers?.length ?? 0}
-        />
+          <InfoCard
+            color="alt-1"
+            label="Followers"
+            compact={true}
+            isLoading={false}
+            polyfillInfo={'£00.00'}
+            info={restaurantData.metrics?.followers?.length ?? 0}
+          />
+        </div>
+
+        <div
+          id="map"
+          style={{ width: '400px', maxWidth: '80vw', height: '400px' }}
+          className="shadow-lg overflow-hidden rounded-xl"
+        ></div>
 
         {/* <CustomerProfileSection profile={profile} /> */}
       </div>
 
-      <div className="flex space-x-4">
-        <div className="flex-1">
+      <div className="flex gap-4 flex-wrap">
+        <div className="flex flex-1 flex-col gap-4">
           <BookingSlotsBlock restaurantData={restaurantData} />
+          <QuietTimesBlock restaurantData={restaurantData} />
         </div>
 
-        <div className="flex-1">
-          <QuietTimesBlock restaurantData={restaurantData} />
+        <div className="flex-1 text-base">
+          <BlockTemplate theme="primary" headerless>
+            <CommissionRow restaurantData={restaurantData} />
+          </BlockTemplate>
         </div>
       </div>
     </div>
   );
 }
+
+interface CommissionRowProps {
+  restaurantData: Partial<IRestaurantData>;
+}
+
+const CommissionRow = (props: CommissionRowProps) => {
+  const { restaurantData } = props;
+
+  // prettier-ignore
+  const commission = {
+    defaultRestaurantCut: restaurantData?.financial?.commission?.defaultRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_DEFAULT_PC,
+    followersRestaurantCut: restaurantData?.financial?.commission?.followersRestaurantCut ?? PAYMENTS.RESTAURANT_CUT_FOLLOWERS_PC,
+  };
+
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const [hasModified, setHasModified] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const [restaurantDefaultCut, setRestaurantDefaultCut] = useState(
+    commission.defaultRestaurantCut,
+  );
+
+  const [restaurantFollowersCut, setRestaurantFollowersCut] = useState(
+    commission.followersRestaurantCut,
+  );
+
+  const [tastiestDefaultCut, setTastiestDefaultCut] = useState(
+    100 - commission.defaultRestaurantCut,
+  );
+
+  const [tastiestFollowersCut, setTastiestFollowersCut] = useState(
+    100 - commission.followersRestaurantCut,
+  );
+
+  const updateRestaurantDefaultCut = (value: number) => {
+    setHasModified(true);
+    setRestaurantDefaultCut(value);
+    setTastiestDefaultCut(100 - value);
+  };
+
+  const updateRestaurantFollowersCut = (value: number) => {
+    setHasModified(true);
+    setRestaurantFollowersCut(value);
+    setTastiestFollowersCut(100 - value);
+  };
+
+  const updateTastiestDefaultCut = (value: number) => {
+    setHasModified(true);
+    setTastiestDefaultCut(value);
+    setRestaurantDefaultCut(100 - value);
+  };
+
+  const updateTastiestFollowersCut = (value: number) => {
+    setHasModified(true);
+    setTastiestFollowersCut(value);
+    setRestaurantFollowersCut(100 - value);
+  };
+
+  const save = async () => {
+    setSaving(true);
+    setError(null);
+
+    const _commission: RestaurantCommissionStructure = {
+      defaultRestaurantCut: restaurantDefaultCut,
+      followersRestaurantCut: restaurantFollowersCut,
+    };
+
+    const { success, error } = await postFetch<SetRestaurantCommissionParams>(
+      LocalEndpoint.SET_RESTAURANT_COMMISSION,
+      {
+        restaurantId: restaurantData.details.id,
+        commission: _commission,
+      },
+    );
+
+    setSaving(false);
+    if (error) setError(error);
+    if (success) setShowModal(false);
+  };
+
+  const resetToDefaults = () => {
+    updateRestaurantDefaultCut(PAYMENTS.RESTAURANT_CUT_DEFAULT_PC);
+    updateRestaurantFollowersCut(PAYMENTS.RESTAURANT_CUT_FOLLOWERS_PC);
+  };
+
+  return (
+    <>
+      <div className="flex items-center justify-between">
+        <div className="">Commission</div>
+        <div
+          style={{ lineHeight: '0.75rem' }}
+          className="flex items-center border rounded-full gap-2"
+        >
+          <Tooltip
+            placement="top"
+            content={`The commission is ${commission.defaultRestaurantCut}% by default and ${commission.followersRestaurantCut}% for followers.`}
+          >
+            <div className="pl-4 pr-2 select-none">
+              <span className="font-mono">
+                D-
+                {commission.defaultRestaurantCut}% F-
+                {commission.followersRestaurantCut}%
+              </span>
+            </div>
+          </Tooltip>
+
+          <div className="h-full border-l">
+            <EditOutlined
+              onClick={() => setShowModal(true)}
+              className="py-2 hover:bg-secondary hover:text-white duration-300 rounded-r-full pr-4 pl-2 text-lg cursor-pointer"
+            />
+          </div>
+        </div>
+      </div>
+
+      <Modal
+        title="Commission Structure"
+        show={showModal}
+        close={() => setShowModal(false)}
+      >
+        <div style={{ width: '333px' }}>
+          <div className="flex mt-4 items-center justify-between pb-2 space-x-4">
+            <div className="text-base font-medium">
+              Restaurant's default cut
+            </div>
+            <div className="text-base">{restaurantDefaultCut}%</div>
+          </div>
+
+          <Slider
+            step={1}
+            min={0}
+            max={100}
+            progress
+            disabled={saving}
+            value={restaurantDefaultCut}
+            onChange={updateRestaurantDefaultCut}
+          />
+
+          <div className="flex mt-6 items-center justify-between pb-2 space-x-4">
+            <div className="text-base font-medium">
+              Restaurant's cut for followers
+            </div>
+            <div className="text-base">{restaurantFollowersCut}%</div>
+          </div>
+
+          <Slider
+            step={1}
+            min={0}
+            max={100}
+            progress
+            disabled={saving}
+            value={restaurantFollowersCut}
+            onChange={updateRestaurantFollowersCut}
+          />
+
+          <div className="mt-6 border-b-2"></div>
+
+          <div className="flex mt-6 items-center justify-between pb-2 space-x-4">
+            <div className="text-base font-medium">Tastiest's default cut</div>
+            <div className="text-base">{tastiestDefaultCut}%</div>
+          </div>
+
+          <Slider
+            step={1}
+            min={0}
+            max={100}
+            progress
+            disabled={saving}
+            value={tastiestDefaultCut}
+            onChange={updateTastiestDefaultCut}
+          />
+
+          <div className="flex mt-6 items-center justify-between pb-2 space-x-4">
+            <div className="text-base font-medium">
+              Tastiest's cut for followers
+            </div>
+            <div className="text-base">{tastiestFollowersCut}%</div>
+          </div>
+
+          <Slider
+            step={1}
+            min={0}
+            max={100}
+            progress
+            disabled={saving}
+            value={tastiestFollowersCut}
+            onChange={updateTastiestFollowersCut}
+          />
+
+          <div className="mt-6">
+            {error ? (
+              <div className="bg-danger bg-opacity-25 rounded-lg p-4">
+                <p className="font-medium leading-none text-base">Error.</p>
+                <p className="leading-none">{error}</p>
+              </div>
+            ) : null}
+
+            <div className="flex items-center justify-between mt-6">
+              <Tooltip placement="bottom" content="Reset to defaults">
+                <UndoOutlined
+                  onClick={saving ? null : resetToDefaults}
+                  className="text-xl text-gray-500 duration-300 hover:text-primary"
+                />
+              </Tooltip>
+
+              <div className="flex space-x-2">
+                <div className="w-20">
+                  <Button
+                    wide
+                    loading={saving}
+                    disabled={!hasModified}
+                    color="success"
+                    onClick={save}
+                  >
+                    Save
+                  </Button>
+                </div>
+                <Button color="light" onClick={() => setShowModal(false)}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};
 
 export default Restaurant;

@@ -15,4 +15,7 @@ export enum LocalEndpoint {
   SET_QUIET_TIMES = '/api/setQuietTimes',
   GET_BOOKING_SLOTS = '/api/getBookingSlots',
   SET_BOOKING_SLOTS = '/api/setBookingSlots',
+
+  // Restauraunts
+  SET_RESTAURANT_COMMISSION = '/api/setRestaurantCommission',
 }

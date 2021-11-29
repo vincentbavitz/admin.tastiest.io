@@ -76,7 +76,7 @@ const LogIn = () => {
           )}
         >
           <div className="w-full text-center">
-            <h1 className="text-4xl bg-white font-somatic text-primary">
+            <h1 className="text-4xl bg-white font-primary text-primary">
               Tastiest Admin Panel
             </h1>
 
