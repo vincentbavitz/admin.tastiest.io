@@ -1,7 +1,7 @@
 import {
   DayOfWeek,
-  RestaurantData,
   RestaurantDataApi,
+  RestaurantDataKey,
 } from '@tastiest-io/tastiest-utils';
 import { OpenTimesArray } from 'components/restautants/BookingSlotsSelector/BookingSlotsContext';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -42,7 +42,7 @@ export default async function getBookingSlots(
     const {
       seatingDuration,
       openTimes: openTimesObject,
-    } = await restaurantDataApi.getRestaurantField(RestaurantData.METRICS);
+    } = await restaurantDataApi.getRestaurantField(RestaurantDataKey.METRICS);
 
     if (!openTimesObject && !seatingDuration) {
       response.status(400).end();

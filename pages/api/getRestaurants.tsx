@@ -1,6 +1,6 @@
 import {
   FirestoreCollection,
-  IRestaurantData,
+  RestaurantData,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
@@ -14,7 +14,7 @@ import { db } from 'utils/firebaseAdmin';
  */
 export default async function getRestaurants(
   request: NextApiRequest,
-  response: NextApiResponse<IRestaurantData[]>,
+  response: NextApiResponse<RestaurantData[]>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
@@ -28,9 +28,9 @@ export default async function getRestaurants(
     const query = await db(FirestoreCollection.RESTAURANTS);
     const restaurantsSnapshot = await query.limit(limit).get();
 
-    const restaurants: IRestaurantData[] = [];
+    const restaurants: RestaurantData[] = [];
     restaurantsSnapshot.forEach(doc => {
-      const data = doc.data() as IRestaurantData;
+      const data = doc.data() as RestaurantData;
       if (!data?.details?.id) {
         return;
       }

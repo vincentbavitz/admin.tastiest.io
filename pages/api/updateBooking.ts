@@ -1,13 +1,13 @@
 import {
+  Booking,
   FirestoreCollection,
   FunctionsResponse,
-  IBooking,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
 
 export type UpdateBookingReturn = FunctionsResponse<{
-  booking: IBooking | null;
+  booking: Booking | null;
 }>;
 
 /**
@@ -61,7 +61,7 @@ export default async function updateBooking(
   try {
     // Fetch the booking from Firestore
     const doc = await db(FirestoreCollection.BOOKINGS).doc(bookingId).get();
-    const booking = doc.data() as IBooking;
+    const booking = doc.data() as Booking;
 
     // Does the booking exist?
     if (!booking) {
@@ -74,7 +74,7 @@ export default async function updateBooking(
     }
 
     // Start updating
-    const updatedBooking: IBooking = {
+    const updatedBooking: Booking = {
       ...booking,
     };
 

@@ -15,22 +15,22 @@ import {
 } from '@tastiest-io/tastiest-ui';
 import {
   dlog,
-  EmailTemplate,
-  IRestaurant,
-  IRestaurantData,
+  RestaurantData,
+  RestaurantDetails,
 } from '@tastiest-io/tastiest-utils';
+import { EmailTemplate } from '@tastiest-io/tastiest-utils/dist/types/email';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 
 type EmailTemplateRow = {
-  restaurant: Partial<IRestaurant>;
+  restaurant: Partial<RestaurantDetails>;
   template: EmailTemplate;
 };
 
 export default function EmailTemplatesTable() {
-  const { data: restaurants } = useSWR<IRestaurantData[]>(
+  const { data: restaurants } = useSWR<RestaurantData[]>(
     `${LocalEndpoint.GET_RESTAURANTS}`,
     {
       refreshInterval: 30000,
@@ -52,8 +52,6 @@ export default function EmailTemplatesTable() {
         .filter(row => Boolean(row)),
     [restaurants],
   );
-
-  dlog('EmailTemplatesTable ➡️ templates:', templates);
 
   // By template ID.
   const [showPreviewId, setShowPreviewId] = useState<string | null>(null);
@@ -172,7 +170,7 @@ export default function EmailTemplatesTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: IRestaurantData[]) => {
+  const searchFunction = (query: string, data: RestaurantData[]) => {
     // prettier-ignore
     const result = data.filter(restaurantData => {
       return (

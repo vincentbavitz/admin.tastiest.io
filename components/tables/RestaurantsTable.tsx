@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { dlog, IRestaurantData } from '@tastiest-io/tastiest-utils';
+import { dlog, RestaurantData } from '@tastiest-io/tastiest-utils';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -13,7 +13,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // async function setBookingField<T>(
 //   field: EditableBookingFields,
 //   value: T,
-//   bookings: IBooking[],
+//   bookings: Booking[],
 //   rowIndex: number,
 // ) {
 //   const booking = bookings[rowIndex];
@@ -38,7 +38,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 //   );
 
 //   // Update booking server side
-//   await postFetch<any, IBooking>(LocalEndpoint.UPDATE_BOOKING, {
+//   await postFetch<any, Booking>(LocalEndpoint.UPDATE_BOOKING, {
 //     bookingId: booking.orderId,
 //     [field]: value,
 //   });
@@ -51,7 +51,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // }
 
 export default function RestaurantsTable() {
-  const { data: restaurants } = useSWR<IRestaurantData[]>(
+  const { data: restaurants } = useSWR<RestaurantData[]>(
     `${LocalEndpoint.GET_RESTAURANTS}`,
     {
       refreshInterval: 30000,
@@ -75,7 +75,7 @@ export default function RestaurantsTable() {
       id: 'name',
       Header: 'Name',
       width: '200',
-      accessor: (row: IRestaurantData) => {
+      accessor: (row: RestaurantData) => {
         return (
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
@@ -96,7 +96,7 @@ export default function RestaurantsTable() {
       id: 'followers',
       Header: 'Followers',
       width: 80,
-      accessor: (row: IRestaurantData) => {
+      accessor: (row: RestaurantData) => {
         const numFollowers = row?.metrics?.followers?.length;
 
         return (
@@ -114,7 +114,7 @@ export default function RestaurantsTable() {
       id: 'totalCovers',
       Header: 'Total Covers',
       width: 80,
-      accessor: (row: IRestaurantData) => (
+      accessor: (row: RestaurantData) => (
         <p className="">
           {row?.bookings?.totalCovers > 0 ? (
             <>row?.bookings?.totalCovers</>
@@ -128,7 +128,7 @@ export default function RestaurantsTable() {
       id: 'avgBooking',
       Header: 'Avg. Booking',
       width: 95,
-      accessor: (row: IRestaurantData) => {
+      accessor: (row: RestaurantData) => {
         return <p>£0.00</p>;
       },
     },
@@ -143,7 +143,7 @@ export default function RestaurantsTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: IRestaurantData[]) => {
+  const searchFunction = (query: string, data: RestaurantData[]) => {
     // prettier-ignore
     const result = data.filter(restaurantData => {
       return (

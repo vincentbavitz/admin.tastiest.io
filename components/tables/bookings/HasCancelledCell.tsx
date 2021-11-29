@@ -1,5 +1,5 @@
 import { ExitFilledIcon } from '@tastiest-io/tastiest-icons';
-import { IBooking } from '@tastiest-io/tastiest-utils';
+import { Booking } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import { ConfirmationModal } from 'components/ConfirmationModal';
 import { useAuth } from 'hooks/useAuth';
@@ -16,7 +16,7 @@ export const HasCancelledCell = ({
   column: any;
   updateData: any;
 }) => {
-  const booking: IBooking = original;
+  const booking: Booking = original;
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // We need to keep and update the state of the cell normally

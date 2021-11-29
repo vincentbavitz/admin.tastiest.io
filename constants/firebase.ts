@@ -1,9 +1,5 @@
 import { FirebaseAuthError } from '@tastiest-io/tastiest-utils';
 
-export interface IFirestore {
-  data: any;
-}
-
 const ERROR_MESSAGES = {
   [FirebaseAuthError.INVALID_EMAIL]: 'Please enter a valid email address.',
   [FirebaseAuthError.INVALID_PASSWORD]:

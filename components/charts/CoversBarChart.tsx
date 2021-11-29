@@ -1,10 +1,10 @@
-import { IBooking } from '@tastiest-io/tastiest-utils';
+import { Booking } from '@tastiest-io/tastiest-utils';
 import BarChart from './BarChart';
 
 const ONE_DAY_IN_MS = 86400000;
 
 interface Props {
-  bookings: IBooking[];
+  bookings: Booking[];
 }
 
 export default function CoversBarChart({ bookings }: Props) {

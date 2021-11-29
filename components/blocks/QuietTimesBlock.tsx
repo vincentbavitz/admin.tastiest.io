@@ -1,7 +1,7 @@
 import { EditOutlined } from '@ant-design/icons';
 import {
-  IRestaurantData,
   minsIntoHumanTime,
+  RestaurantData,
   TIME,
   WeekQuietTimes,
 } from '@tastiest-io/tastiest-utils';
@@ -13,7 +13,7 @@ import QuietTimesSelector from '../restautants/QuietTimesSelector';
 import BlockTemplate from './BlockTemplate';
 
 interface Props {
-  restaurantData: Partial<IRestaurantData>;
+  restaurantData: Partial<RestaurantData>;
 }
 
 export default function QuietTimesBlock(props: Props) {

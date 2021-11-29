@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { IBooking, postFetch, titleCase } from '@tastiest-io/tastiest-utils';
+import { Booking, postFetch, titleCase } from '@tastiest-io/tastiest-utils';
 import { useNotifier } from 'hooks/useNotifier';
 import moment from 'moment';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ enum EditableBookingFields {
 }
 
 interface Props {
-  bookings: IBooking[];
+  bookings: Booking[];
 }
 
 // Update any field in the current booking
@@ -30,7 +30,7 @@ interface Props {
 async function setBookingField<T>(
   field: EditableBookingFields,
   value: T,
-  bookings: IBooking[],
+  bookings: Booking[],
   rowIndex: number,
 ) {
   const booking = bookings[rowIndex];
@@ -55,7 +55,7 @@ async function setBookingField<T>(
   );
 
   // Update booking server side
-  await postFetch<any, IBooking>(LocalEndpoint.UPDATE_BOOKING, {
+  await postFetch<any, Booking>(LocalEndpoint.UPDATE_BOOKING, {
     bookingId: booking.orderId,
     [field]: value,
   });
@@ -84,7 +84,7 @@ export default function BookingsTable({ bookings }: Props) {
     {
       id: 'eaterName',
       Header: 'Name',
-      accessor: (row: IBooking) => {
+      accessor: (row: Booking) => {
         return (
           <Link href={`/customers/${row.userId}`}>
             <a className="font-medium hover:underline">{row.eaterName}</a>
@@ -96,7 +96,7 @@ export default function BookingsTable({ bookings }: Props) {
       id: 'restaurantName',
       Header: 'Offer',
       width: 200,
-      accessor: (row: IBooking) => {
+      accessor: (row: Booking) => {
         const maxDealNameLength = 50;
 
         return (
@@ -124,13 +124,13 @@ export default function BookingsTable({ bookings }: Props) {
       id: 'heads',
       Header: 'Heads',
       maxWidth: 90,
-      accessor: (row: IBooking) => <p>{row.heads}</p>,
+      accessor: (row: Booking) => <p>{row.heads}</p>,
     },
     {
       id: 'orderTotal',
       Header: 'Order Total',
       maxWidth: 120,
-      accessor: (row: IBooking) => (
+      accessor: (row: Booking) => (
         <p className="font-medium">
           £{Number(row.price?.final * 0.75)?.toFixed(2)}
         </p>
@@ -140,7 +140,7 @@ export default function BookingsTable({ bookings }: Props) {
       id: 'paidAt',
       Header: 'Purchased',
       maxWidth: 130,
-      accessor: (row: IBooking) => {
+      accessor: (row: Booking) => {
         return <p>{moment(row.paidAt).local().fromNow()}</p>;
       },
     },
@@ -173,7 +173,7 @@ export default function BookingsTable({ bookings }: Props) {
     [bookings],
   );
 
-  const searchFunction = (query: string, data: IBooking[]) => {
+  const searchFunction = (query: string, data: Booking[]) => {
     return data.filter(booking => {
       return (
         booking.dealName.toLowerCase().includes(query.toLowerCase()) ||

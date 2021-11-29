@@ -1,7 +1,7 @@
 import {
+  Booking,
   dlog,
   FirestoreCollection,
-  IBooking,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
@@ -12,7 +12,7 @@ import { db } from 'utils/firebaseAdmin';
  */
 export default async function getBookings(
   request: NextApiRequest,
-  response: NextApiResponse<IBooking[]>,
+  response: NextApiResponse<Booking[]>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
@@ -39,9 +39,9 @@ export default async function getBookings(
       .limit(limit)
       .get();
 
-    const bookings: IBooking[] = [];
+    const bookings: Booking[] = [];
     bookingsSnapshot.forEach(doc => {
-      const booking = doc.data() as IBooking;
+      const booking = doc.data() as Booking;
       if (!booking.isTest) {
         bookings.push(booking);
       }

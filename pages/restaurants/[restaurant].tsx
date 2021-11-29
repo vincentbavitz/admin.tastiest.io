@@ -7,14 +7,15 @@ import {
   Button,
   InfoCard,
   Modal,
+  StatusOrb,
   Tooltip,
   useMap,
 } from '@tastiest-io/tastiest-ui';
 import {
-  IRestaurantData,
   PAYMENTS,
   postFetch,
   RestaurantCommissionStructure,
+  RestaurantData,
   RestaurantDataApi,
 } from '@tastiest-io/tastiest-utils';
 import BlockTemplate from 'components/blocks/BlockTemplate';
@@ -147,7 +148,10 @@ function Restaurant(
 
         <div className="flex-1 text-base">
           <BlockTemplate theme="primary" headerless>
-            <CommissionRow restaurantData={restaurantData} />
+            <div className="flex flex-col space-y-4">
+              <ModeRow restaurantData={restaurantData} />
+              <CommissionRow restaurantData={restaurantData} />
+            </div>
           </BlockTemplate>
         </div>
       </div>
@@ -155,11 +159,25 @@ function Restaurant(
   );
 }
 
-interface CommissionRowProps {
-  restaurantData: Partial<IRestaurantData>;
+interface RowProps {
+  restaurantData: Partial<RestaurantData>;
 }
 
-const CommissionRow = (props: CommissionRowProps) => {
+const ModeRow = (props: RowProps) => {
+  const { restaurantData } = props;
+  // const restaurantMode = restaurantData.details.isDemo;
+
+  return (
+    <div className="flex items-end justify-between">
+      <div>Mode</div>
+      <div className="font-medium">
+        <StatusOrb status="online" /> Live
+      </div>
+    </div>
+  );
+};
+
+const CommissionRow = (props: RowProps) => {
   const { restaurantData } = props;
 
   const [

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
 import { Popover, Select, Table } from '@tastiest-io/tastiest-ui';
-import { IUserSupportRequest } from '@tastiest-io/tastiest-utils';
+import { UserSupportRequest } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import moment from 'moment';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ type ResolvedStatus = 'all' | 'resolved' | 'unresolved';
 
 export default function SupportTable() {
   const [filteredResults, setFilteredResults] = useState(null);
-  const { data: supportItems } = useSWR<IUserSupportRequest[]>(
+  const { data: supportItems } = useSWR<UserSupportRequest[]>(
     LocalEndpoint.GET_USER_SUPPORT_REQUESTS,
     {
       refreshInterval: 30000,
@@ -36,7 +36,7 @@ export default function SupportTable() {
       id: 'priority',
       Header: 'Priority',
       width: '120',
-      accessor: (row: IUserSupportRequest) => {
+      accessor: (row: UserSupportRequest) => {
         return (
           <div
             className={clsx(
@@ -57,7 +57,7 @@ export default function SupportTable() {
       id: 'userName',
       Header: 'Name',
       width: '120',
-      accessor: (row: IUserSupportRequest) => {
+      accessor: (row: UserSupportRequest) => {
         return (
           <div className={clsx(row.seen && 'opacity-50')}>
             {row.userId ? (
@@ -81,7 +81,7 @@ export default function SupportTable() {
       id: 'lastMessage',
       Header: 'Request',
       width: 300,
-      accessor: (row: IUserSupportRequest) => {
+      accessor: (row: UserSupportRequest) => {
         return (
           <div className="overflow-hidden cursor-pointer hover:underline">
             {row.seen ? (
@@ -101,7 +101,7 @@ export default function SupportTable() {
       id: 'type',
       Header: 'Type',
       width: 150,
-      accessor: (row: IUserSupportRequest) => {
+      accessor: (row: UserSupportRequest) => {
         return (
           <div className="w-20 px-2 py-px text-sm text-center uppercase bg-opacity-25 rounded-md bg-secondary-2">
             {row.type}
@@ -113,7 +113,7 @@ export default function SupportTable() {
       id: 'createdAt',
       Header: 'Time',
       width: '150',
-      accessor: (row: IUserSupportRequest) => {
+      accessor: (row: UserSupportRequest) => {
         return <div>{moment(row.createdAt).local().fromNow()}</div>;
       },
     },
@@ -128,7 +128,7 @@ export default function SupportTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: IUserSupportRequest[]) => {
+  const searchFunction = (query: string, data: UserSupportRequest[]) => {
     // prettier-ignore
     const result = data.filter(supportItem => {       
         return (

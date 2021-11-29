@@ -1,7 +1,7 @@
 import {
   RestaurantCommissionStructure,
-  RestaurantData,
   RestaurantDataApi,
+  RestaurantDataKey,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { firebaseAdmin } from 'utils/firebaseAdmin';
@@ -71,7 +71,7 @@ export default async function setRestaurantCommission(
       return;
     }
 
-    await restaurantDataApi.setRestaurantData(RestaurantData.FINANCIAL, {
+    await restaurantDataApi.setRestaurantData(RestaurantDataKey.FINANCIAL, {
       commission,
     });
 

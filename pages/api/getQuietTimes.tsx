@@ -1,7 +1,7 @@
 import {
   DayOfWeek,
-  RestaurantData,
   RestaurantDataApi,
+  RestaurantDataKey,
 } from '@tastiest-io/tastiest-utils';
 import { QuietTimesArray } from 'components/restautants/QuietTimesSelector/QuietTimesContext';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -36,7 +36,7 @@ export default async function getQuietTimes(
 
     const {
       quietTimes: quietTimesObject,
-    } = await restaurantDataApi.getRestaurantField(RestaurantData.METRICS);
+    } = await restaurantDataApi.getRestaurantField(RestaurantDataKey.METRICS);
 
     if (!quietTimesObject) {
       response.status(400).end();

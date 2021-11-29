@@ -5,12 +5,12 @@ import {
   TrophyOutlined,
 } from '@ant-design/icons';
 import { Tooltip } from '@tastiest-io/tastiest-ui';
-import { IBooking } from '@tastiest-io/tastiest-utils';
+import { Booking } from '@tastiest-io/tastiest-utils';
 import React from 'react';
 
 interface BookingsTableAccordianProps {
   id: string;
-  row: IBooking;
+  row: Booking;
 }
 
 const BookingsTableAccordian = ({ row }: BookingsTableAccordianProps) => {

@@ -1,8 +1,8 @@
 import {
   dlog,
   FirestoreCollection,
-  IRestaurantSupportRequest,
-  IUserSupportRequest,
+  RestaurantSupportRequest,
+  UserSupportRequest,
 } from '@tastiest-io/tastiest-utils';
 import SupportChatScreen from 'components/SupportChatScreen';
 import { useScreenSize } from 'hooks/useScreenSize';
@@ -62,8 +62,8 @@ export const getServerSideProps = async (
   const origin = restaurantRequestSnapshot.exists ? 'restaurant' : 'user';
 
   const request = restaurantRequestSnapshot.exists
-    ? (restaurantRequestSnapshot.data() as IRestaurantSupportRequest)
-    : (userRequestSnapshot.data() as IUserSupportRequest);
+    ? (restaurantRequestSnapshot.data() as RestaurantSupportRequest)
+    : (userRequestSnapshot.data() as UserSupportRequest);
 
   return { props: { origin, request } };
 };

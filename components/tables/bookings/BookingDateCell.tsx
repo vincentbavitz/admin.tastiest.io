@@ -1,4 +1,4 @@
-import { IBooking } from '@tastiest-io/tastiest-utils';
+import { Booking } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import DatePicker from 'components/DatePicker';
 import React from 'react';
@@ -14,7 +14,7 @@ export const BookingDateCell = ({
   column: any;
   updateData: any;
 }) => {
-  const booking: IBooking = original;
+  const booking: Booking = original;
 
   // We need to keep and update the state of the cell normally
   const [date, setDate] = React.useState(

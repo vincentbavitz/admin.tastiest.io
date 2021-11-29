@@ -1,8 +1,8 @@
 import { EditOutlined } from '@ant-design/icons';
 import {
   dlog,
-  IRestaurantData,
   minsIntoHumanTime,
+  RestaurantData,
   TIME,
 } from '@tastiest-io/tastiest-utils';
 import { GetBookingSlotsReturn } from 'pages/api/getBookingSlots';
@@ -14,7 +14,7 @@ import { BookingSlotsProvider } from '../restautants/BookingSlotsSelector/Bookin
 import BlockTemplate from './BlockTemplate';
 
 interface Props {
-  restaurantData: Partial<IRestaurantData>;
+  restaurantData: Partial<RestaurantData>;
 }
 
 export default function BookingSlotsBlock(props: Props) {

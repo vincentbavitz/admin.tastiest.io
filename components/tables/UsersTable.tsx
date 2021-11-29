@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { dlog, IUserData } from '@tastiest-io/tastiest-utils';
+import { dlog, UserData } from '@tastiest-io/tastiest-utils';
 import moment from 'moment';
 import Link from 'next/link';
 import { UserRecord } from 'pages/api/getUsers';
@@ -16,7 +16,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // async function setBookingField<T>(
 //   field: EditableBookingFields,
 //   value: T,
-//   bookings: IBooking[],
+//   bookings: Booking[],
 //   rowIndex: number,
 // ) {
 //   const booking = bookings[rowIndex];
@@ -41,7 +41,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 //   );
 
 //   // Update booking server side
-//   await postFetch<any, IBooking>(LocalEndpoint.UPDATE_BOOKING, {
+//   await postFetch<any, Booking>(LocalEndpoint.UPDATE_BOOKING, {
 //     bookingId: booking.orderId,
 //     [field]: value,
 //   });
@@ -54,7 +54,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // }
 
 export default function UsersTable() {
-  const { data: users } = useSWR<IUserData[]>(`${LocalEndpoint.GET_USERS}`, {
+  const { data: users } = useSWR<UserData[]>(`${LocalEndpoint.GET_USERS}`, {
     refreshInterval: 30000,
     initialData: null,
     refreshWhenHidden: true,
@@ -100,7 +100,7 @@ export default function UsersTable() {
       id: 'lastActive',
       Header: 'Last Active',
       maxWidth: 100,
-      accessor: (row: IUserData) => {
+      accessor: (row: UserData) => {
         return (
           <p className="text-sm opacity-75">
             {row.details.lastActive ? (
@@ -116,7 +116,7 @@ export default function UsersTable() {
       id: 'orders',
       Header: 'Orders',
       width: 80,
-      accessor: (row: IUserData) => (
+      accessor: (row: UserData) => (
         <p>
           {row.metrics?.totalBookings ? (
             row.metrics.totalBookings
@@ -130,7 +130,7 @@ export default function UsersTable() {
       id: 'totalSpent',
       Header: 'Total Spent',
       width: 80,
-      accessor: (row: IUserData) => (
+      accessor: (row: UserData) => (
         <p className="">
           {row.metrics?.totalSpent?.['GBP'] > 0 ? (
             <>£{Number(row.metrics?.totalSpent?.['GBP'] ?? 0)?.toFixed(2)}</>
@@ -151,7 +151,7 @@ export default function UsersTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: IUserData[]) => {
+  const searchFunction = (query: string, data: UserData[]) => {
     // prettier-ignore
     const result = data.filter(userData => {
       const fullName = userData.details?.firstName + (userData.details?.lastName ? ' ' + userData.details.lastName : '');

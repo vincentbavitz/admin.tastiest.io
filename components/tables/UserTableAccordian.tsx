@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { TextArea, Tooltip } from '@tastiest-io/tastiest-ui';
-import { IUserData } from '@tastiest-io/tastiest-utils';
+import { UserData } from '@tastiest-io/tastiest-utils';
 import Link from 'next/link';
 import { TastiestCustomerProfile } from 'pages/api/getCustomerProfile';
 import React, { useState } from 'react';
@@ -17,7 +17,7 @@ import { dlog } from 'utils/development';
 
 interface UserTableAccordianProps {
   id: string;
-  row: IUserData;
+  row: UserData;
 }
 
 const UserTableAccordian = ({ row }: UserTableAccordianProps) => {

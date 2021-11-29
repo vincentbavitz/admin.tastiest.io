@@ -1,6 +1,6 @@
 import {
   FirestoreCollection,
-  IUserSupportRequest,
+  UserSupportRequest,
 } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
@@ -11,7 +11,7 @@ import { db } from 'utils/firebaseAdmin';
  */
 export default async function getUserSupportRequests(
   request: NextApiRequest,
-  response: NextApiResponse<IUserSupportRequest[]>,
+  response: NextApiResponse<UserSupportRequest[]>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
@@ -29,9 +29,9 @@ export default async function getUserSupportRequests(
       .limit(limit)
       .get();
 
-    const supportItems: IUserSupportRequest[] = [];
+    const supportItems: UserSupportRequest[] = [];
     supportItemsSnapshot.forEach(doc =>
-      supportItems.push({ ...doc.data(), id: doc.id } as IUserSupportRequest),
+      supportItems.push({ ...doc.data(), id: doc.id } as UserSupportRequest),
     );
 
     if (!supportItems?.length) {

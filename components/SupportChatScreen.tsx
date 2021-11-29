@@ -1,17 +1,17 @@
 import { SendOutlined } from '@ant-design/icons';
 import {
-  IRestaurantSupportRequest,
-  ISupportMessage,
-  IUserSupportRequest,
+  RestaurantSupportRequest,
+  SupportMessage,
   SupportMessageDirection,
   titleCase,
+  UserSupportRequest,
 } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface Props {
-  request: IUserSupportRequest | IRestaurantSupportRequest;
+  request: UserSupportRequest | RestaurantSupportRequest;
 }
 
 export default function SupportChatScreen({ request }: Props) {
@@ -106,7 +106,7 @@ export default function SupportChatScreen({ request }: Props) {
 }
 
 interface ChatMessageProps {
-  message: ISupportMessage;
+  message: SupportMessage;
   isFinalMessage: boolean;
 }
 

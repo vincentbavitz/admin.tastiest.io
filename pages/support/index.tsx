@@ -1,6 +1,6 @@
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { Button, Input, TextArea } from '@tastiest-io/tastiest-ui';
-import { IRestaurant } from '@tastiest-io/tastiest-utils';
+import { RestaurantData } from '@tastiest-io/tastiest-utils';
 import SupportTable from 'components/tables/SupportTable';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { NextPage } from 'next';
@@ -11,7 +11,7 @@ import { dlog } from 'utils/development';
 import { METADATA } from '../../constants';
 
 interface Props {
-  resaurant?: IRestaurant;
+  resaurant?: RestaurantData;
 }
 
 export const getServerSideProps = async context => {

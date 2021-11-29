@@ -1,9 +1,9 @@
 import {
+  Address,
   FirestoreCollection,
-  IUserData,
   titleCase,
+  UserData,
 } from '@tastiest-io/tastiest-utils';
-import { IAddress } from '@tastiest-io/tastiest-utils/dist/types/geography';
 import DeviceDetector from 'device-detector-js';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
@@ -51,7 +51,7 @@ export interface TastiestCustomerProfile {
   country: string;
   timezone: string;
   postalCode: string;
-  address: IAddress;
+  address: Address;
 
   created: string;
   updated: string;
@@ -62,7 +62,7 @@ export interface TastiestCustomerProfile {
   platform: string; // eg. Android 6.0 - Chrome
 
   // From Firebase
-  userData: IUserData;
+  userData: UserData;
 }
 
 /**
@@ -114,7 +114,7 @@ export default async function getCustomerProfile(
       .where('details.email', '==', email)
       .get();
 
-    const userData = (await userDataRef.docs[0]?.data()) as IUserData;
+    const userData = (await userDataRef.docs[0]?.data()) as UserData;
 
     const profile: TastiestCustomerProfile = {
       userId: userDataRef.docs[0]?.id ?? klaviyoProfile.userId,

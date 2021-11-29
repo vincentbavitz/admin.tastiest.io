@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { dlog, IUserDetails } from '@tastiest-io/tastiest-utils';
+import { dlog, UserDetails } from '@tastiest-io/tastiest-utils';
 import moment from 'moment';
 import { UserEvent } from 'pages/api/getCustomerEvents';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 
 interface Props {
-  userDetails: Partial<IUserDetails>;
+  userDetails: Partial<UserDetails>;
 }
 
 const AccordianElement = ({ row }: { row: UserEvent }) => {

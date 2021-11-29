@@ -1,5 +1,5 @@
 import { InfoCard } from '@tastiest-io/tastiest-ui';
-import { IBooking } from '@tastiest-io/tastiest-utils';
+import { Booking } from '@tastiest-io/tastiest-utils';
 import CoversBarChart from 'components/charts/CoversBarChart';
 import BookingsTable from 'components/tables/bookings/BookinigsTable';
 import { NextPage } from 'next';
@@ -28,7 +28,7 @@ export const getServerSideProps = async context => {
 const Bookings: NextPage = () => {
   const [usingTestData, setUsingTestData] = useState(false);
 
-  const { data: bookings } = useSWR<IBooking[]>(
+  const { data: bookings } = useSWR<Booking[]>(
     `${LocalEndpoint.GET_BOOKINGS}?useTestData=${usingTestData}`,
     {
       refreshInterval: 5000,

@@ -1,8 +1,8 @@
-import { FirestoreCollection, IUserData } from '@tastiest-io/tastiest-utils';
+import { FirestoreCollection, UserData } from '@tastiest-io/tastiest-utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from 'utils/firebaseAdmin';
 
-export type UserRecord = IUserData & { id: string };
+export type UserRecord = UserData & { id: string };
 
 /**
  * Gets all users from Firestore
@@ -13,7 +13,7 @@ export type UserRecord = IUserData & { id: string };
  */
 export default async function getUsers(
   request: NextApiRequest,
-  response: NextApiResponse<IUserData[]>,
+  response: NextApiResponse<UserData[]>,
 ) {
   // Only allow GET
   if (request.method !== 'GET') {
