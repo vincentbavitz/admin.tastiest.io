@@ -1,3 +1,4 @@
+import '@tastiest-io/tastiest-ui/dist/styles.min.css';
 import { dlog } from '@tastiest-io/tastiest-utils';
 import AmbianceProvider from 'contexts/ambiance';
 import 'firebase/auth';
