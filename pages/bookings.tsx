@@ -40,27 +40,35 @@ const Bookings: NextPage = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-12 gap-4">
-        <div className="grid grid-cols-1 col-span-4 grid-rows-2 gap-4">
-          <InfoCard
-            color="primary"
-            label="Total Bookings"
-            compact={false}
-            isLoading={!bookings?.length}
-            info={bookings?.length}
-            polyfillInfo={'0'}
-          />
-          <InfoCard
-            color="secondary"
-            label="YTD"
-            compact={false}
-            isLoading={!bookings?.length}
-            info={bookings?.length}
-            polyfillInfo={'0'}
-          />
+      <div className="flex justify-between gap-4 flex-wrap">
+        <div
+          style={{ maxWidth: '800px' }}
+          className="flex flex-wrap flex-1 gap-4"
+        >
+          <div className="flex-1">
+            <InfoCard
+              color="primary"
+              label="Total Bookings"
+              compact={false}
+              isLoading={!bookings?.length}
+              info={bookings?.length}
+              polyfillInfo={'0'}
+            />
+          </div>
+
+          <div className="flex-1">
+            <InfoCard
+              color="secondary"
+              label="YTD"
+              compact={false}
+              isLoading={!bookings?.length}
+              info={bookings?.length}
+              polyfillInfo={'0'}
+            />
+          </div>
         </div>
 
-        <div className="col-span-8">
+        <div style={{ maxWidth: '500px' }} className="flex-1">
           <CoversBarChart bookings={bookings} />
         </div>
       </div>

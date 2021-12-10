@@ -1,20 +1,16 @@
 import { titleCase } from '@tastiest-io/tastiest-utils';
-import { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { HeaderAvatar } from './HeaderAvatar';
 
 export const HEADER_HEIGHT_REM = 2.5;
 
-interface HeaderProps {
-  router?: NextRouter;
-}
-
 /**
  * The header as shown in the dashboard.
  * Do not get this confued with the login page header.
  */
-export default function Header(props: HeaderProps) {
-  const { router } = props;
+export default function Header() {
+  const router = useRouter();
 
   const [query, setQuery] = useState<string>();
 
@@ -23,7 +19,7 @@ export default function Header(props: HeaderProps) {
   };
 
   const pageLabel = titleCase(
-    router.asPath.split('/').filter(s => Boolean(s.length))[0],
+    router?.asPath.split('/').filter(s => Boolean(s.length))[0],
   );
 
   return (

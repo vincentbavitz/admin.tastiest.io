@@ -8,6 +8,6 @@
     }
   },
   "plugins": [
-    ["tailwind", { "ssr": true, "displayName": true, "preprocess": false }]
+    ["tailwind",   { "ssr": true, "displayName": true, "preprocess": false }]
   ]
 }

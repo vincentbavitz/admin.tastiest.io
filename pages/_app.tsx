@@ -1,4 +1,3 @@
-import '@tastiest-io/tastiest-ui/dist/styles.min.css';
 import { dlog } from '@tastiest-io/tastiest-utils';
 import AmbianceProvider from 'contexts/ambiance';
 import 'firebase/auth';
@@ -8,10 +7,14 @@ import LayoutHandler from 'layouts/LayoutHandler';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
-import 'rsuite/dist/rsuite.min.css';
 import { METADATA } from '../constants';
 import { AuthProvider } from '../contexts/auth';
+
+// THIS order is important
+import 'rsuite/dist/rsuite.min.css';
+import '@tastiest-io/tastiest-ui/dist/styles.min.css';
 import '../styles/style.scss';
+import { useBattery } from 'react-use';
 
 function App(props: AppProps) {
   const { Component, router, pageProps } = props;

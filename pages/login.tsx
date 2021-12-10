@@ -90,17 +90,17 @@ const LogIn = () => {
           >
             <div className="w-64">
               <Input
+                label={'Admin Email'}
                 value={email}
                 onValueChange={setEmail}
-                label={'Admin Email'}
               />
             </div>
             <div className="w-64">
               <Input
+                label={'Password'}
                 value={password}
                 onValueChange={setPassword}
                 type="password"
-                label={'Password'}
               />
             </div>
 
@@ -108,10 +108,6 @@ const LogIn = () => {
               Sign In
             </Button>
           </div>
-        </div>
-
-        <div className="absolute top-0 w-full">
-          <Header />
         </div>
       </div>
     </>

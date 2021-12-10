@@ -91,7 +91,7 @@ export default function LayoutWrapper({
         </Sidebar>
 
         <div className="relative flex-grow w-full">
-          <Header router={router} />
+          <Header />
 
           <div
             style={{ height: `calc(100vh - ${HEADER_HEIGHT_REM}rem)` }}
