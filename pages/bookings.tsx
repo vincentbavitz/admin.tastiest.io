@@ -68,7 +68,10 @@ const Bookings: NextPage = () => {
           </div>
         </div>
 
-        <div style={{ maxWidth: '500px' }} className="flex-1">
+        <div
+          style={{ maxWidth: '500px', minHeight: '200px' }}
+          className="flex-1"
+        >
           <CoversBarChart bookings={bookings} />
         </div>
       </div>

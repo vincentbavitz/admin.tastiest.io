@@ -2,12 +2,20 @@
 // Get IDs like this https://a.klaviyo.com/api/v2/people/search?email=vincent@bavitz.org&api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf
 // https://a.klaviyo.com/api/v1/person/01F7GJRAW02J07TMDVKYZ7Y5PS/metrics/timeline?api_key=pk_9709c4e5fd47f4c60483f956eff6d00ddf&count=100&sort=desc
 
-import { EditOutlined, UndoOutlined } from '@ant-design/icons';
+import {
+  CodeOutlined,
+  DownOutlined,
+  EditOutlined,
+  LaptopOutlined,
+  UndoOutlined,
+} from '@ant-design/icons';
 import {
   Button,
+  Dropdown,
   InfoCard,
   Modal,
   StatusOrb,
+  Switch,
   Tooltip,
   useMap,
 } from '@tastiest-io/tastiest-ui';
@@ -17,6 +25,8 @@ import {
   RestaurantCommissionStructure,
   RestaurantData,
   RestaurantDataApi,
+  RestaurantDataMode,
+  titleCase,
 } from '@tastiest-io/tastiest-utils';
 import BlockTemplate from 'components/blocks/BlockTemplate';
 import BookingSlotsBlock from 'components/blocks/BookingSlotsBlock';
@@ -151,6 +161,7 @@ function Restaurant(
             <div className="flex flex-col space-y-4">
               <ModeRow restaurantData={restaurantData} />
               <CommissionRow restaurantData={restaurantData} />
+              <ShouldFallbackRow restaurantData={restaurantData} />
             </div>
           </BlockTemplate>
         </div>
@@ -165,14 +176,142 @@ interface RowProps {
 
 const ModeRow = (props: RowProps) => {
   const { restaurantData } = props;
-  // const restaurantMode = restaurantData.details.isDemo;
+
+  const initialMode = restaurantData.details?.mode ?? RestaurantDataMode.TEST;
+  const [mode, setMode] = useState<RestaurantDataMode>(initialMode);
+  const [attemptedMode, setAttemptedMode] = useState<RestaurantDataMode>(
+    initialMode,
+  );
+
+  const [showModal, setShowModal] = useState(false);
+
+  const TriggerIcon = () =>
+    mode === RestaurantDataMode.TEST ? (
+      <CodeOutlined />
+    ) : mode === RestaurantDataMode.DEMO ? (
+      <LaptopOutlined />
+    ) : mode === RestaurantDataMode.LIVE ? (
+      <StatusOrb status="online" />
+    ) : null;
+
+  const attemptChangeMode = (_mode: RestaurantDataMode) => {
+    setAttemptedMode(_mode);
+    setShowModal(true);
+  };
+
+  const cancelChangeMode = () => {
+    setAttemptedMode(mode);
+    setShowModal(false);
+  };
+
+  const confirmChangeMode = async () => {
+    setMode(attemptedMode);
+    setShowModal(false);
+    return null;
+  };
+
+  return (
+    <>
+      <Modal
+        title="Change data mode"
+        size="small"
+        show={showModal}
+        close={cancelChangeMode}
+      >
+        <div className="text-base">
+          Are you sure you want to change the restaurant's data-mode to{' '}
+          <b className="font-bold font-mono">{attemptedMode}</b>?
+        </div>
+
+        <ol className="ml-6 mt-4 list-outside list-decimal">
+          <li className="mb-2">
+            <b className="font-mono font-medium bg-green-200 px-1 rounded">
+              LIVE
+            </b>{' '}
+            will make all of its posts public.
+          </li>
+          <li className="mb-2">
+            <b className="font-mono font-medium bg-yellow-200 px-1 rounded">
+              TEST
+            </b>{' '}
+            is strictly for development.
+          </li>
+          <li className="mb-2">
+            <b className="font-mono font-medium bg-pink-200 px-1 rounded">
+              DEMO
+            </b>{' '}
+            is used for sandboxed accounts for onboarding demos.
+          </li>
+        </ol>
+        <div className="flex justify-end space-x-2 mt-6">
+          <Button color="light" onClick={cancelChangeMode}>
+            Cancel
+          </Button>
+          <Button onClick={confirmChangeMode}>Confirm</Button>
+        </div>
+      </Modal>
+
+      <div className="flex items-end justify-between">
+        <div>Mode</div>
+
+        <Dropdown>
+          <Dropdown.Trigger>
+            <div className="flex items-center space-x-4 px-4 py-1 border rounded-full cursor-pointer">
+              <TriggerIcon />
+              <div>{titleCase(mode)}</div>
+              <DownOutlined className="text-xs" />
+            </div>
+          </Dropdown.Trigger>
+
+          <Dropdown.Item
+            onClick={() => attemptChangeMode(RestaurantDataMode.LIVE)}
+            selected={mode === RestaurantDataMode.LIVE}
+            icon={<StatusOrb status="online" />}
+          >
+            Live
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            onClick={() => attemptChangeMode(RestaurantDataMode.TEST)}
+            selected={mode === RestaurantDataMode.TEST}
+            icon={<CodeOutlined />}
+          >
+            Test
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            onClick={() => attemptChangeMode(RestaurantDataMode.DEMO)}
+            selected={mode === RestaurantDataMode.DEMO}
+            icon={<LaptopOutlined />}
+          >
+            Demo
+          </Dropdown.Item>
+        </Dropdown>
+      </div>
+    </>
+  );
+};
+
+const ShouldFallbackRow = (props: RowProps) => {
+  const { restaurantData } = props;
+
+  const [shouldFallback, setShouldFallback] = useState(
+    restaurantData.metrics?.shouldFallbackToOpenTimes ?? false,
+  );
 
   return (
     <div className="flex items-end justify-between">
-      <div>Mode</div>
-      <div className="font-medium">
-        <StatusOrb status="online" /> Live
+      <div className="flex items-center space-x-1">
+        <div>Fallback to Open Times </div>
+
+        <Tooltip content="Use the open-times when a booking system sync fails.">
+          <div className="h-5 w-5 flex items-center justify-center font-mono bg-gray-200 text-gray-400 cursor-pointer rounded-full">
+            ?
+          </div>
+        </Tooltip>
       </div>
+
+      <Switch checked={shouldFallback} onChange={setShouldFallback} />
     </div>
   );
 };

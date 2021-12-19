@@ -66,7 +66,10 @@ const LogIn = () => {
         style={{ height: '100vh' }}
         className="relative w-full overflow-hidden"
       >
-        <div style={{ zIndex: -1 }} className="absolute bottom-0 w-full">
+        <div
+          style={{ zIndex: -1, maxWidth: '900px' }}
+          className="absolute bottom-0 w-full"
+        >
           <img src="/assets/illustrations/hero.svg" />
         </div>
 
