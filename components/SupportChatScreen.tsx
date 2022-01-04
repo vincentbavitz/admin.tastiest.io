@@ -1,5 +1,6 @@
 import { SendOutlined } from '@ant-design/icons';
 import {
+  dlog,
   RestaurantSupportRequest,
   SupportMessage,
   SupportMessageDirection,
@@ -7,8 +8,9 @@ import {
   UserSupportRequest,
 } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
+import { AuthContext } from 'contexts/auth';
 import { DateTime } from 'luxon';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 interface Props {
   request: UserSupportRequest | RestaurantSupportRequest;
@@ -18,8 +20,17 @@ export default function SupportChatScreen({ request }: Props) {
   const { conversation } = request;
   const messages = conversation.sort((a, b) => a.timestamp - b.timestamp);
 
+  // Set token for API requests to api.tastiest.io
+  const { adminUser } = useContext(AuthContext);
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    adminUser?.getIdToken().then(setToken);
+  }, [adminUser]);
+
   const container = useRef<HTMLDivElement>(null);
   const [composeMessage, setComposeMessage] = useState<string | null>(null);
+
+  const [isSending, setIsSending] = useState(false);
 
   // Adjust chatbox size with text content.
   const composeRef = useRef<HTMLTextAreaElement>(null);
@@ -55,8 +66,27 @@ export default function SupportChatScreen({ request }: Props) {
     });
   }, [messages]);
 
-  const sendMessage = () => {
-    container;
+  const sendMessage = async () => {
+    const name = 'Tastiest Support';
+    const message = composeRef.current.value.replace('/\r?\n/g', '<br/>');
+
+    dlog('SupportChatScreen ➡️ token:', token);
+    dlog('SupportChatScreen ➡️ request.id:', request.id);
+    dlog('SupportChatScreen ➡️ message:', message);
+
+    // await fetch('https://api.tastiest.io/support/users/reply', {
+    await fetch('http://localhost:4444/support/users/reply', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: request.id,
+        name,
+        message,
+      }),
+    });
   };
 
   return (
@@ -66,14 +96,7 @@ export default function SupportChatScreen({ request }: Props) {
         style={{ boxShadow: '0 15px 10px -15px rgba(0, 0, 0, 0.15) inset' }}
         className="flex flex-col w-full h-full p-4 overflow-y-auto bg-dark"
       >
-        {[
-          ...messages,
-          ...messages,
-          ...messages,
-          ...messages,
-          ...messages,
-          ...messages,
-        ].map((message, index) => (
+        {messages.map((message, index) => (
           <ChatMessage
             key={index}
             message={message}
@@ -84,12 +107,13 @@ export default function SupportChatScreen({ request }: Props) {
 
       <div className="flex gap-2 items-end bg-white w-full">
         <textarea
+          wrap="physical"
           ref={composeRef}
           value={composeMessage}
           placeholder="Write a reply..."
           onKeyPress={handleEnterKeyPress}
           onChange={handleComposeMessageChange}
-          className="flex-grow text-lg pl-4 pr-2 py-4 outline-none resize-none"
+          className="flex-grow text-base pl-4 pr-2 py-4 outline-none resize-none"
           style={{
             lineHeight: `${composeLineHeight}px`,
           }}
@@ -98,7 +122,7 @@ export default function SupportChatScreen({ request }: Props) {
           style={{ maxHeight: '55px' }}
           className="flex items-center justify-center w-12 h-full cursor-pointer duration-300 text-gray-500 hover:text-secondary"
         >
-          <SendOutlined className="text-xl" />
+          <SendOutlined onClick={sendMessage} className="text-xl" />
         </div>
       </div>
     </div>

@@ -296,7 +296,7 @@ const ShouldFallbackRow = (props: RowProps) => {
   const { restaurantData } = props;
 
   const [shouldFallback, setShouldFallback] = useState(
-    restaurantData.metrics?.shouldFallbackToOpenTimes ?? false,
+    restaurantData.settings?.shouldFallbackToOpenTimes ?? false,
   );
 
   return (

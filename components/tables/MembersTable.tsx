@@ -1,79 +1,37 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
 import { dlog, UserData } from '@tastiest-io/tastiest-utils';
-import { useTastiestSWR } from 'hooks/useTastiestSWR';
-import moment from 'moment';
 import Link from 'next/link';
+import { UserRecord } from 'pages/api/getUsers';
 import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import { LocalEndpoint } from 'types/api';
 import UserTableAccordian from './UserTableAccordian';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 
-// Update any field in the current booking
-// instantly using mutate SWR
-// async function setBookingField<T>(
-//   field: EditableBookingFields,
-//   value: T,
-//   bookings: Booking[],
-//   rowIndex: number,
-// ) {
-//   const booking = bookings[rowIndex];
-//   if (!booking) {
-//     console.log('Booking not found');
-//     return;
-//   }
-
-//   // Can't modify a cancelled booking
-//   if (booking.hasCancelled) {
-//     console.log("Can't modify a cancelled booking");
-//     return;
-//   }
-
-//   const updatedBookUsersTableings = bookings.map((row, index) =>
-//     index === rowIndex
-//       ? {
-//           ...booking,
-//           [field]: value,
-//         }
-//       : row,
-//   );
-
-//   // Update booking server side
-//   await postFetch<any, Booking>(LocalEndpoint.UPDATE_BOOKING, {
-//     bookingId: booking.orderId,
-//     [field]: value,
-//   });
-
-//   mutate(
-//     `${LocalEndpoint.GET_BOOKINGS}?restaurantId=${booking.restaurantId}`,
-//     updatedBookings,
-//     false,
-//   );
-// }
-
-export default function UsersTable() {
-  const { data: users } = useTastiestSWR('/admin/users', {
+export default function MembersTable() {
+  const { data: members } = useSWR<UserData[]>(`${LocalEndpoint.GET_USERS}`, {
     refreshInterval: 120000,
     initialData: null,
-    refreshWhenHidden: true,
   });
 
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
-    if (users) {
+    if (members) {
       setIsInitialLoading(false);
     }
-  }, [users]);
+  }, [members]);
 
-  dlog('UsersTable ➡️ users:', users);
+  dlog('MembersTable ➡️ users:', members);
 
   const columns = [
     {
-      id: 'userName',
+      id: 'name',
       Header: 'Name',
       width: '200',
-      accessor: (row: UserData & { id: string }) => {
+      accessor: (row: UserRecord) => {
         return (
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
@@ -95,38 +53,8 @@ export default function UsersTable() {
       },
     },
     {
-      id: 'lastActive',
-      Header: 'Last Active',
-      maxWidth: 100,
-      accessor: (row: UserData) => {
-        return (
-          <p className="text-sm opacity-75">
-            {row.details.lastActive ? (
-              moment(row.details.lastActive).local().fromNow()
-            ) : (
-              <span className="opacity-50">—</span>
-            )}
-          </p>
-        );
-      },
-    },
-    {
-      id: 'orders',
-      Header: 'Orders',
-      width: 80,
-      accessor: (row: UserData) => (
-        <p>
-          {row.metrics?.totalBookings ? (
-            row.metrics.totalBookings
-          ) : (
-            <span className="opacity-50">0</span>
-          )}
-        </p>
-      ),
-    },
-    {
-      id: 'totalSpent',
-      Header: 'Total Spent',
+      id: 'accessLevel',
+      Header: 'Access level',
       width: 80,
       accessor: (row: UserData) => (
         <p className="">
@@ -166,10 +94,10 @@ export default function UsersTable() {
   return (
     <div className="text-xs mobile:text-base">
       <Table
-        label="Users"
+        label="Members"
         columns={columns}
-        data={users ?? []}
-        noDataLabel="No users yet"
+        data={members ?? []}
+        noDataLabel="No members yet"
         searchFunction={searchFunction}
         isLoadingInitialData={isInitialLoading}
         rowAccordianElement={UserTableAccordian}

@@ -83,7 +83,6 @@ function SupportRequest(
   dlog('[support] ➡️ request:', request);
 
   // Set seen to true!
-
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-grow gap-4 pr-6 overflow-y-auto">

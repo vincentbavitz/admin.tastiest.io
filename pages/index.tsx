@@ -1,5 +1,6 @@
 import { InfoCard } from '@tastiest-io/tastiest-ui';
 import clsx from 'clsx';
+import PreregistersTable from 'components/tables/PreregistersTable';
 import UsersTable from 'components/tables/UsersTable';
 import { useScreenSize } from 'hooks/useScreenSize';
 import { InferGetServerSidePropsType } from 'next';
@@ -135,6 +136,8 @@ const Index = (
         </div>
 
         <UsersTable />
+
+        <PreregistersTable />
       </div>
     </>
   );

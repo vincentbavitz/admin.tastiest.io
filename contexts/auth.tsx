@@ -56,8 +56,8 @@ export function AuthProvider({ children }: any) {
         return;
       }
 
-      dlog(`updating token...`);
       const token = await _adminUser.getIdToken();
+      dlog(`updating token...`, token);
 
       setAdminUser(_adminUser);
       nookies.destroy(null, 'token');
