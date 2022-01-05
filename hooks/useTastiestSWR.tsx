@@ -11,13 +11,16 @@ const TASTIEST_BACKEND_URL = process.env.NODE_ENV === 'development'
 
 const fetcher = async (url: string, token: string) => {
   if (!token) {
+    dlog('useTastiestSWR ➡️ failed');
     return;
   }
 
   return fetch(url, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
-  }).then(response => response.json());
+  }).then(response => {
+    return response.json();
+  });
 };
 
 /**
@@ -25,7 +28,7 @@ const fetcher = async (url: string, token: string) => {
  */
 export function useTastiestSWR<T>(
   endpoint: string,
-  configuration: Partial<Configuration<T>>,
+  configuration?: Partial<Configuration<T>>,
 ) {
   const { adminUser } = useContext(AuthContext);
   const [token, setToken] = useState<string | null>(null);
@@ -33,18 +36,10 @@ export function useTastiestSWR<T>(
   // Set token immediately.
   useEffect(() => {
     adminUser?.getIdToken().then(setToken);
-  }, [endpoint, configuration]);
+  }, [adminUser, endpoint, configuration]);
 
   const path = useMemo(() => `${TASTIEST_BACKEND_URL}${endpoint}`, [endpoint]);
-
-  dlog('useTastiestSWR ➡️ path:', path);
-  const response = useSWR<T>(
-    token ? [path, token] : null,
-    fetcher,
-    configuration,
-  );
-
-  dlog('useTastiestSWR ➡️ response:', response);
+  const response = useSWR<T>([path, token], fetcher, configuration);
 
   return response;
 }

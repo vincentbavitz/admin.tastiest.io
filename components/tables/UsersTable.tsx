@@ -52,7 +52,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // }
 
 export default function UsersTable() {
-  const { data: users } = useTastiestSWR('/admin/users', {
+  const { data: users } = useTastiestSWR('/users', {
     refreshInterval: 120000,
     initialData: null,
     refreshWhenHidden: true,

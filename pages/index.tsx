@@ -1,5 +1,5 @@
 import { InfoCard } from '@tastiest-io/tastiest-ui';
-import clsx from 'clsx';
+import ServerStats from 'components/ServerStats';
 import PreregistersTable from 'components/tables/PreregistersTable';
 import UsersTable from 'components/tables/UsersTable';
 import { useScreenSize } from 'hooks/useScreenSize';
@@ -95,48 +95,53 @@ const Index = (
         ></meta>
       </Head>
 
-      <div className="flex flex-col h-full space-y-8">
-        <div className="grid grid-cols-1 gap-2 mobile:grid-cols-2 tablet:gap-4 tablet:grid-cols-3">
-          <div className="flex-1">
-            <InfoCard
-              color="primary"
-              label="Total Revenue"
-              compact={!isHuge}
-              isLoading={!revenue}
-              polyfillInfo={'£00.00'}
-              info={revenue ? `£${revenue.toFixed(2)}` : ' '}
-            />
+      <div className="flex flex-col space-y-8 pb-12">
+        <div className="flex gap-6 w-full">
+          <div className="flex gap-4 flex-wrap flex-grow">
+            <div className="flex-1">
+              <InfoCard
+                color="primary"
+                label="Total Revenue"
+                compact={!isHuge}
+                isLoading={!revenue}
+                polyfillInfo={'£00.00'}
+                info={revenue ? `£${revenue.toFixed(2)}` : ' '}
+              />
+            </div>
+
+            <div className="flex-1">
+              <InfoCard
+                color="alt-2"
+                label="Total Profit"
+                compact={!isHuge}
+                isLoading={!totalProfit}
+                polyfillInfo={'£00.00'}
+                info={totalProfit ? `£${totalProfit.toFixed(2)}` : ' '}
+              />
+            </div>
+
+            <div className="flex-1">
+              <InfoCard
+                color="alt-1"
+                label="Owed to Restaurants"
+                compact={!isHuge}
+                isLoading={!owedToRestaurants}
+                polyfillInfo={'£00.00'}
+                info={
+                  owedToRestaurants
+                    ? `£${Math.max(0, owedToRestaurants).toFixed(2)}`
+                    : ' '
+                }
+              />
+            </div>
           </div>
 
-          <div className="flex-1">
-            <InfoCard
-              color="alt-2"
-              label="Total Profit"
-              compact={!isHuge}
-              isLoading={!totalProfit}
-              polyfillInfo={'£00.00'}
-              info={totalProfit ? `£${totalProfit.toFixed(2)}` : ' '}
-            />
-          </div>
-
-          <div style={{ minWidth: '200px' }} className={clsx('flex-1')}>
-            <InfoCard
-              color="alt-1"
-              label="Owed to Restaurants"
-              compact={!isHuge}
-              isLoading={!owedToRestaurants}
-              polyfillInfo={'£00.00'}
-              info={
-                owedToRestaurants
-                  ? `£${Math.max(0, owedToRestaurants).toFixed(2)}`
-                  : ' '
-              }
-            />
+          <div className="">
+            <ServerStats />
           </div>
         </div>
 
         <UsersTable />
-
         <PreregistersTable />
       </div>
     </>

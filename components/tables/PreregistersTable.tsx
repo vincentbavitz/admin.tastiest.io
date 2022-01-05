@@ -55,9 +55,10 @@ export default function PreregistersTable() {
     refreshWhenHidden: true,
   });
 
-  const preregisters = unsorted.sort(
-    (a: Preregister, b: Preregister) => b.position - a.position,
-  );
+  const preregisters =
+    unsorted?.sort(
+      (a: Preregister, b: Preregister) => b.position - a.position,
+    ) ?? [];
 
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 

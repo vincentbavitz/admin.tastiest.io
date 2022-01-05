@@ -1,17 +1,15 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
 import { dlog, UserData } from '@tastiest-io/tastiest-utils';
+import { useTastiestSWR } from 'hooks/useTastiestSWR';
 import Link from 'next/link';
-import { UserRecord } from 'pages/api/getUsers';
 import React, { useEffect, useState } from 'react';
-import useSWR from 'swr';
-import { LocalEndpoint } from 'types/api';
 import UserTableAccordian from './UserTableAccordian';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 
 export default function MembersTable() {
-  const { data: members } = useSWR<UserData[]>(`${LocalEndpoint.GET_USERS}`, {
+  const { data: members } = useTastiestSWR<any>('/admin/accounts?role=admin', {
     refreshInterval: 120000,
     initialData: null,
   });
@@ -31,7 +29,7 @@ export default function MembersTable() {
       id: 'name',
       Header: 'Name',
       width: '200',
-      accessor: (row: UserRecord) => {
+      accessor: (row: any) => {
         return (
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
