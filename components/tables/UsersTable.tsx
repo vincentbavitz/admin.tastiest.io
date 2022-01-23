@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { dlog, UserData } from '@tastiest-io/tastiest-utils';
-import { useTastiestSWR } from 'hooks/useTastiestSWR';
+import { useHorusSWR, UserData } from '@tastiest-io/tastiest-utils';
+import { AuthContext } from 'contexts/auth';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserTableAccordian from './UserTableAccordian';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
@@ -52,7 +52,8 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 // }
 
 export default function UsersTable() {
-  const { data: users } = useTastiestSWR('/users', {
+  const { token } = useContext(AuthContext);
+  const { data: users } = useHorusSWR('/users', token, {
     refreshInterval: 120000,
     initialData: null,
     refreshWhenHidden: true,
@@ -65,8 +66,6 @@ export default function UsersTable() {
       setIsInitialLoading(false);
     }
   }, [users]);
-
-  dlog('UsersTable ➡️ users:', users);
 
   const columns = [
     {

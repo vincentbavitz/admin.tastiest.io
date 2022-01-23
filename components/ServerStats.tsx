@@ -1,22 +1,19 @@
 import { RedoOutlined } from '@ant-design/icons';
 import { Button, ButtonGroup, RadialProgress } from '@tastiest-io/tastiest-ui';
-import { dlog } from '@tastiest-io/tastiest-utils';
-import { useTastiestSWR } from 'hooks/useTastiestSWR';
+import { useHorusSWR } from '@tastiest-io/tastiest-utils';
+import { AuthContext } from 'contexts/auth';
 import { Duration } from 'luxon';
-import React from 'react';
+import React, { useContext } from 'react';
 
 export default function ServerStats() {
-  const { data } = useTastiestSWR<any>('/admin/server/system-stats', {
+  const { token } = useContext(AuthContext);
+  const { data } = useHorusSWR<any>('/admin/server/system-stats', token, {
     refreshInterval: 5000,
   });
-
-  dlog('ServerStats ➡️ as:', data);
 
   const uptime = Duration.fromMillis(1000 * (data?.os?.uptime ?? 0)).toFormat(
     `d'D' h'H' m'M'`,
   );
-
-  dlog('ServerStats ➡️ uptime:', uptime);
 
   return (
     <div className="flex flex-col justify-between gap-6 h-full p-4 bg-white rounded-lg shadow-lg">

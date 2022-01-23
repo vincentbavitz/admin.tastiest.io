@@ -20,12 +20,7 @@ export default function SupportChatScreen({ request }: Props) {
   const { conversation } = request;
   const messages = conversation.sort((a, b) => a.timestamp - b.timestamp);
 
-  // Set token for API requests to api.tastiest.io
-  const { adminUser } = useContext(AuthContext);
-  const [token, setToken] = useState(null);
-  useEffect(() => {
-    adminUser?.getIdToken().then(setToken);
-  }, [adminUser]);
+  const { token } = useContext(AuthContext);
 
   const container = useRef<HTMLDivElement>(null);
   const [composeMessage, setComposeMessage] = useState<string | null>(null);

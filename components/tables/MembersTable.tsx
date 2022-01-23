@@ -1,18 +1,23 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { dlog, UserData } from '@tastiest-io/tastiest-utils';
-import { useTastiestSWR } from 'hooks/useTastiestSWR';
+import { dlog, useHorusSWR, UserData } from '@tastiest-io/tastiest-utils';
+import { AuthContext } from 'contexts/auth';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserTableAccordian from './UserTableAccordian';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 
 export default function MembersTable() {
-  const { data: members } = useTastiestSWR<any>('/admin/accounts?role=admin', {
-    refreshInterval: 120000,
-    initialData: null,
-  });
+  const { token } = useContext(AuthContext);
+  const { data: members } = useHorusSWR<any>(
+    '/admin/accounts?role=admin',
+    token,
+    {
+      refreshInterval: 120000,
+      initialData: null,
+    },
+  );
 
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 

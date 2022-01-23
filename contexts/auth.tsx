@@ -1,45 +1,27 @@
-import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import React, { createContext, useEffect, useState } from 'react';
 import { dlog } from 'utils/development';
 import { firebaseClient } from '../utils/firebaseClient';
 
-// Example taken from  https://github1s.com/colinhacks/next-firebase-ssr/blob/HEAD/auth.tsx
-export const AuthContext = createContext<{
+interface AuthContextParams {
   adminUser: firebaseClient.User | null;
-}>({
+  token: string | null;
+}
+
+// Example taken from  https://github1s.com/colinhacks/next-firebase-ssr/blob/HEAD/auth.tsx
+export const AuthContext = createContext<AuthContextParams>({
   adminUser: null,
+  token: null,
 });
 
 export function AuthProvider({ children }: any) {
-  const router = useRouter();
-
   // Undefined while loading, null if not logged in
   const [adminUser, setAdminUser] = useState<
     firebaseClient.User | null | undefined
   >(undefined);
 
-  // Break default layout for certain pages
-  const pagesWithoutAuth = [/^\/login/];
-  const onNoAuthPage = pagesWithoutAuth.some(page =>
-    page.test(router.pathname),
-  );
-
-  // Redirects based upon login state
-  useEffect(() => {
-    dlog('auth ➡️ adminUser:', adminUser);
-
-    const isLoginPage = /^\/login/.test(router.pathname);
-    // Logged in and on /login, redirect
-    if (adminUser !== null && isLoginPage) {
-      router.replace('/');
-    }
-
-    // Not logged in and not on a no auth page, redirect
-    if (adminUser === null && !onNoAuthPage) {
-      router.replace('/login');
-    }
-  }, [router.pathname, adminUser]);
+  // User Token for authentication middleware.
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,37 +29,46 @@ export function AuthProvider({ children }: any) {
     }
 
     return firebaseClient.auth().onIdTokenChanged(async _adminUser => {
-      dlog(`token changed!`);
+      dlog(`Token changed!`);
+
       if (!_adminUser) {
-        dlog(`no token found...`);
-        setAdminUser(null);
+        dlog(`No token found...`);
+
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', '', { path: '/' });
+        setAdminUser(null);
+        setToken(null);
+
         return;
       }
 
-      const token = await _adminUser.getIdToken();
-      dlog(`updating token...`, token);
+      const _token = await _adminUser.getIdToken();
 
-      setAdminUser(_adminUser);
       nookies.destroy(null, 'token');
-      nookies.set(null, 'token', token, { path: '/' });
+      nookies.set(null, 'token', _token, { path: '/' });
+      setAdminUser(_adminUser);
+      setToken(_token);
+
+      dlog(`Updating token...`, _token);
     });
   }, []);
 
   // Force refresh the token every 10 minutes
   useEffect(() => {
     const handle = setInterval(async () => {
-      dlog(`refreshing token...`);
+      dlog(`Refreshing token...`);
       const _adminUser = firebaseClient.auth().currentUser;
-      if (_adminUser) await _adminUser.getIdToken(true);
+
+      if (_adminUser) {
+        await _adminUser.getIdToken(true);
+      }
     }, 10 * 60 * 1000);
 
     return () => clearInterval(handle);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ adminUser }}>
+    <AuthContext.Provider value={{ adminUser, token }}>
       {children}
     </AuthContext.Provider>
   );
