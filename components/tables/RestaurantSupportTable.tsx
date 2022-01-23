@@ -1,22 +1,28 @@
 /* eslint-disable react/display-name */
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
 import { Popover, Select, Table } from '@tastiest-io/tastiest-ui';
-import { dlog, UserSupportRequest } from '@tastiest-io/tastiest-utils';
+import {
+  dlog,
+  RestaurantSupportRequest,
+  useHorusSWR,
+  UserSupportRequest,
+} from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
+import { AuthContext } from 'contexts/auth';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import useSWR from 'swr';
-import { LocalEndpoint } from 'types/api';
+import React, { useContext, useEffect, useState } from 'react';
 
 type ResolvedStatus = 'all' | 'resolved' | 'unresolved';
 type Priority = 'all' | 'critical' | 'high' | 'normal' | 'low';
 
 export default function RestaurantSupportTable() {
+  const { token } = useContext(AuthContext);
   const [filteredResults, setFilteredResults] = useState(null);
 
-  const { data: supportItems } = useSWR<UserSupportRequest[]>(
-    LocalEndpoint.GET_USER_SUPPORT_REQUESTS,
+  const { data: supportItems } = useHorusSWR<RestaurantSupportRequest[]>(
+    '/support/restaurants',
+    token,
     {
       refreshInterval: 200000,
       initialData: null,
@@ -85,15 +91,11 @@ export default function RestaurantSupportTable() {
       accessor: (row: UserSupportRequest) => {
         return (
           <div className="overflow-hidden cursor-pointer hover:underline">
-            {row.seen ? (
-              <div className="font-medium opacity-50">
-                {row.conversation[0].message}
-              </div>
-            ) : (
-              <Link href={`/support/${row.id}`}>
-                <a className="font-medium">{row.conversation[0].message}</a>
-              </Link>
-            )}
+            <Link href={`/support/${row.id}`}>
+              <a className={clsx('font-medium', row.seen && 'opacity-50')}>
+                {row.subject}
+              </a>
+            </Link>
           </div>
         );
       },

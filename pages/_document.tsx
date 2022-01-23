@@ -10,9 +10,6 @@ export default class CustomDocument extends Document<any> {
         <Head>
           {this.props?.styleTags}
 
-          {/* Inject Google Optimize */}
-          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MNCSH5K"></script>
-
           <Fonts />
           <Favicon />
         </Head>

@@ -1,22 +1,27 @@
 /* eslint-disable react/display-name */
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
 import { Popover, Select, Table } from '@tastiest-io/tastiest-ui';
-import { dlog, UserSupportRequest } from '@tastiest-io/tastiest-utils';
+import {
+  dlog,
+  useHorusSWR,
+  UserSupportRequest,
+} from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
+import { AuthContext } from 'contexts/auth';
 import moment from 'moment';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import useSWR from 'swr';
-import { LocalEndpoint } from 'types/api';
+import React, { useContext, useEffect, useState } from 'react';
 
 type ResolvedStatus = 'all' | 'resolved' | 'unresolved';
 type Priority = 'all' | 'critical' | 'high' | 'normal' | 'low';
 
 export default function UserSupportTable() {
+  const { token } = useContext(AuthContext);
   const [filteredResults, setFilteredResults] = useState(null);
 
-  const { data: supportItems } = useSWR<UserSupportRequest[]>(
-    LocalEndpoint.GET_USER_SUPPORT_REQUESTS,
+  const { data: supportItems } = useHorusSWR<UserSupportRequest[]>(
+    '/support/users',
+    token,
     {
       refreshInterval: 200000,
       initialData: null,

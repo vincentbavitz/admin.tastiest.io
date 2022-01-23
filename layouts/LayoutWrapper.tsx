@@ -35,6 +35,8 @@ export default function LayoutWrapper({
     return null;
   }
 
+  // Get Admin Panel metrics and when something changes, useNotifier.
+
   return (
     <div
       style={{ height: '100vh' }}
@@ -49,44 +51,46 @@ export default function LayoutWrapper({
           <Sidebar.Item
             label="Bookings"
             page="/bookings"
-            icon={CalendarIcon}
             float="top"
+            icon={CalendarIcon}
+            // notifications={{ amount: 50, urgency: 'high' }}
           />
           <Sidebar.Item
             label="Customers"
             page="/customers"
-            icon={UserIcon}
             float="top"
+            icon={UserIcon}
+            // notifications={{ amount: 1, urgency: 'medium' }}
           />
           <Sidebar.Item
             label="Restaurants"
             page="/restaurants"
-            icon={CutleryIcon}
             float="top"
+            icon={CutleryIcon}
           />
           <Sidebar.Item
             label="Support"
             page="/support"
-            icon={SupportIcon}
             float="top"
+            icon={SupportIcon}
           />
           <Sidebar.Item
             label="Statistics"
             page="/statistics"
-            icon={GagueIcon}
             float="bottom"
+            icon={GagueIcon}
           />
           <Sidebar.Item
             label="Influencers"
             page="/influencers"
-            icon={UserIcon}
             float="bottom"
+            icon={UserIcon}
           />
           <Sidebar.Item
             label="SEO"
             page="/seo"
-            icon={MessageIcon}
             float="bottom"
+            icon={MessageIcon}
           />
           <Sidebar.Item
             label="Ads"
@@ -97,8 +101,8 @@ export default function LayoutWrapper({
           <Sidebar.Item
             label="Errors"
             page="/errors"
-            icon={WarningOutlined}
             float="bottom"
+            icon={WarningOutlined}
           />
         </Sidebar>
 
