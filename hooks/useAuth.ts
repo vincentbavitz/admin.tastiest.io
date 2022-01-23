@@ -58,6 +58,10 @@ export const useAuth = () => {
       let i = 0;
       while (!credential && i < FIREBASE.MAX_LOGIN_ATTEMPTS) {
         credential = await attemptSignIn();
+
+        if (credential) {
+          router.push('/');
+        }
         i++;
       }
 

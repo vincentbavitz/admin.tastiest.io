@@ -1,23 +1,24 @@
 /* eslint-disable react/display-name */
 import { TriangleIcon } from '@tastiest-io/tastiest-icons';
 import { Popover, Select, Table } from '@tastiest-io/tastiest-ui';
-import { UserSupportRequest } from '@tastiest-io/tastiest-utils';
+import { dlog, UserSupportRequest } from '@tastiest-io/tastiest-utils';
 import clsx from 'clsx';
 import moment from 'moment';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { useToggle } from 'react-use';
 import useSWR from 'swr';
 import { LocalEndpoint } from 'types/api';
 
 type ResolvedStatus = 'all' | 'resolved' | 'unresolved';
+type Priority = 'all' | 'critical' | 'high' | 'normal' | 'low';
 
-export default function SupportTable() {
+export default function UserSupportTable() {
   const [filteredResults, setFilteredResults] = useState(null);
+
   const { data: supportItems } = useSWR<UserSupportRequest[]>(
     LocalEndpoint.GET_USER_SUPPORT_REQUESTS,
     {
-      refreshInterval: 30000,
+      refreshInterval: 200000,
       initialData: null,
       refreshWhenHidden: true,
     },
@@ -119,15 +120,6 @@ export default function SupportTable() {
     },
   ];
 
-  // Update data depending on the column
-  // const updateData = React.useMemo(
-  //   () => (value: any, rowIndex: number, columnId: EditableBookingFields) => {
-  //     console.log(`Updating '${columnId}' field on booking to ${value}`);
-  //     setBookingField(columnId, value, bookings, rowIndex);
-  //   },
-  //   [bookings],
-  // );
-
   const searchFunction = (query: string, data: UserSupportRequest[]) => {
     // prettier-ignore
     const result = data.filter(supportItem => {       
@@ -142,8 +134,9 @@ export default function SupportTable() {
   };
 
   // Managing filters
-  const [filtersOpen, toggleFiltersOpen] = useToggle(false);
   const applyStatusFilter = (status: ResolvedStatus) => {
+    dlog('SupportTable ➡️ status:', status);
+
     if (status === 'all') {
       setFilteredResults(null);
       return;
@@ -151,6 +144,21 @@ export default function SupportTable() {
 
     const filtered = supportItems.filter(item => {
       return item.resolved === (status === 'resolved');
+    });
+
+    setFilteredResults(filtered);
+  };
+
+  const applyPriorityFilter = (priority: Priority) => {
+    dlog('SupportTable ➡️ priority:', priority);
+
+    if (priority === 'all') {
+      setFilteredResults(null);
+      return;
+    }
+
+    const filtered = supportItems.filter(item => {
+      return item.priority === priority;
     });
 
     setFilteredResults(filtered);
@@ -187,22 +195,16 @@ export default function SupportTable() {
               </div>
 
               <div className="w-40">
-                <div className="font-medium">Type</div>
-                <Select size="small" onSelect={() => null}>
+                <div className="font-medium">Priority</div>
+                <Select
+                  size="small"
+                  onSelect={value => applyPriorityFilter(value as Priority)}
+                >
                   <Select.Option id="all" value="All" />
                   <Select.Option id="critical" value="Critical" />
                   <Select.Option id="high" value="High" />
                   <Select.Option id="normal" value="Normal" />
                   <Select.Option id="low" value="Low" />
-                </Select>
-              </div>
-
-              <div className="w-40">
-                <div className="font-medium">From</div>
-                <Select size="small" onSelect={() => null}>
-                  <Select.Option id="all" value="All" />
-                  <Select.Option id="users" value="Users" />
-                  <Select.Option id="restaurants" value="Restaurants" />
                 </Select>
               </div>
             </div>

@@ -15,9 +15,9 @@ export default function LayoutDefault({
     <LayoutWrapper router={router} pageProps={pageProps}>
       <div
         style={{ minWidth: '700px' }}
-        className="absolute inset-0 flex h-full px-8 py-6 overflow-auto bg-gray-100"
+        className="absolute inset-0 flex h-full bg-gray-100"
       >
-        <div style={{ height: '100%' }} className="relative w-full">
+        <div className="relative w-full px-8 pt-6 pb-12 overflow-auto">
           <Component {...pageProps} />
         </div>
       </div>
