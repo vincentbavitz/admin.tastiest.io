@@ -76,18 +76,18 @@ export default function UsersTable() {
         return (
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
-              {Date.now() - row.details.lastActive < MS_IN_TEN_MINUTES && (
+              {Date.now() - row.details?.lastActive < MS_IN_TEN_MINUTES && (
                 <div className="w-2 h-2 bg-green-400 rounded-full"></div>
               )}
               <Link href={`/customers/${row.id}`}>
                 <a className="font-medium hover:underline">
-                  {row.details.firstName +
+                  {row.details?.firstName +
                     (row?.details?.lastName ? ' ' + row.details.lastName : '')}
                 </a>
               </Link>
             </div>
             <Link href={`/customers/${row.id}`}>
-              <a className="text-sm opacity-75">{row.details.email}</a>
+              <a className="text-sm opacity-75">{row.details?.email}</a>
             </Link>
           </div>
         );
@@ -100,8 +100,8 @@ export default function UsersTable() {
       accessor: (row: UserData) => {
         return (
           <p className="text-sm opacity-75">
-            {row.details.lastActive ? (
-              moment(row.details.lastActive).local().fromNow()
+            {row.details?.lastActive ? (
+              moment(row.details?.lastActive).local().fromNow()
             ) : (
               <span className="opacity-50">—</span>
             )}

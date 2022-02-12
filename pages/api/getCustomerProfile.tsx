@@ -40,6 +40,7 @@ interface KlaviyoProfile {
   context?: { userAgent?: string };
 }
 
+// DELETE ME ENTIRE FILE
 export interface TastiestCustomerProfile {
   firstName: string;
   lastName: string;
