@@ -1,12 +1,11 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
 import {
+  dlog,
   HorusUserEntity,
   useHorusSWR,
-  UserData,
 } from '@tastiest-io/tastiest-utils';
 import { AuthContext } from 'contexts/auth';
-import moment from 'moment';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import UserTableAccordian from './UserTableAccordian';
@@ -71,6 +70,8 @@ export default function UsersTable() {
     }
   }, [users]);
 
+  dlog('UsersTable ➡️ users:', users);
+
   const columns = [
     {
       id: 'userName',
@@ -81,7 +82,7 @@ export default function UsersTable() {
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
               {row.lastActive &&
-              Date.now() - row.lastActive.getTime() < MS_IN_TEN_MINUTES ? (
+              Date.now() - row.lastActive.getTime?.() < MS_IN_TEN_MINUTES ? (
                 <div className="w-2 h-2 bg-green-400 rounded-full"></div>
               ) : null}
               <Link href={`/customers/${row.id}`}>
@@ -97,27 +98,29 @@ export default function UsersTable() {
         );
       },
     },
-    {
-      id: 'lastActive',
-      Header: 'Last Active',
-      maxWidth: 100,
-      accessor: (row: UserData) => {
-        return (
-          <p className="text-sm opacity-75">
-            {row.details?.lastActive ? (
-              moment(row.details?.lastActive).local().fromNow()
-            ) : (
-              <span className="opacity-50">—</span>
-            )}
-          </p>
-        );
-      },
-    },
+    // {
+    //   id: 'lastActive',
+    //   Header: 'Last Active',
+    //   maxWidth: 100,
+    //   accessor: (row: HorusUserEntity) => {
+    //     return (
+    //       <p className="text-sm opacity-75">
+    //         {row.lastActive ? (
+    //           DateTime.fromJSDate(row.lastActive)
+    //             .setLocale(TIME.LOCALES.LONDON)
+    //             .toRelative()
+    //         ) : (
+    //           <span className="opacity-50">—</span>
+    //         )}
+    //       </p>
+    //     );
+    //   },
+    // },
     {
       id: 'orders',
       Header: 'Orders',
       width: 80,
-      accessor: (row: UserData) => (
+      accessor: (row: HorusUserEntity) => (
         <p>
           {row.metrics?.totalBookings ? (
             row.metrics.totalBookings
@@ -131,7 +134,7 @@ export default function UsersTable() {
       id: 'totalSpent',
       Header: 'Total Spent',
       width: 80,
-      accessor: (row: UserData) => (
+      accessor: (row: HorusUserEntity) => (
         <p className="">
           {row.metrics?.totalSpent?.['GBP'] > 0 ? (
             <>£{Number(row.metrics?.totalSpent?.['GBP'] ?? 0)?.toFixed(2)}</>
@@ -152,14 +155,14 @@ export default function UsersTable() {
   //   [bookings],
   // );
 
-  const searchFunction = (query: string, data: UserData[]) => {
+  const searchFunction = (query: string, data: HorusUserEntity[]) => {
     // prettier-ignore
     const result = data.filter(userData => {
-      const fullName = userData.details?.firstName + (userData.details?.lastName ? ' ' + userData.details.lastName : '');
+      const fullName = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
       
       return (
         fullName?.toLowerCase().includes(query.toLowerCase()) ||
-        userData.details?.email?.toLowerCase().includes(query.toLowerCase())
+        userData.email?.toLowerCase().includes(query.toLowerCase())
       );
     });
 
