@@ -15,12 +15,20 @@ import { firebaseClient } from '../utils/firebaseClient';
 interface AuthContextParams {
   adminUser: firebaseClient.User | null;
   token: string | null;
+  error?: string;
+  isSignedIn: boolean | null;
+  signIn?: (
+    email: string,
+    password: string,
+  ) => Promise<false | firebaseClient.auth.UserCredential>;
+  signOut?: (redirectTo?: string) => Promise<void>;
 }
 
 // Example taken from  https://github1s.com/colinhacks/next-firebase-ssr/blob/HEAD/auth.tsx
 export const AuthContext = createContext<AuthContextParams>({
   adminUser: null,
   token: null,
+  isSignedIn: null,
 });
 
 export function AuthProvider({ children }: any) {

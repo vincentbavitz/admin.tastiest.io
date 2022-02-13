@@ -33,7 +33,7 @@
     "@svgr/cli": "^5.5.0",
     "@tastiest-io/tastiest-icons": "^0.24.0",
     "@tastiest-io/tastiest-ui": "^0.79.0",
-    "@tastiest-io/tastiest-utils": "^1.55.0",
+    "@tastiest-io/tastiest-utils": "^1.64.0",
     "@types/analytics-node": "^3.1.4",
     "@types/react-table": "^7.0.29",
     "@zeit/next-css": "^1.0.1",

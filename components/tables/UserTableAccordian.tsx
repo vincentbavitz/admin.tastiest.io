@@ -7,13 +7,10 @@ import {
 } from '@ant-design/icons';
 import { CheckIcon } from '@tastiest-io/tastiest-icons';
 import { TextArea, Tooltip } from '@tastiest-io/tastiest-ui';
-import { useHorusSWR, UserData } from '@tastiest-io/tastiest-utils';
+import { UserData } from '@tastiest-io/tastiest-utils';
 import { useAuth } from 'hooks/useAuth';
 import Link from 'next/link';
-import { TastiestCustomerProfile } from 'pages/api/getCustomerProfile';
 import React, { useState } from 'react';
-import { LocalEndpoint } from 'types/api';
-import { dlog } from 'utils/development';
 
 interface UserTableAccordianProps {
   id: string;
@@ -23,16 +20,17 @@ interface UserTableAccordianProps {
 const UserTableAccordian = ({ row }: UserTableAccordianProps) => {
   const { token } = useAuth();
 
-  const { data: profile, error } = useHorusSWR<TastiestCustomerProfile>(
-    `${LocalEndpoint.GET_CUSTOMER_PROFILE}?email=${row.details.email}`,
-    {
-      refreshInterval: 30000,
-      initialData: null,
-      refreshWhenHidden: true,
-    },
-  );
-
-  dlog('UsersTable ➡️ error:', error);
+  const profile = null;
+  // const { data: profile, error } = useHorusSWR<any>(
+  //   `/users/${row.}`
+  //   `${LocalEndpoint.GET_CUSTOMER_PROFILE}?email=${row.details.email}`,
+  //   token,
+  //   {
+  //     refreshInterval: 30000,
+  //     initialData: null,
+  //     refreshWhenHidden: true,
+  //   },
+  // );
 
   const [userNotesEditing, setUserNotesEditing] = useState(false);
 

@@ -1,6 +1,10 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
-import { useHorusSWR, UserData } from '@tastiest-io/tastiest-utils';
+import {
+  HorusUserEntity,
+  useHorusSWR,
+  UserData,
+} from '@tastiest-io/tastiest-utils';
 import { AuthContext } from 'contexts/auth';
 import moment from 'moment';
 import Link from 'next/link';
@@ -53,7 +57,7 @@ const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
 
 export default function UsersTable() {
   const { token } = useContext(AuthContext);
-  const { data: users } = useHorusSWR('/users', token, {
+  const { data: users } = useHorusSWR<HorusUserEntity[]>('/users', token, {
     refreshInterval: 120000,
     initialData: null,
     refreshWhenHidden: true,
@@ -72,22 +76,22 @@ export default function UsersTable() {
       id: 'userName',
       Header: 'Name',
       width: '200',
-      accessor: (row: UserData & { id: string }) => {
+      accessor: (row: HorusUserEntity) => {
         return (
           <div className="flex flex-col">
             <div className="flex items-center space-x-1">
-              {Date.now() - row.details?.lastActive < MS_IN_TEN_MINUTES && (
+              {row.lastActive &&
+              Date.now() - row.lastActive.getTime() < MS_IN_TEN_MINUTES ? (
                 <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              )}
+              ) : null}
               <Link href={`/customers/${row.id}`}>
                 <a className="font-medium hover:underline">
-                  {row.details?.firstName +
-                    (row?.details?.lastName ? ' ' + row.details.lastName : '')}
+                  {row.firstName + (row.lastName ? ' ' + row.lastName : '')}
                 </a>
               </Link>
             </div>
             <Link href={`/customers/${row.id}`}>
-              <a className="text-sm opacity-75">{row.details?.email}</a>
+              <a className="text-sm opacity-75">{row.email}</a>
             </Link>
           </div>
         );
