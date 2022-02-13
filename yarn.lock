@@ -3219,14 +3219,15 @@
     react-table "^7.7.0"
     uuid "^8.3.2"
 
-"@tastiest-io/tastiest-utils@^1.55.0":
-  version "1.55.0"
-  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/1.55.0/01cc0c3138dca55803e8476f2346999cf56cdc2705b302d63132397e6496078a#f504f1907e9c37ecba4b9903da155e1002554a28"
-  integrity sha512-MEiUnyuDMlBBNawE0r2U82AKJPrEI06AY5BxztUlyekGRK/+87xMf027A7L7b+BuC8IXz2S8aIGZ0x9GbOC9QA==
+"@tastiest-io/tastiest-utils@^1.58.0", "@tastiest-io/tastiest-utils@^1.64.0":
+  version "1.64.0"
+  resolved "https://npm.pkg.github.com/download/@tastiest-io/tastiest-utils/1.64.0/0abdf713102c0b0569a0ec20849c30415d4a0361b8a26d4c84cab93e1e2dd8c2#eda234d12b7f3f3733c7d2eff5df0f6ac9f22529"
+  integrity sha512-NWmWmJiGgXd/epzES3inmc3DDg9HTosEEd+bPke6qlLmNcRaRaSQLJUM+A16bAEra0AOIWnBUX7akk1B9nrtMA==
   dependencies:
     "@contentful/rich-text-types" "^14.1.2"
     "@shopify/shopify-api" "^1.4.0"
     "@stripe/stripe-js" "^1.13.2"
+    "@tastiest-io/tastiest-utils" "^1.58.0"
     "@types/react" "^17.0.3"
     contentful "^8.2.1"
     crypto-hash "^1.3.0"
