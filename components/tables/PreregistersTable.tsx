@@ -1,52 +1,11 @@
 /* eslint-disable react/display-name */
 import { Table } from '@tastiest-io/tastiest-ui';
+import { DateTime } from 'luxon';
 import { Preregister } from 'pages/api/getPreregisters';
 import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 const MS_IN_TEN_MINUTES = 1000 * 60 * 10;
-
-// Update any field in the current booking
-// instantly using mutate SWR
-// async function setBookingField<T>(
-//   field: EditableBookingFields,
-//   value: T,
-//   bookings: Booking[],
-//   rowIndex: number,
-// ) {
-//   const booking = bookings[rowIndex];
-//   if (!booking) {
-//     console.log('Booking not found');
-//     return;
-//   }
-
-//   // Can't modify a cancelled booking
-//   if (booking.hasCancelled) {
-//     console.log("Can't modify a cancelled booking");
-//     return;
-//   }
-
-//   const updatedBookUsersTableings = bookings.map((row, index) =>
-//     index === rowIndex
-//       ? {
-//           ...booking,
-//           [field]: value,
-//         }
-//       : row,
-//   );
-
-//   // Update booking server side
-//   await postFetch<any, Booking>(LocalEndpoint.UPDATE_BOOKING, {
-//     bookingId: booking.orderId,
-//     [field]: value,
-//   });
-
-//   mutate(
-//     `${LocalEndpoint.GET_BOOKINGS}?restaurantId=${booking.restaurantId}`,
-//     updatedBookings,
-//     false,
-//   );
-// }
 
 export default function PreregistersTable() {
   const { data: unsorted } = useSWR('/api/getPreregisters', {
@@ -76,6 +35,18 @@ export default function PreregistersTable() {
       accessor: (row: Preregister) => {
         return <div className="font-medium">{row.email}</div>;
       },
+    },
+    {
+      id: 'date',
+      Header: 'Date',
+      width: 80,
+      accessor: (row: Preregister) => (
+        <div className="font-mono">
+          {(row as any).timestamp
+            ? DateTime.fromMillis((row as any).timestamp).toFormat('DDDD')
+            : null}
+        </div>
+      ),
     },
     {
       id: 'position',
